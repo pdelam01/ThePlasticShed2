@@ -1,12 +1,32 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        Hello from Facelets
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head> 
+        <title> Login </title>
+        <h:outputStylesheet library="css" name="login.css" />
+    </h:head> 
+    <h:body style="text-align:center">
+        <p:growl id="mensajes" showDetail="true" life="2000" />
+        <h:form id="formulario">
+            <p:panel header="Login" style="width:300px">
+                <h:panelGrid id="panelGrid" columns="2" cellpadding="5">
+                    <h:outputLabel for="username" value="Usuario:" />
+                    <p:inputText value="#{loginBean.nombre}" id="username"
+                                 required="true" label="username" />
+                    <h:outputLabel for="password" value="Clave:" />
+                    <p:password value="#{loginBean.clave}" id="password" required="true"
+                                label="password" />
+                    <f:facet name="footer">
+                        <p:commandButton id="loginButton" value="Login"
+                                         actionListener="#{loginBean.login}" update=":mensajes"
+                                         oncomplete="manejarLogin(xhr, status, args)" />
+                    </f:facet>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
     </h:body>
 </html>
 
