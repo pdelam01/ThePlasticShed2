@@ -17,7 +17,7 @@ import modelo.Sales;
 @Stateless
 public class SalesFacade extends AbstractFacade<Sales> implements SalesFacadeLocal {
 
-    @PersistenceContext(unitName = "PublicacionesPU")
+    @PersistenceContext(unitName = "ThePlasticShed2PU")
     private EntityManager em;
 
     @Override

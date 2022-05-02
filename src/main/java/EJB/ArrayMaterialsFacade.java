@@ -17,7 +17,7 @@ import modelo.ArrayMaterials;
 @Stateless
 public class ArrayMaterialsFacade extends AbstractFacade<ArrayMaterials> implements ArrayMaterialsFacadeLocal {
 
-    @PersistenceContext(unitName = "PublicacionesPU")
+    @PersistenceContext(unitName = "ThePlasticShed2PU")
     private EntityManager em;
 
     @Override

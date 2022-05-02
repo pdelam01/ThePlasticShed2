@@ -5,7 +5,7 @@
  */
 package controller;
 
-import EJB.EmployeesFacade;
+import EJB.EmployeesFacadeLocal;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -25,14 +25,22 @@ public class LoginController implements Serializable{
     private Employees employees;
     
     @EJB
-    private EmployeesFacade employeesEJB;
+    private EmployeesFacadeLocal employeesEJB;
     
     @PostConstruct
     public void init(){
         employees = new Employees();
     }
     
-    //Search for user and password in database
+    public void checkCredentials(String user, String pass){
+        try {
+           
+        } catch (Exception e) {
+            System.out.println("controller.LoginController.checkCredentials" + e.getMessage());
+        }
+        
+        //return false;
+    }
     
 
     public Employees getEmployees() {

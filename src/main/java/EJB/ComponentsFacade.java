@@ -17,7 +17,7 @@ import modelo.Components;
 @Stateless
 public class ComponentsFacade extends AbstractFacade<Components> implements ComponentsFacadeLocal {
 
-    @PersistenceContext(unitName = "PublicacionesPU")
+    @PersistenceContext(unitName = "ThePlasticShed2PU")
     private EntityManager em;
 
     @Override

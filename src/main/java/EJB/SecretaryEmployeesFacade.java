@@ -17,7 +17,7 @@ import modelo.SecretaryEmployees;
 @Stateless
 public class SecretaryEmployeesFacade extends AbstractFacade<SecretaryEmployees> implements SecretaryEmployeesFacadeLocal {
 
-    @PersistenceContext(unitName = "PublicacionesPU")
+    @PersistenceContext(unitName = "ThePlasticShed2PU")
     private EntityManager em;
 
     @Override

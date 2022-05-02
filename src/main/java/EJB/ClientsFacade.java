@@ -17,7 +17,7 @@ import modelo.Clients;
 @Stateless
 public class ClientsFacade extends AbstractFacade<Clients> implements ClientsFacadeLocal {
 
-    @PersistenceContext(unitName = "PublicacionesPU")
+    @PersistenceContext(unitName = "ThePlasticShed2PU")
     private EntityManager em;
 
     @Override

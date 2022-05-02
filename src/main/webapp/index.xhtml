@@ -9,24 +9,13 @@
         <h:outputStylesheet library="css" name="login.css" />
     </h:head> 
     <h:body style="text-align:center">
-        <p:growl id="mensajes" showDetail="true" life="2000" />
-        <h:form id="formulario">
-            <p:panel header="Login" style="width:300px">
-                <h:panelGrid id="panelGrid" columns="2" cellpadding="5">
-                    <h:outputLabel for="username" value="Usuario:" />
-                    <p:inputText value="#{loginBean.nombre}" id="username"
-                                 required="true" label="username" />
-                    <h:outputLabel for="password" value="Clave:" />
-                    <p:password value="#{loginBean.clave}" id="password" required="true"
-                                label="password" />
-                    <f:facet name="footer">
-                        <p:commandButton id="loginButton" value="Login"
-                                         actionListener="#{loginBean.login}" update=":mensajes"
-                                         oncomplete="manejarLogin(xhr, status, args)" />
-                    </f:facet>
-                </h:panelGrid>
-            </p:panel>
-        </h:form>
+        <div align="center">
+            <h:form id="iniSes">Inicio de sesión</h:form>
+            <h:panelGrid id="panelG">
+                <p:inputText id="user" placeholder="Usuario" value="#{loginController.employees.username}"/><br/>
+                <p:password id="toggle" value="#{loginController.employees.pass}" toggleMask="true" redisplay="true"/>
+                <p:commandButton value="Login" actionListener="#{loginController.checkCredentials()}" /><br/>
+            </h:panelGrid>
+        </div>
     </h:body>
 </html>
-

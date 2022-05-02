@@ -17,7 +17,7 @@ import modelo.Orders;
 @Stateless
 public class OrdersFacade extends AbstractFacade<Orders> implements OrdersFacadeLocal {
 
-    @PersistenceContext(unitName = "PublicacionesPU")
+    @PersistenceContext(unitName = "ThePlasticShed2PU")
     private EntityManager em;
 
     @Override

@@ -17,7 +17,7 @@ import modelo.Materials;
 @Stateless
 public class MaterialsFacade extends AbstractFacade<Materials> implements MaterialsFacadeLocal {
 
-    @PersistenceContext(unitName = "PublicacionesPU")
+    @PersistenceContext(unitName = "ThePlasticShed2PU")
     private EntityManager em;
 
     @Override

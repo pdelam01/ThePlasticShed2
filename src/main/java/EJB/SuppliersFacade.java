@@ -17,7 +17,7 @@ import modelo.Suppliers;
 @Stateless
 public class SuppliersFacade extends AbstractFacade<Suppliers> implements SuppliersFacadeLocal {
 
-    @PersistenceContext(unitName = "PublicacionesPU")
+    @PersistenceContext(unitName = "ThePlasticShed2PU")
     private EntityManager em;
 
     @Override

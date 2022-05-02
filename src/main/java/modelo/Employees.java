@@ -39,8 +39,8 @@ public class Employees implements Serializable{
     @Column (name = "SSN")
     private String ssn;
     
-    @Column (name = "Range")
-    private String range;
+    @Column (name = "Role")
+    private String role;
     
     @Column (name = "PhoneNumber")
     private int phoneNum;
@@ -88,11 +88,11 @@ public class Employees implements Serializable{
     }
 
     public String getRange() {
-        return range;
+        return role;
     }
 
-    public void setRange(String range) {
-        this.range = range;
+    public void setRange(String role) {
+        this.role = role;
     }
 
     public int getPhoneNum() {
@@ -134,7 +134,7 @@ public class Employees implements Serializable{
         hash = 73 * hash + Objects.hashCode(this.name);
         hash = 73 * hash + Objects.hashCode(this.dni);
         hash = 73 * hash + Objects.hashCode(this.ssn);
-        hash = 73 * hash + Objects.hashCode(this.range);
+        hash = 73 * hash + Objects.hashCode(this.role);
         hash = 73 * hash + this.phoneNum;
         hash = 73 * hash + Objects.hashCode(this.birthday);
         hash = 73 * hash + Objects.hashCode(this.username);
@@ -169,7 +169,7 @@ public class Employees implements Serializable{
         if (!Objects.equals(this.ssn, other.ssn)) {
             return false;
         }
-        if (!Objects.equals(this.range, other.range)) {
+        if (!Objects.equals(this.role, other.role)) {
             return false;
         }
         if (!Objects.equals(this.username, other.username)) {
