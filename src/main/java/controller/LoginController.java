@@ -32,14 +32,14 @@ public class LoginController implements Serializable{
         employees = new Employees();
     }
     
-    public void checkCredentials(String user, String pass){
+    public void checkCredentials(){
         try {
-           
+            //employeesEJB.loginCredentials(username, password);
+            System.out.println("Login controller "+employees.getUsername()+" "+employees.getPass());
+            System.out.println("Login controller "+employeesEJB.loginCredentials(employees.getUsername(), employees.getPass()));
         } catch (Exception e) {
             System.out.println("controller.LoginController.checkCredentials" + e.getMessage());
         }
-        
-        //return false;
     }
     
 

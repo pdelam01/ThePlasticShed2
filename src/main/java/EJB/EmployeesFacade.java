@@ -5,6 +5,7 @@
  */
 package EJB;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,22 @@ public class EmployeesFacade extends AbstractFacade<Employees> implements Employ
 
     public EmployeesFacade() {
         super(Employees.class);
+    }
+
+
+    public List loginCredentials(String username, String password) {
+        try {
+            System.out.println(username+" "+password);
+            return em.createQuery(
+                    "SELECT u FROM Employees e WHERE e.Username=:user AND e.Password=:pass")
+                    .setParameter("user", username)
+                    .setParameter("pass", password)
+                    .getResultList();
+        } catch (Exception e) {
+             System.out.println("empFacLocal" + e.getMessage());
+        }
+        
+        return null;
     }
     
 }
