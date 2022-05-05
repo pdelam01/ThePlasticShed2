@@ -28,7 +28,7 @@ import javax.persistence.TemporalType;
 public class Employees implements Serializable{
     @Id
     @GeneratedValue (strategy=GenerationType.IDENTITY)
-    private int id;
+    private int idEmployee;
     
     @Column (name = "NameEmp")
     private String name;
@@ -56,11 +56,11 @@ public class Employees implements Serializable{
     private String pass;
 
     public int getIdEmployee() {
-        return id;
+        return idEmployee;
     }
 
     public void setIdEmployee(int id) {
-        this.id = id;
+        this.idEmployee = id;
     }
 
     public String getNameEmp() {
@@ -130,7 +130,7 @@ public class Employees implements Serializable{
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 73 * hash + this.id;
+        hash = 73 * hash + this.idEmployee;
         hash = 73 * hash + Objects.hashCode(this.name);
         hash = 73 * hash + Objects.hashCode(this.dni);
         hash = 73 * hash + Objects.hashCode(this.ssn);
@@ -154,7 +154,7 @@ public class Employees implements Serializable{
             return false;
         }
         final Employees other = (Employees) obj;
-        if (this.id != other.id) {
+        if (this.idEmployee != other.idEmployee) {
             return false;
         }
         if (this.phoneNum != other.phoneNum) {

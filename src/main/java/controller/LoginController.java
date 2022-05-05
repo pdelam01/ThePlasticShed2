@@ -7,6 +7,7 @@ package controller;
 
 import EJB.EmployeesFacadeLocal;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
@@ -32,17 +33,24 @@ public class LoginController implements Serializable{
         employees = new Employees();
     }
     
-    public void checkCredentials(){
+    public List checkCredentials(){
         try {
-            //employeesEJB.loginCredentials(username, password);
-            System.out.println("Login controller "+employees.getUsername()+" "+employees.getPass());
-            System.out.println("Login controller "+employeesEJB.loginCredentials(employees.getUsername(), employees.getPass()));
+            List result = employeesEJB.loginCredentials(employees.getUsername(), employees.getPass());
+            if(result.size()!=0) {
+                //redirección
+                //return private home que esto esta todo explicado en un practica templates de LuisVincalderita jaja no k pasao
+                return result;
+            } else {
+                //error
+                System.out.println("USUARIO O CONTRASEÑA INCORRECTA");
+                
+            }
         } catch (Exception e) {
             System.out.println("controller.LoginController.checkCredentials" + e.getMessage());
         }
+        return null;
     }
     
-
     public Employees getEmployees() {
         return employees;
     }

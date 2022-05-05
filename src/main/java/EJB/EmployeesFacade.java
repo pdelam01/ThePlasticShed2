@@ -35,7 +35,7 @@ public class EmployeesFacade extends AbstractFacade<Employees> implements Employ
         try {
             System.out.println(username+" "+password);
             return em.createQuery(
-                    "SELECT u FROM Employees e WHERE e.Username=:user AND e.Password=:pass")
+                    "FROM Employees e WHERE e.username=:user AND e.pass=:pass")
                     .setParameter("user", username)
                     .setParameter("pass", password)
                     .getResultList();

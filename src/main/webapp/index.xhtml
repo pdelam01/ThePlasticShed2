@@ -10,11 +10,12 @@
     </h:head> 
     <h:body style="text-align:center">
         <div align="center">
-            <h:form id="iniSes">Inicio de sesión</h:form>
             <h:panelGrid id="panelG">
-                <p:inputText id="user" placeholder="Usuario" value="#{loginController.employees.username}"/><br/>
-                <p:password id="toggle" placeholder="Password" value="#{loginController.employees.pass}" toggleMask="true" redisplay="true"/>
-                <p:commandButton value="Login" actionListener="#{loginController.checkCredentials()}" /><br/>
+                <h:form id="iniSes">Inicio de sesión
+                    <p:inputText id="user" placeholder="Usuario" value="#{loginController.employees.username}"/><br/>
+                    <p:password id="toggle" placeholder="Password" value="#{loginController.employees.pass}" toggleMask="false" redisplay="true"/><br/>
+                    <p:commandButton value="Login" action="#{loginController.checkCredentials}" /><br/>
+                </h:form>
             </h:panelGrid>
         </div>
     </h:body>
