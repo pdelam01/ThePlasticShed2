@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Employees;
@@ -33,17 +34,16 @@ public class LoginController implements Serializable{
         employees = new Employees();
     }
     
-    public List checkCredentials(){
+    public String checkCredentials(){
         try {
             List result = employeesEJB.loginCredentials(employees.getUsername(), employees.getPass());
-            if(result.size()!=0) {
-                //redirección
-                //return private home que esto esta todo explicado en un practica templates de LuisVincalderita jaja no k pasao
-                return result;
+            if(!result.isEmpty()) {
+                System.out.println(result.get(0).toString());
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("empleadoLogged", result.get(0));
+                return "private/home.xhtml?faces-redirect=true";
             } else {
-                //error
                 System.out.println("USUARIO O CONTRASEÑA INCORRECTA");
-                
+                return "private/permisosinsuficientes.xhtml?faces-redirect=true"; 
             }
         } catch (Exception e) {
             System.out.println("controller.LoginController.checkCredentials" + e.getMessage());
