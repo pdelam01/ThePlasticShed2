@@ -16,12 +16,12 @@ import javax.inject.Named;
  * @author De la Hera
  */
 
-@Named //Ambitos de clase: Vista, aplicacion, sesion, peticion 
+@Named
 @ViewScoped
 public class PlantillaController implements Serializable{
     
     public void checkLoggedUser() throws IOException{
-        System.out.println("polla checklogged user ");
+        System.out.println("hecklogged user ");
         if(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleadoLogged")!=null){
             System.out.println(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath());
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/private/home.xhtml");    
