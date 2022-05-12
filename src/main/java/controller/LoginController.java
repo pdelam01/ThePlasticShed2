@@ -40,7 +40,7 @@ public class LoginController implements Serializable{
             if(!result.isEmpty()) {
                 System.out.println(result.get(0).toString());
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("empleadoLogged", result.get(0));
-                return "private/home.xhtml?faces-redirect=true";
+                return "private/home2.xhtml?faces-redirect=true";
             } else {
                 System.out.println("USUARIO O CONTRASEÑA INCORRECTA");
                 return "private/permisosinsuficientes.xhtml?faces-redirect=true"; 

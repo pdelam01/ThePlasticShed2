@@ -15,7 +15,10 @@
     <h:body>
 
         <div id="top">
-            <ui:insert name="top">Top</ui:insert>
+            <ui:insert name="top">
+                Top
+             <f:event type="preRenderView" listener="#{plantillaController.checkLoggedUser()}"/>
+            </ui:insert>
         </div>
         <div>
             <div id="left">
