@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <h:head>
@@ -11,9 +11,7 @@
         <h:outputStylesheet name="css/cssLayout.css"/>
         <title>Facelets Template</title>
     </h:head>
-
     <h:body>
-
         <div id="top">
             <ui:insert name="top">
                 Top
@@ -22,7 +20,6 @@
         </div>
         <div>
             <div id="left">
-                
                 <ui:insert name="left">Left</ui:insert>
             </div>
             <div id="content" class="left_content">
@@ -34,7 +31,5 @@
             <ui:include src="footer.xhtml"/>
             <ui:insert name="bottom">Bottom</ui:insert>
         </div>
-
     </h:body>
-
 </html>
