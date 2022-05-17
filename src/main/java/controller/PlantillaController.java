@@ -24,7 +24,7 @@ public class PlantillaController implements Serializable{
         System.out.println("checklogged user ");
         if(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleadoLogged")!=null){
             System.out.println("estoy en el if()");
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/private/home2.xhtml");    
+            //FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/private/home2.xhtml");    
         }else{
             System.out.println("Lol yo en el else bro");
             FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");

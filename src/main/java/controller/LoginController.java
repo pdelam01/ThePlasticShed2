@@ -40,15 +40,15 @@ public class LoginController implements Serializable{
             if(!result.isEmpty()) {
                 System.out.println(result.get(0).toString());
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("empleadoLogged", result.get(0));
-                return "private/home2.xhtml?faces-redirect=true";
+                return "private/home2";
             } else {
                 System.out.println("USUARIO O CONTRASEÑA INCORRECTA");
-                return "private/permisosinsuficientes.xhtml?faces-redirect=true"; 
+                return "private/permisosinsuficientes"; 
             }
         } catch (Exception e) {
             System.out.println("controller.LoginController.checkCredentials" + e.getMessage());
+            return null;
         }
-        return null;
     }
     
     public Employees getEmployees() {
