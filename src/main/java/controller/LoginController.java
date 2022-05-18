@@ -31,24 +31,28 @@ public class LoginController implements Serializable{
     
     @PostConstruct
     public void init(){
-        employees = new Employees();
+        employees = new Employees();        
     }
     
     public String checkCredentials(){
+        
         try {
+            String direccion;
             List result = employeesEJB.loginCredentials(employees.getUsername(), employees.getPass());
             if(!result.isEmpty()) {
                 System.out.println(result.get(0).toString());
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("empleadoLogged", result.get(0));
-                return "private/home2";
+                direccion = "/private/home.xhtml";                
             } else {
                 System.out.println("USUARIO O CONTRASEÑA INCORRECTA");
-                return "private/permisosinsuficientes"; 
+                direccion = "/private/home.xhtml";  //antes: public/permisosinsuficientes
             }
+            return(direccion);
         } catch (Exception e) {
             System.out.println("controller.LoginController.checkCredentials" + e.getMessage());
-            return null;
+            return(null);
         }
+
     }
     
     public Employees getEmployees() {

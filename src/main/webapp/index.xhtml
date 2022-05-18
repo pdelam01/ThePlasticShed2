@@ -14,7 +14,7 @@
                 <h:form id="iniSes">Inicio de sesión
                     <p:inputText id="user" placeholder="Usuario" value="#{loginController.employees.username}"/><br/>
                     <p:password id="toggle" placeholder="Password" value="#{loginController.employees.pass}" toggleMask="false" redisplay="true"/><br/>
-                    <p:commandButton value="Login" action="#{loginController.checkCredentials}" /><br/>
+                    <p:commandButton value="Login" action="#{loginController.checkCredentials()}" /><br/>
                 </h:form>
             </h:panelGrid>
         </div>
