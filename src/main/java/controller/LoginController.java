@@ -42,10 +42,12 @@ public class LoginController implements Serializable{
             if(!result.isEmpty()) {
                 System.out.println(result.get(0).toString());
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("empleadoLogged", result.get(0));
-                direccion = "/private/home.xhtml";                
+                direccion = "private/home.xhtml";                
             } else {
                 System.out.println("USUARIO O CONTRASEÑA INCORRECTA");
-                direccion = "/private/home.xhtml";  //antes: public/permisosinsuficientes
+                FacesContext.getCurrentInstance().getExternalContext().redirect("public/permisosinsuficientes.xhtml");
+                //direccion = "public/permisosinsuficientes.xhtml";  //antes: 
+                direccion="";
             }
             return(direccion);
         } catch (Exception e) {
