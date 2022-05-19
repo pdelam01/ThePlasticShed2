@@ -45,7 +45,7 @@ public class LoginController implements Serializable{
                 direccion = "private/home.xhtml";                
             } else {
                 System.out.println("USUARIO O CONTRASEÑA INCORRECTA");
-                FacesContext.getCurrentInstance().getExternalContext().redirect("public/permisosinsuficientes.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("public/error404.xhtml");
                 //direccion = "public/permisosinsuficientes.xhtml";  //antes: 
                 direccion="";
             }
