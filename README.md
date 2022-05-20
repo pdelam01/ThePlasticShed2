@@ -3,7 +3,7 @@
 ### Trabajo final de la asignatura Ingeniería del Software II, curso 2021/2022.
 
 <p align="center">
-  <img height=180 width=180 src="src/main/webapp/assets/img/logos/loginPhotoTransparent.png">
+  <img height=225 width=225 src="src/main/webapp/assets/img/logos/loginPhotoTransparent.png">
 </p>
 
 Implementación de una aplicación web empleando Java Session Beans para una empresa de plásticos con las siguientes características:
@@ -30,7 +30,6 @@ Se ha empleado Java como principal lenguaje de programación, junto con xhtml, j
 
 ## Autores ✒️
 
-Adrián Pérez García. <br>
 Diego Fernández Velasco. <br>
 Pablo de la Hera Martinez. <br>
 Pablo Javier Barrio Navarro. <br><br>
@@ -39,8 +38,8 @@ Iconos diseñados por <a href="https://www.freepik.com" title="Freepik">Freepik<
 
 ##
 <p align="center">
-  <img align="left" src="https://forthebadge.com/images/badges/gluten-free.svg">
-  <img src="https://forthebadge.com/images/badges/made-with-python.svg">
-  <img align="right" src="https://forthebadge.com/images/badges/cc-nc-sa.svg">
+  <img align="left" src="https://forthebadge.com/images/badges/powered-by-coders-sweat.svg">
+  <img src="https://forthebadge.com/images/badges/made-with-java.svg">
+  <img align="right" src="https://forthebadge.com/images/badges/built-with-love.svg">
 </p>
 
