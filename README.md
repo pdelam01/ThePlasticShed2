@@ -3,7 +3,7 @@
 ### Trabajo final de la asignatura Ingeniería del Software II, curso 2021/2022.
 
 <p align="center">
-  <img height=325 width=325 src="src/main/webapp/assets/img/logos/loginPhotoTransparent.png">
+  <img height=325 width=400 src="src/main/webapp/assets/img/logos/loginPhotoTransparent.png">
 </p>
 
 Implementación de una aplicación web empleando Java Session Beans para una empresa de plásticos con las siguientes características:
@@ -38,6 +38,7 @@ Iconos diseñados por <a href="https://www.freepik.com" title="Freepik">Freepik<
 
 ##
 <p align="center">
+  <img align="left" src="https://forthebadge.com/images/badges/gluten-free.svg">
   <img src="https://forthebadge.com/images/badges/made-with-java.svg">
   <img align="right" src="https://forthebadge.com/images/badges/built-with-love.svg">
 </p>
