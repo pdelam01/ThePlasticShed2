@@ -38,7 +38,6 @@ Iconos diseñados por <a href="https://www.freepik.com" title="Freepik">Freepik<
 
 ##
 <p align="center">
-  <img align="left" src="https://forthebadge.com/images/badges/powered-by-coders-sweat.svg">
   <img src="https://forthebadge.com/images/badges/made-with-java.svg">
   <img align="right" src="https://forthebadge.com/images/badges/built-with-love.svg">
 </p>
