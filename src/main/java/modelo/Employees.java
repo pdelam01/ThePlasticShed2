@@ -87,11 +87,11 @@ public class Employees implements Serializable{
         this.ssn = ssn;
     }
 
-    public String getRange() {
+    public String getRole() {
         return role;
     }
 
-    public void setRange(String role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
