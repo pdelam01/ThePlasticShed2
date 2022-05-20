@@ -3,7 +3,7 @@
 ### Trabajo final de la asignatura Ingeniería del Software II, curso 2021/2022.
 
 <p align="center">
-  <img height=225 width=225 src="src/main/webapp/assets/img/logos/loginPhotoTransparent.png">
+  <img height=325 width=325 src="src/main/webapp/assets/img/logos/loginPhotoTransparent.png">
 </p>
 
 Implementación de una aplicación web empleando Java Session Beans para una empresa de plásticos con las siguientes características:
