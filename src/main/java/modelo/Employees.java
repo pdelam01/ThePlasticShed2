@@ -6,6 +6,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -88,7 +89,7 @@ public class Employees implements Serializable{
     }
 
     public String getRole() {
-        return role;
+        return role.charAt(0) + role.substring(1).toLowerCase();
     }
 
     public void setRole(String role) {
@@ -103,8 +104,9 @@ public class Employees implements Serializable{
         this.phoneNum = phoneNum;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public String getBirthday() {
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");  
+        return format.format(birthday);  
     }
 
     public void setBirthday(Date birthday) {

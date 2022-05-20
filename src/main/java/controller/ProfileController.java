@@ -25,12 +25,15 @@ public class ProfileController implements Serializable{
     
     private Employees employees;
     
+    private Employees employeeToUpdate;
+    
     @EJB
     private EmployeesFacadeLocal employeesEJB;
     
     @PostConstruct
     public void init(){
-        employees = showInfo();        
+        employees = showInfo();
+        employeeToUpdate = new Employees();
     }
     
     public Employees showInfo() {
@@ -58,8 +61,16 @@ public class ProfileController implements Serializable{
     }
     
     public void updateInfoEmployee() {
+        System.out.println("Probar");
         try {
-            
+            String user = "", name = "";
+            if(employeeToUpdate.getUsername()!=null) {
+                user = employeeToUpdate.getUsername();
+            }
+            if(employeeToUpdate.getNameEmp()!=null) {
+                name = employeeToUpdate.getNameEmp();
+            }
+            System.out.println("User: "+user+", name: "+name);
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
         }
@@ -71,5 +82,13 @@ public class ProfileController implements Serializable{
 
     public void setEmployees(Employees employees) {
         this.employees = employees;
+    }
+    
+    public Employees getEmployeesToUpdate() {
+        return employeeToUpdate;
+    }
+
+    public void setEmployeesToUpdate(Employees employees) {
+        this.employeeToUpdate = employees;
     }
 }

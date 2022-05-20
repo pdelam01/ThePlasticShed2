@@ -60,25 +60,25 @@
                                             <h:form>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de usuario</strong></label><p:inputText class="form-control" type="text" id="username" placeholder="#{profileController.employees.username}"/></div>
+                                                        <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de usuario</strong></label><p:inputText class="form-control" type="text" id="username" placeholder="#{profileController.employees.username}" value="#{profileController.employeesToUpdate.username}"/></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="name"><strong>Nombre</strong></label><p:inputText class="form-control" type="text" id="name" placeholder="#{profileController.employees.nameEmp}"/></div>
+                                                        <div class="mb-3"><label class="form-label" for="name"><strong>Nombre</strong></label><p:inputText class="form-control" type="text" id="name" placeholder="#{profileController.employees.nameEmp}" value="#{profileController.employeesToUpdate.nameEmp}"/></div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="mb-3"><label class="form-label" for="birthday"><strong>Fecha de nacimiento</strong></label>
-                                                            <p:inputText class="form-control" type="text" id="birthday" placeholder="#{profileController.employees.birthday}">
+                                                            <p:inputText class="form-control" type="text" id="birthday" placeholder="#{profileController.employees.birthday}" disabled="True">
                                                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
                                                             </p:inputText>
                                                         </div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="role"><strong>Rol</strong></label><p:inputText class="form-control" type="text" id="role" placeholder="#{profileController.employees.role}"/></div>
+                                                        <div class="mb-3"><label class="form-label" for="role"><strong>Rol</strong></label><p:inputText class="form-control" type="text" id="role" placeholder="#{profileController.employees.role}" disabled="True"/></div>
                                                     </div>
                                                 </div>
-                                                <div class="mb-3"><p:commandButton class="btn btn-primary btn-sm" value="Guardar cambios"></p:commandButton></div>
+                                                <div class="mb-3"><p:commandButton class="btn btn-primary btn-sm" value="Guardar cambios" action="#{profileController.updateInfoEmployee()}"></p:commandButton></div>
                                             </h:form>
                                         </div>
                                     </div>

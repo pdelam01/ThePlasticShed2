@@ -58,4 +58,12 @@ public class EmployeesFacade extends AbstractFacade<Employees> implements Employ
         }
     }
     
+    public void updateEmployee(String user, String name) {
+        try {
+            
+        } catch (Exception e) {
+            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+        }
+    }
+    
 }
