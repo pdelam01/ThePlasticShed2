@@ -39,11 +39,11 @@ public class ProfileController implements Serializable{
     public Employees showInfo() {
         System.out.println("VAmos a BBSS");
         try {
-            //Employees pr = (Employees) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleadoLogged");
-            //System.out.println(pr.getUsername());
+            Employees pr = (Employees) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleadoLogged");
+            System.out.println(pr.getIdEmployee());
             System.out.println("QUE lo que tu esta asiendo");
-            //List result = employeesEJB.showEmployeeInfo(pr.getUsername());
-            List result = employeesEJB.showEmployeeInfo("Admin"); 
+            List result = employeesEJB.showEmployeeInfo(pr.getDni());
+            //List result = employeesEJB.showEmployeeInfo("Admin"); 
             System.out.println("Alo");
             if(!result.isEmpty()) {
                 System.out.println("QUE lo que tu esta asiendox2");
@@ -64,13 +64,22 @@ public class ProfileController implements Serializable{
         System.out.println("Probar");
         try {
             String user = "", name = "";
-            if(employeeToUpdate.getUsername()!=null) {
+            String returnUsername = employeeToUpdate.getUsername().trim();
+            if(returnUsername.length()!=0) {
                 user = employeeToUpdate.getUsername();
+            }else{
+                user = employees.getUsername();
             }
-            if(employeeToUpdate.getNameEmp()!=null) {
+            String returnName = employeeToUpdate.getNameEmp().trim();
+            if(returnName.length()!=0) {
+                System.out.println("El nombre es:"+employeeToUpdate.getNameEmp());
                 name = employeeToUpdate.getNameEmp();
+            }else{
+                name = employees.getNameEmp();
             }
             System.out.println("User: "+user+", name: "+name);
+            employeesEJB.updateEmployee(user, name, employees.getDni());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml");
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
         }

@@ -32,6 +32,8 @@ public interface EmployeesFacadeLocal {
     
     List loginCredentials(String username, String password);
 
-    List showEmployeeInfo(String username);
+    List showEmployeeInfo(String id);
+    
+    void updateEmployee(String user, String name, String dni);
     
 }
