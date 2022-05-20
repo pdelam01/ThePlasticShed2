@@ -31,7 +31,7 @@ public class PlantillaController implements Serializable{
             System.out.println("yo en el else");
             String direccionContexto = FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath();
            // FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");
-           FacesContext.getCurrentInstance().getExternalContext().redirect(direccionContexto + "/public/permisosinsuficientes.xhtml");
+           FacesContext.getCurrentInstance().getExternalContext().redirect(direccionContexto + "/public/error404.xhtml");
         }
     }
 }
