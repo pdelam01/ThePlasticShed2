@@ -19,29 +19,28 @@ import modelo.Employees;
  *
  * @author De la Hera
  */
-
 @Named //Ambitos de clase: Vista, aplicacion, sesion, peticion 
 @ViewScoped
-public class LoginController implements Serializable{
-    
+public class LoginController implements Serializable {
+
     private Employees employees;
-    
+
     @EJB
     private EmployeesFacadeLocal employeesEJB;
-    
+
     @PostConstruct
-    public void init(){
-        employees = new Employees();        
+    public void init() {
+        employees = new Employees();
     }
-    
-    public void checkCredentials(){
-        
+
+    public void checkCredentials() {
+
         try {
             List result = employeesEJB.loginCredentials(employees.getUsername(), employees.getPass());
-            if(!result.isEmpty()) {
+            if (!result.isEmpty()) {
                 System.out.println(result.get(0).toString());
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("empleadoLogged", result.get(0));
-                FacesContext.getCurrentInstance().getExternalContext().redirect("faces/private/home.xhtml");             
+                FacesContext.getCurrentInstance().getExternalContext().redirect("faces/private/home.xhtml");
             } else {
                 System.out.println("USUARIO O CONTRASEÑA INCORRECTA");
                 FacesContext.getCurrentInstance().getExternalContext().redirect("public/error404.xhtml");
@@ -51,7 +50,18 @@ public class LoginController implements Serializable{
         }
 
     }
-    
+
+    public void closeSession() {
+        try {
+            System.out.println("cierro la session");
+            FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+            FacesContext.getCurrentInstance().getExternalContext().redirect("../index.xhtml");
+        } catch (Exception e) {
+            System.out.println("controller.LoginController.closeSession" + e.getMessage());
+        }
+
+    }
+
     public Employees getEmployees() {
         return employees;
     }
@@ -59,6 +69,5 @@ public class LoginController implements Serializable{
     public void setEmployees(Employees employees) {
         this.employees = employees;
     }
-    
-    
+
 }
