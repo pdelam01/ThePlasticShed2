@@ -44,7 +44,7 @@ public class MaterialsController implements Serializable{
         }
     }
     
-    public List<Materials> getMaterialstsList(){
+    public List<Materials> getMaterialsList(){
         return materialsList;
     }
     

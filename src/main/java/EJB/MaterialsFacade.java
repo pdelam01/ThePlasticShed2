@@ -30,15 +30,15 @@ public class MaterialsFacade extends AbstractFacade<Materials> implements Materi
         super(Materials.class);
     }
     
-     public  List<Materials> findMaterialsList(){
-        try {
-            return em.createQuery(
-                    "FROM Materials m")
-                    .getResultList();
-        } catch (Exception e) {
-             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
-             return null;
-        }
+    public  List<Materials> findMaterialsList(){
+       try {
+           return em.createQuery(
+                   "FROM Materials m")
+                   .getResultList();
+       } catch (Exception e) {
+            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            return null;
+       }
     }
     
 }

@@ -29,7 +29,7 @@ public class Materials implements Serializable {
     private int quantity;
 
     @Column(name = "Price")
-    private int price;
+    private float price;
 
     @JoinColumn(name = "idSupplier")
     @ManyToOne
@@ -67,11 +67,11 @@ public class Materials implements Serializable {
         this.quantity = quantity;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -85,13 +85,13 @@ public class Materials implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + this.idMaterial;
-        hash = 79 * hash + Objects.hashCode(this.name);
-        hash = 79 * hash + Objects.hashCode(this.upc);
-        hash = 79 * hash + this.quantity;
-        hash = 79 * hash + this.price;
-        hash = 79 * hash + Objects.hashCode(this.idSupplier);
+        int hash = 3;
+        hash = 23 * hash + this.idMaterial;
+        hash = 23 * hash + Objects.hashCode(this.name);
+        hash = 23 * hash + Objects.hashCode(this.upc);
+        hash = 23 * hash + this.quantity;
+        hash = 23 * hash + Float.floatToIntBits(this.price);
+        hash = 23 * hash + Objects.hashCode(this.idSupplier);
         return hash;
     }
 

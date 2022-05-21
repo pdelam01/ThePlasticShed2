@@ -47,10 +47,10 @@
                         </div>
                         <h:form>
                         <div class="card-body">
-                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                                <p:dataTable class="table my-0" id="dataTable" var="materiales" value="#{materialsController.materialstsList}">
+                            <div class="table-responsive table mt-2" id="dataTable22" role="grid" aria-describedby="dataTable_info">
+                                <p:dataTable class="table my-0" id="dataTable2" var="materiales" value="#{materialsController.materialsList}">
                                     <p:column headerText="Imagen de material">
-                                        <h:graphicImage class="rounded-circle me-2" width="40" height="40" url="../../assets/img/materials/metacrilato.png" />
+                                        <h:graphicImage class="rounded-circle me-2" width="40" height="40" url="../../assets/img/materials/material#{materiales.id}.png" />
                                     </p:column>
                                     <p:column headerText="Nombre de material">
                                         <h:outputText value="#{materiales.name}"/>
