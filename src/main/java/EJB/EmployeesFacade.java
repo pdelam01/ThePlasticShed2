@@ -71,4 +71,18 @@ public class EmployeesFacade extends AbstractFacade<Employees> implements Employ
         }
     }
     
+    public void updateEmployeeSensibiliti(String ssn, int phoneNumber, String dni) {
+        try {
+            em.createQuery(
+                    "UPDATE Employees e SET e.ssn=:ssn"
+                            + " WHERE e.dni=:dni")
+                    .setParameter("ssn", ssn)
+                    //.setParameter("phone", phoneNumber)
+                    .setParameter("dni", dni)
+                    .executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+        }
+    }
+    
 }

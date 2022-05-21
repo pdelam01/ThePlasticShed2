@@ -85,6 +85,29 @@ public class ProfileController implements Serializable{
         }
     }
     
+    public void updateInfoSensibilityEmployee() {
+        try {
+            String ssn = "";
+            int phoneNumber = 0;
+            String returnSSN = employeeToUpdate.getSsn().trim();
+            if(returnSSN.length()==10) {
+                ssn = employeeToUpdate.getSsn();
+            }else{
+                ssn = employees.getSsn();
+            }
+            if(String.valueOf(phoneNumber).length()==9) {
+                System.out.println("El nombre es:"+employeeToUpdate.getNameEmp());
+                phoneNumber = employeeToUpdate.getPhoneNum();
+            }else{
+                phoneNumber = employees.getPhoneNum();
+            }
+            employeesEJB.updateEmployeeSensibiliti(ssn, phoneNumber, employees.getDni());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml");
+        } catch (Exception e) {
+            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+        }
+    }
+    
     public Employees getEmployees() {
         return employees;
     }

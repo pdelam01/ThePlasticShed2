@@ -36,4 +36,6 @@ public interface EmployeesFacadeLocal {
     
     void updateEmployee(String user, String name, String dni);
     
+    void updateEmployeeSensibiliti(String ssn, int phoneNumber, String dni);
+    
 }
