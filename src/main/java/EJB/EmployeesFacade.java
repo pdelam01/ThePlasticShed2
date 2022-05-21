@@ -45,11 +45,11 @@ public class EmployeesFacade extends AbstractFacade<Employees> implements Employ
         }
     }
     
-    public List showEmployeeInfo(String dni) {
+    public List showEmployeeInfo(int id) {
         try {
             return em.createQuery(
-                    "FROM Employees e WHERE e.dni=:dni")
-                    .setParameter("dni", dni)
+                    "FROM Employees e WHERE e.idEmployee=:id")
+                    .setParameter("id", id)
                     .getResultList();
         } catch (Exception e) {
              System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
@@ -71,14 +71,15 @@ public class EmployeesFacade extends AbstractFacade<Employees> implements Employ
         }
     }
     
-    public void updateEmployeeSensibiliti(String ssn, int phoneNumber, String dni) {
+    public void updateEmployeeSensibiliti(String ssn, String phone, String dni, int id) {
         try {
             em.createQuery(
-                    "UPDATE Employees e SET e.ssn=:ssn"
-                            + " WHERE e.dni=:dni")
+                    "UPDATE Employees e SET e.ssn=:ssn, e.phoneNum=:phone, e.dni=:dni"
+                            + " WHERE e.idEmployee=:id")
                     .setParameter("ssn", ssn)
-                    //.setParameter("phone", phoneNumber)
+                    .setParameter("phone", phone)
                     .setParameter("dni", dni)
+                    .setParameter("id", id)
                     .executeUpdate();
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());

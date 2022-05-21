@@ -41,16 +41,11 @@ public class ProfileController implements Serializable{
         try {
             Employees pr = (Employees) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleadoLogged");
             System.out.println(pr.getIdEmployee());
-            System.out.println("QUE lo que tu esta asiendo");
-            List result = employeesEJB.showEmployeeInfo(pr.getDni());
+            List result = employeesEJB.showEmployeeInfo(pr.getIdEmployee());
             //List result = employeesEJB.showEmployeeInfo("Admin"); 
-            System.out.println("Alo");
             if(!result.isEmpty()) {
-                System.out.println("QUE lo que tu esta asiendox2");
-                System.out.println(result.get(0).toString());
                 return (Employees) result.get(0);
             } else {
-                System.out.println("USUARIO O CONTRASEÑA INCORRECTA");
                 FacesContext.getCurrentInstance().getExternalContext().redirect("public/error404.xhtml");
                 return null;
             }
@@ -87,25 +82,54 @@ public class ProfileController implements Serializable{
     
     public void updateInfoSensibilityEmployee() {
         try {
-            String ssn = "";
-            int phoneNumber = 0;
+            String ssn = "", phoneNumber = "", dni = "";
             String returnSSN = employeeToUpdate.getSsn().trim();
             if(returnSSN.length()==10) {
-                ssn = employeeToUpdate.getSsn();
+                ssn = employeeToUpdate.getSsn().trim();
             }else{
                 ssn = employees.getSsn();
             }
-            if(String.valueOf(phoneNumber).length()==9) {
-                System.out.println("El nombre es:"+employeeToUpdate.getNameEmp());
-                phoneNumber = employeeToUpdate.getPhoneNum();
+            String returnPhoneNumber = employeeToUpdate.getPhoneNum().trim();
+            if(returnPhoneNumber.length()==9 && checkNumbers(returnPhoneNumber)) {
+                phoneNumber = employeeToUpdate.getPhoneNum().trim();
             }else{
                 phoneNumber = employees.getPhoneNum();
             }
-            employeesEJB.updateEmployeeSensibiliti(ssn, phoneNumber, employees.getDni());
+            String returnDNI = employeeToUpdate.getDni().trim();
+            if(checkDni(returnDNI)) {
+                dni = employeeToUpdate.getDni().trim();
+            }else{
+                dni = employees.getDni();
+            }
+            employeesEJB.updateEmployeeSensibiliti(ssn, phoneNumber, dni, employees.getIdEmployee());
             FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml");
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
         }
+    }
+    
+    private boolean checkNumbers(String phone) {
+        for(int i=0; i<phone.length(); i++) {
+            if(!Character.isDigit(phone.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private boolean checkDni(String dni) {
+        if(dni.length()!=9) {
+            return false;
+        }
+        for(int i=0; i<7; i++) {
+            if(!Character.isDigit(dni.charAt(i))) {
+                return false;
+            }
+        }
+        if(!Character.isUpperCase(dni.charAt(8))) {
+            return false;
+        }
+        return true;
     }
     
     public Employees getEmployees() {

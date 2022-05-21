@@ -32,10 +32,10 @@ public interface EmployeesFacadeLocal {
     
     List loginCredentials(String username, String password);
 
-    List showEmployeeInfo(String id);
+    List showEmployeeInfo(int id);
     
     void updateEmployee(String user, String name, String dni);
     
-    void updateEmployeeSensibiliti(String ssn, int phoneNumber, String dni);
+    void updateEmployeeSensibiliti(String ssn, String phone, String dni, int id); 
     
 }

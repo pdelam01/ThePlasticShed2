@@ -44,7 +44,7 @@ public class Employees implements Serializable{
     private String role;
     
     @Column (name = "PhoneNumber")
-    private int phoneNum;
+    private String phoneNum;
     
     @Column (name = "Birthday")
     @Temporal(TemporalType.DATE)
@@ -96,11 +96,11 @@ public class Employees implements Serializable{
         this.role = role;
     }
 
-    public int getPhoneNum() {
+    public String getPhoneNum() {
         return phoneNum;
     }
 
-    public void setPhoneNum(int phoneNum) {
+    public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
 
@@ -137,7 +137,7 @@ public class Employees implements Serializable{
         hash = 73 * hash + Objects.hashCode(this.dni);
         hash = 73 * hash + Objects.hashCode(this.ssn);
         hash = 73 * hash + Objects.hashCode(this.role);
-        hash = 73 * hash + this.phoneNum;
+        hash = 73 * hash + Objects.hashCode(this.phoneNum);
         hash = 73 * hash + Objects.hashCode(this.birthday);
         hash = 73 * hash + Objects.hashCode(this.username);
         hash = 73 * hash + Objects.hashCode(this.pass);
