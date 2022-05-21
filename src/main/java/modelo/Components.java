@@ -22,7 +22,7 @@ import javax.persistence.Table;
 public class Components implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idComponent;
 
     @Column(name = "Name")
     private String name;
@@ -30,19 +30,22 @@ public class Components implements Serializable {
     @Column(name = "UPC")
     private String upc;
 
-    @JoinColumn(name = "UPCAditionalComponents")
+    @JoinColumn(name = "UPCAditionalComponent")
     @ManyToOne
-    private Components upcAditionalComponents;
+    private Components upcAditionalComponent;
 
     @Column(name = "Quantity")
-    private int Quantity;
+    private int quantity;
+    
+    @Column(name = "Price")
+    private float price;
 
     public int getId() {
-        return id;
+        return idComponent;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idComponent = id;
     }
 
     public String getName() {
@@ -62,29 +65,38 @@ public class Components implements Serializable {
     }
 
     public Components getUpcAditionalComponents() {
-        return upcAditionalComponents;
+        return upcAditionalComponent;
     }
 
     public void setUpcAditionalComponents(Components upcAditionalComponents) {
-        this.upcAditionalComponents = upcAditionalComponents;
+        this.upcAditionalComponent = upcAditionalComponents;
     }
     
     public int getQuantity() {
-        return Quantity;
+        return quantity;
     }
 
-    public void setQuantity(int Quantity) {
-        this.Quantity = Quantity;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 17 * hash + this.id;
-        hash = 17 * hash + Objects.hashCode(this.name);
-        hash = 17 * hash + Objects.hashCode(this.upc);
-        hash = 17 * hash + Objects.hashCode(this.upcAditionalComponents);
-        hash = 17 * hash + this.Quantity;
+        int hash = 7;
+        hash = 41 * hash + this.idComponent;
+        hash = 41 * hash + Objects.hashCode(this.name);
+        hash = 41 * hash + Objects.hashCode(this.upc);
+        hash = 41 * hash + Objects.hashCode(this.upcAditionalComponent);
+        hash = 41 * hash + this.quantity;
+        hash = 41 * hash + Float.floatToIntBits(this.price);
         return hash;
     }
 
@@ -100,10 +112,13 @@ public class Components implements Serializable {
             return false;
         }
         final Components other = (Components) obj;
-        if (this.id != other.id) {
+        if (this.idComponent != other.idComponent) {
             return false;
         }
-        if (this.Quantity != other.Quantity) {
+        if (this.quantity != other.quantity) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.price) != Float.floatToIntBits(other.price)) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
@@ -112,12 +127,11 @@ public class Components implements Serializable {
         if (!Objects.equals(this.upc, other.upc)) {
             return false;
         }
-        if (!Objects.equals(this.upcAditionalComponents, other.upcAditionalComponents)) {
+        if (!Objects.equals(this.upcAditionalComponent, other.upcAditionalComponent)) {
             return false;
         }
         return true;
     }
-
     
     
     

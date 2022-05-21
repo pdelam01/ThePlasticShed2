@@ -5,6 +5,7 @@
  */
 package EJB;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,17 @@ public class ComponentsFacade extends AbstractFacade<Components> implements Comp
 
     public ComponentsFacade() {
         super(Components.class);
+    }
+    
+    public  List<Components> findComponentsList(){
+        try {
+            return em.createQuery(
+                    "FROM Components c")
+                    .getResultList();
+        } catch (Exception e) {
+             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+             return null;
+        }
     }
     
 }

@@ -27,7 +27,9 @@ public interface MaterialsFacadeLocal {
     List<Materials> findAll();
 
     List<Materials> findRange(int[] range);
-
+    
+    List<Materials> findMaterialsList();
+    
     int count();
     
 }

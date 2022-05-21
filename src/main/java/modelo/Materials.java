@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class Materials implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idMaterial;
 
     @Column(name = "Name")
     private String name;
@@ -36,11 +36,11 @@ public class Materials implements Serializable {
     private Suppliers idSupplier;
 
     public int getId() {
-        return id;
+        return idMaterial;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idMaterial = id;
     }
 
     public String getName() {
@@ -86,7 +86,7 @@ public class Materials implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 79 * hash + this.id;
+        hash = 79 * hash + this.idMaterial;
         hash = 79 * hash + Objects.hashCode(this.name);
         hash = 79 * hash + Objects.hashCode(this.upc);
         hash = 79 * hash + this.quantity;
@@ -107,7 +107,7 @@ public class Materials implements Serializable {
             return false;
         }
         final Materials other = (Materials) obj;
-        if (this.id != other.id) {
+        if (this.idMaterial != other.idMaterial) {
             return false;
         }
         if (this.quantity != other.quantity) {

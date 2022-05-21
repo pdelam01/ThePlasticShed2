@@ -5,6 +5,7 @@
  */
 package EJB;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,17 @@ public class MaterialsFacade extends AbstractFacade<Materials> implements Materi
 
     public MaterialsFacade() {
         super(Materials.class);
+    }
+    
+     public  List<Materials> findMaterialsList(){
+        try {
+            return em.createQuery(
+                    "FROM Materials m")
+                    .getResultList();
+        } catch (Exception e) {
+             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+             return null;
+        }
     }
     
 }

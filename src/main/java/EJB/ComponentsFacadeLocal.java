@@ -28,6 +28,8 @@ public interface ComponentsFacadeLocal {
 
     List<Components> findRange(int[] range);
 
+    List<Components> findComponentsList();
+    
     int count();
     
 }
