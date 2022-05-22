@@ -12,69 +12,84 @@
 
             <ui:define name="content">
                 <h3 class="text-dark mb-4">Almacén</h3>
-                    <div class="card shadow">
-                        <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold">Componentes</p>
-                        </div>
-                        <h:form>
-                        <div class="card-body">
-                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                                <p:dataTable class="table my-0" id="dataTable" var="componente" value="#{componentsController.componentsList}">
-                                    <p:column headerText="Imagen de componente">
-                                        <h:graphicImage class="rounded-circle me-2" width="40" height="40" url="../../assets/img/components/componente#{componente.id}.png" />
-                                    </p:column>
-                                    <p:column headerText="Nombre">
-                                        <h:outputText value="#{componente.name}"/>
-                                    </p:column>
-                                    <p:column headerText="UPC">
-                                        <h:outputText value="#{componente.upc}"/>
-                                    </p:column>
-                                    <p:column headerText="Cantidad">
-                                        <h:outputText value="#{componente.quantity}"/>
-                                    </p:column>
-                                    <p:column headerText="Precio de venta">
-                                        <h:outputText value="#{componente.price}  €"/>
-                                    </p:column>
-                                </p:dataTable>
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1">Componentes</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">Materiales</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">Reponer Materiales </a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" role="tabpanel" id="tab-1">
+                            <div class="card shadow">
+                                <div class="card-header py-3">
+                                    <p class="text-primary m-0 fw-bold">Componentes</p>
+                                </div>
+                                <h:form>
+                                    <div class="card-body">
+                                        <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                            <p:dataTable class="table my-0" id="dataTable" var="componente" value="#{componentsController.componentsList}">
+                                                <p:column headerText="Imagen de componente">
+                                                    <h:graphicImage class="rounded-circle me-2" width="40" height="40" url="../../assets/img/components/componente#{componente.id}.png" />
+                                                </p:column>
+                                                <p:column headerText="Nombre">
+                                                    <h:outputText value="#{componente.name}"/>
+                                                </p:column>
+                                                <p:column headerText="UPC">
+                                                    <h:outputText value="#{componente.upc}"/>
+                                                </p:column>
+                                                <p:column headerText="Cantidad">
+                                                    <h:outputText value="#{componente.quantity}"/>
+                                                </p:column>
+                                                <p:column headerText="Precio de venta">
+                                                    <h:outputText value="#{componente.price}  €"/>
+                                                </p:column>
+                                            </p:dataTable>
+                                        </div>
+                                    </div>
+                                </h:form>
                             </div>
                         </div>
-                        </h:form>
-                    </div>
-                <br></br>
-                <div class="card shadow">
-                        <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold">Materiales</p>
-                        </div>
-                        <h:form>
-                        <div class="card-body">
-                            <div class="table-responsive table mt-2" id="dataTable22" role="grid" aria-describedby="dataTable_info">
-                                <p:dataTable class="table my-0" id="dataTable2" var="materiales" value="#{materialsController.materialsList}">
-                                    <p:column headerText="Imagen">
-                                        <h:graphicImage class="rounded-circle me-2" width="40" height="40" url="../../assets/img/materials/material#{materiales.id}.png" />
-                                    </p:column>
-                                    <p:column headerText="Nombre">
-                                        <h:outputText value="#{materiales.name}"/>
-                                    </p:column>
-                                    <p:column headerText="UPC">
-                                        <h:outputText value="#{materiales.upc}"/>
-                                    </p:column>
-                                    <p:column headerText="Cantidad">
-                                        <h:outputText value="#{materiales.quantity}"/>
-                                    </p:column>
-                                    <p:column headerText="Precio de compra">
-                                        <h:outputText value="#{materiales.price} €"/>
-                                    </p:column>
-                                    <p:column headerText="Proveedor">
-                                        <h:outputText value="#{materiales.idSupplier.name}"/>
-                                    </p:column>
-                                    <p:column headerText="Tlf de proveedor">
-                                        <h:outputText value="#{materiales.idSupplier.phoneNumber}"/>
-                                    </p:column>
-                                </p:dataTable>
+                        <div class="tab-pane" role="tabpanel" id="tab-2">
+                            <div class="card shadow">
+                                <div class="card-header py-3">
+                                    <p class="text-primary m-0 fw-bold">Materiales</p>
+                                </div>
+                                <h:form>
+                                    <div class="card-body">
+                                        <div class="table-responsive table mt-2" id="dataTable22" role="grid" aria-describedby="dataTable_info">
+                                            <p:dataTable class="table my-0" id="dataTable2" var="materiales" value="#{materialsController.materialsList}">
+                                                <p:column headerText="Imagen">
+                                                    <h:graphicImage class="rounded-circle me-2" width="40" height="40" url="../../assets/img/materials/material#{materiales.id}.png" />
+                                                </p:column>
+                                                <p:column headerText="Nombre">
+                                                    <h:outputText value="#{materiales.name}"/>
+                                                </p:column>
+                                                <p:column headerText="UPC">
+                                                    <h:outputText value="#{materiales.upc}"/>
+                                                </p:column>
+                                                <p:column headerText="Cantidad">
+                                                    <h:outputText value="#{materiales.quantity}"/>
+                                                </p:column>
+                                                <p:column headerText="Precio de compra">
+                                                    <h:outputText value="#{materiales.price} €"/>
+                                                </p:column>
+                                                <p:column headerText="Proveedor">
+                                                    <h:outputText value="#{materiales.idSupplier.name}"/>
+                                                </p:column>
+                                                <p:column headerText="Tlf de proveedor">
+                                                    <h:outputText value="#{materiales.idSupplier.phoneNumber}"/>
+                                                </p:column>
+                                            </p:dataTable>
+                                        </div>
+                                    </div>
+                                </h:form>
                             </div>
                         </div>
-                        </h:form>
+                        <div class="tab-pane" role="tabpanel" id="tab-3">
+                            <p>En este tab irá un pequeño menu para añadir materiales a la tabla materiales, como si fuera una "compra a suplier"</p>
+                        </div>
                     </div>
+                </div>
             </ui:define>
 
         </ui:composition>
