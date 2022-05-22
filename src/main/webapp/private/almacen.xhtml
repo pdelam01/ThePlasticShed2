@@ -23,7 +23,7 @@
                                     <p:column headerText="Imagen de componente">
                                         <h:graphicImage class="rounded-circle me-2" width="40" height="40" url="../../assets/img/components/componente#{componente.id}.png" />
                                     </p:column>
-                                    <p:column headerText="Nombre de componente">
+                                    <p:column headerText="Nombre">
                                         <h:outputText value="#{componente.name}"/>
                                     </p:column>
                                     <p:column headerText="UPC">
@@ -33,7 +33,7 @@
                                         <h:outputText value="#{componente.quantity}"/>
                                     </p:column>
                                     <p:column headerText="Precio de venta">
-                                        <h:outputText value="#{componente.price}"/>
+                                        <h:outputText value="#{componente.price}  €"/>
                                     </p:column>
                                 </p:dataTable>
                             </div>
@@ -49,10 +49,10 @@
                         <div class="card-body">
                             <div class="table-responsive table mt-2" id="dataTable22" role="grid" aria-describedby="dataTable_info">
                                 <p:dataTable class="table my-0" id="dataTable2" var="materiales" value="#{materialsController.materialsList}">
-                                    <p:column headerText="Imagen de material">
+                                    <p:column headerText="Imagen">
                                         <h:graphicImage class="rounded-circle me-2" width="40" height="40" url="../../assets/img/materials/material#{materiales.id}.png" />
                                     </p:column>
-                                    <p:column headerText="Nombre de material">
+                                    <p:column headerText="Nombre">
                                         <h:outputText value="#{materiales.name}"/>
                                     </p:column>
                                     <p:column headerText="UPC">
@@ -62,7 +62,7 @@
                                         <h:outputText value="#{materiales.quantity}"/>
                                     </p:column>
                                     <p:column headerText="Precio de compra">
-                                        <h:outputText value="#{materiales.price}"/>
+                                        <h:outputText value="#{materiales.price} €"/>
                                     </p:column>
                                     <p:column headerText="Proveedor">
                                         <h:outputText value="#{materiales.idSupplier.name}"/>
