@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Suppliers implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idSupplier;
 
     @Column(name = "NameSupp")
     private String name;
@@ -33,11 +33,11 @@ public class Suppliers implements Serializable {
     private String phoneNumber;
 
     public int getId() {
-        return id;
+        return idSupplier;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idSupplier = id;
     }
 
     public String getName() {
@@ -83,7 +83,7 @@ public class Suppliers implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + this.id;
+        hash = 53 * hash + this.idSupplier;
         hash = 53 * hash + Objects.hashCode(this.name);
         hash = 53 * hash + Objects.hashCode(this.contactPerson);
         hash = 53 * hash + Objects.hashCode(this.cif);
@@ -104,7 +104,7 @@ public class Suppliers implements Serializable {
             return false;
         }
         final Suppliers other = (Suppliers) obj;
-        if (this.id != other.id) {
+        if (this.idSupplier != other.idSupplier) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
