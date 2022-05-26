@@ -5,6 +5,7 @@
  */
 package EJB;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,17 @@ public class ClientsFacade extends AbstractFacade<Clients> implements ClientsFac
 
     public ClientsFacade() {
         super(Clients.class);
+    }
+    
+    public  List<Clients> findClientsList(){
+        try {
+            return em.createQuery(
+                    "FROM Clients c")
+                    .getResultList();
+        } catch (Exception e) {
+             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+             return null;
+        }
     }
     
 }
