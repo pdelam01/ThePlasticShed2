@@ -6,10 +6,15 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,20 +27,21 @@ import javax.persistence.Table;
 public class AdminEmployees implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @OneToOne
+    private Employees id;
 
-    public int getId() {
+    public Employees getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Employees id) {
         this.id = id;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + this.id;
+        int hash = 3;
+        hash = 79 * hash + Objects.hashCode(this.id);
         return hash;
     }
 

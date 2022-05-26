@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
@@ -17,64 +19,47 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" role="tabpanel" id="tab-1">
-                            <p>// Tabla para visión general de los usuarios de la aplicación. Show employees table</p>
                             <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>DNI</th>
-                                            <th>SSN</th>
-                                            <th>Rol</th>
-                                            <th>Nº Tlfn</th>
-                                            <th>Fecha Nacimiento</th>
-                                            <th>Username</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td><a href="#">Eliminar</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Text<br/></td>
-                                            <td>Text</td>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td><a href="#">Eliminar</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td><a href="#">Eliminar</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td><a href="#">Eliminar</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="card shadow">
+                                    <div class="card-header py-3">
+                                        <p class="text-primary m-0 fw-bold">Usuarios</p>
+                                    </div>
+                                    <h:form>
+                                        <div class="card-body">
+                                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                                <p:dataTable class="table my-0" id="dataTable" var="empleados" value="#{employeesController.employeesList}">
+                                                    <p:column headerText="Nombre">
+                                                        <h:outputText value="#{empleados.nameEmp}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Id">
+                                                        <h:outputText value="#{empleados.idEmployee}"/>
+                                                    </p:column>
+                                                    <p:column headerText="DNI">
+                                                        <h:outputText value="#{empleados.dni}"/>
+                                                    </p:column>
+                                                    <p:column headerText="SSN">
+                                                        <h:outputText value="#{empleados.ssn}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Rol">
+                                                        <h:outputText value="#{empleados.role}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Tlfn">
+                                                        <h:outputText value="#{empleados.phoneNum}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Fecha de nacimiento">
+                                                        <h:outputText value="#{empleados.birthday}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Username">
+                                                        <h:outputText value="#{empleados.username}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Eliminar">
+                                                        <h:commandLink value="Eliminar" action="#{employeesController.removeEmployees(empleados.idEmployee)}"/>
+                                                    </p:column>
+                                                </p:dataTable>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="tab-2">
