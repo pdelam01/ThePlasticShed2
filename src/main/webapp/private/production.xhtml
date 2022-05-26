@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templates/homeTemplate.xhtml">
+
+            <ui:define name="content">
+                <h3 class="text-dark mb-1">Producción</h3>
+                <div class="row">
+                    <div class="col">
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3">
+                                <p class="text-primary m-0 fw-bold">Componente a producir</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col d-flex align-items-center justify-content-end"><button class="btn btn-primary" type="button"><i class="fas fa-arrow-left"/></button></div>
+                                    <div class="col d-flex align-items-center justify-content-center"><img class="rounded-circle mb-3 mt-4" src="./../assets/img/components/componente1.png" width="160" height="160"/></div>
+                                    <div class="col d-flex align-items-center justify-content-start"><button class="btn btn-primary" type="button"><i class="fas fa-arrow-right"/></button></div>
+                                </div>
+                                <form>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3"><label class="form-label"><strong>Nombre de componente</strong></label><input class="form-control" type="text" id="component" placeholder="Bebedero de tubo" name="component"/></div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="mb-3"><label class="form-label"><strong>UPC</strong><br/></label><input class="form-control" type="text" id="upc" placeholder="0001" name="upc"/></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3"><label class="form-label" for="first_name"><strong>Componente necesario</strong></label><input class="form-control" type="text" id="complement_component" placeholder="-" name="complement_component"/></div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="mb-3"><label class="form-label" for="last_name"><strong>Material Necesario 1</strong></label><input class="form-control" type="text" id="complement_material" placeholder="PVC" name="last_name"/></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col d-flex align-items-center justify-content-center">
+                                            <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">Producir Componente</button></div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="mb-3"><label class="form-label" for="last_name"><strong>Material Necesario 2</strong></label><input class="form-control" type="text" id="complement_material-1" placeholder="PVC" name="last_name"/></div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
