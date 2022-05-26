@@ -1,14 +1,16 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./../WEB-INF/templates/homeTemplate.xhtml">
 
             <ui:define name="content">
-                <h3 class="text-dark mb-1">Proveedores</h3>
+                <h3 class="text-dark mb-1">Proveedores</h3><br></br>
                     <div class="row">
                         <div class="col">
                             <div>
@@ -18,63 +20,33 @@
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" role="tabpanel" id="tab-1">
-                                        <p>// Tabla para mostrar los suppliers</p>
                                         <div class="card shadow">
                                             <div class="card-header py-3">
                                                 <p class="text-primary m-0 fw-bold">Proveedores</p>
                                             </div>
-                                            <div class="card-body">
-                                                <div class="table-responsive">
-                                                    <table class="table">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Nombre&nbsp;</th>
-                                                                <th>Persona de Contacto</th>
-                                                                <th>CIF</th>
-                                                                <th>Email</th>
-                                                                <th>Nº Tlfn</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Cell 1</td>
-                                                                <td>Cell 2</td>
-                                                                <td>Cell 3</td>
-                                                                <td>Cell 4</td>
-                                                                <td>Cell 5</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Cell 3</td>
-                                                                <td>Cell 4</td>
-                                                                <td>Cell 3</td>
-                                                                <td>Cell 4</td>
-                                                                <td>Cell 5</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Cell 1</td>
-                                                                <td>Cell 2</td>
-                                                                <td>Cell 3</td>
-                                                                <td>Cell 4</td>
-                                                                <td>Cell 5</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Cell 1</td>
-                                                                <td>Cell 2</td>
-                                                                <td>Cell 3</td>
-                                                                <td>Cell 4</td>
-                                                                <td>Cell 5</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Cell 1</td>
-                                                                <td>Cell 2</td>
-                                                                <td>Cell 3</td>
-                                                                <td>Cell 4</td>
-                                                                <td>Cell 5</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                            <h:form>
+                                                <div class="card-body">
+                                                    <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                                        <p:dataTable class="table my-0" id="dataTable" var="proveedores" value="#{suppliersController.suppliersList}">
+                                                            <p:column headerText="Nombre">
+                                                                <h:outputText value="#{proveedores.name}"/>
+                                                            </p:column>
+                                                            <p:column headerText="Contacto">
+                                                                <h:outputText value="#{proveedores.contactPerson}"/>
+                                                            </p:column>
+                                                            <p:column headerText="CIF">
+                                                                <h:outputText value="#{proveedores.cif}"/>
+                                                            </p:column>
+                                                            <p:column headerText="Email">
+                                                                <h:outputText value="#{proveedores.email}"/>
+                                                            </p:column>
+                                                            <p:column headerText="Tlfn">
+                                                                <h:outputText value="#{proveedores.phoneNumber}"/>
+                                                            </p:column>
+                                                        </p:dataTable>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </h:form>
                                         </div>
                                     </div>
                                     <div class="tab-pane" role="tabpanel" id="tab-2">

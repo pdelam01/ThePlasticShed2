@@ -5,6 +5,7 @@
  */
 package EJB;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,17 @@ public class SuppliersFacade extends AbstractFacade<Suppliers> implements Suppli
 
     public SuppliersFacade() {
         super(Suppliers.class);
+    }
+    
+    public List<Suppliers> findSuppliersList(){
+        try {
+            return em.createQuery(
+                    "FROM Suppliers s")
+                    .getResultList();
+        } catch (Exception e) {
+             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+             return null;
+        }
     }
     
 }
