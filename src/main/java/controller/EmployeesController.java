@@ -5,8 +5,10 @@
  */
 package controller;
 
+import EJB.AdminEmployeesFacadeLocal;
 import EJB.EmployeesFacadeLocal;
 import EJB.PawnEmployeesFacadeLocal;
+import EJB.SecretaryEmployeesFacadeLocal;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -21,8 +23,10 @@ import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.validation.constraints.Future;
+import modelo.AdminEmployees;
 import modelo.Employees;
 import modelo.PawnEmployees;
+import modelo.SecretaryEmployees;
 
 /**
  *
@@ -44,9 +48,6 @@ public class EmployeesController implements Serializable{
     @EJB
     private EmployeesFacadeLocal employeesEJB;
     
-    @EJB
-    private PawnEmployeesFacadeLocal pawnEJB;
-    
     @PostConstruct
     public void init(){
         employeesList = loadEmployeesList();
@@ -66,16 +67,23 @@ public class EmployeesController implements Serializable{
         }
     }
     
-    public void removeEmployees(int index){
+    public void removeEmployees(int id){
         try {
-            System.out.println("IDENTIFICADOR: "+(index-1));
-            System.out.println(" NOMBRE USER "+employeesList.get(index-1).getNameEmp());
-            System.out.println(" IDENT USER "+employeesList.get(index-1).getIdEmployee());
-            employeesEJB.remove(employeesList.get(index-1));
-            FacesContext.getCurrentInstance().getExternalContext().redirect("usermng.xhtml");
+            Employees aux = getEmployee(id);
+            employeesEJB.remove(aux);
+            FacesContext.getCurrentInstance().getExternalContext().redirect("usermng.xhtml"); 
         } catch (Exception e) {
              System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
         }
+    }
+    
+    private Employees getEmployee(int id) {
+        for(int i=0; i<employeesList.size(); i++) {
+            if(employeesList.get(i).getIdEmployee()==id) {
+                return employeesList.get(i);
+            }
+        }
+        return null;
     }
     
     private void addItems() {
@@ -90,10 +98,6 @@ public class EmployeesController implements Serializable{
         employee.setPass("admin");
         System.out.println("IDe: "+employee.getIdEmployee());
         employeesEJB.create(employee);
-        PawnEmployees pawn = new PawnEmployees();
-        pawn.setEmployee(employee);
-        pawn.setId(1);
-        pawnEJB.create(pawn);
     }
     
     public void searchEmployees() {
