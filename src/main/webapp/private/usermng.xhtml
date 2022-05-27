@@ -3,9 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <body>
+    <h:body>
 
         <ui:composition template="./../WEB-INF/templates/homeTemplate.xhtml">
 
@@ -63,7 +64,6 @@
                             </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="tab-2">
-                            <p>// Tab para añadir usuarios, abierta a cambios</p>
                             <div class="row mb-3">
                                 <div class="col-lg-4">
                                     <div class="card mb-3">
@@ -122,52 +122,42 @@
                                                     <p class="text-primary m-0 fw-bold">Datos de nuevo usuario</p>
                                                 </div>
                                                 <div class="card-body">
-                                                    <form>
+                                                    <h:form>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de usuario</strong></label><input class="form-control" type="text" id="username" placeholder="" name="username"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de usuario</strong></label><p:inputText class="form-control" type="text" id="username" placeholder="" value="#{employeesController.employee.username}"/></div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="email"><strong>Nombre</strong></label><input class="form-control" type="email" id="name" placeholder="" name="name"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="email"><strong>Nombre</strong></label><p:inputText class="form-control" type="text" id="name" placeholder="" value="#{employeesController.employee.nameEmp}"/></div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="first_name"><strong>Fecha de nacimiento</strong></label><input class="form-control" type="text" id="Birthday" placeholder="" name="Birthday"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="birthday"><strong>Fecha de nacimiento</strong></label>
+                                                                    <p:outputLabel for="navigator" value="Navigator"/>
+                                                                    <p:datePicker id="navigator" value="#{employeesController.employee.birthday}" monthNavigator="true" yearNavigator="true" showWeek="true"/>
+                                                                </div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="last_name"><strong>Rol</strong></label><select class="form-select">
-                                                                        <option value="12" selected="">Administrator</option>
-                                                                        <option value="13">Pawn</option>
-                                                                        <option value="14">Secretary</option>
-                                                                    </select></div>
+                                                                <div class="mb-3"><label class="form-label" for="last_name"><strong>Rol</strong></label>
+                                                                    <h:selectOneMenu class="form-select" value="#{employeesController.rol}">
+                                                                        <f:selectItems value="#{employeesController.listRoles}" />
+                                                                    </h:selectOneMenu>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="mb-3"></div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <div class="card shadow">
-                                                <div class="card-header py-3">
-                                                    <p class="text-primary m-0 fw-bold">Datos sensibles</p>
-                                                </div>
-                                                <div class="card-body">
-                                                    <form>
-                                                        <div class="mb-3"><label class="form-label" for="address"><strong>DNI</strong></label><input class="form-control" type="text" id="dni" placeholder="" name="dni"/></div>
+                                                        <div class="mb-3"><label class="form-label" for="address"><strong>DNI</strong></label><p:inputText class="form-control" type="text" id="dni" placeholder="" value="#{employeesController.employee.dni}"/></div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="city"><strong>SSN</strong></label><input class="form-control" type="text" id="ssn" placeholder="" name="ssn"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="city"><strong>SSN</strong></label><p:inputText class="form-control" type="text" id="ssn" placeholder="" value="#{employeesController.employee.ssn}"/></div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="country"><strong>Número de Telefono</strong></label><input class="form-control" type="text" id="tlfn" placeholder="" name="tlfn"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="country"><strong>Número de Telefono</strong></label><p:inputText class="form-control" type="text" id="tlfn" placeholder="" value="#{employeesController.employee.phoneNum}"/></div>
                                                             </div>
                                                         </div>
-                                                        <div class="mb-3"></div>
-                                                    </form>
+                                                        <div class="mb-3"><p:commandButton class="btn btn-primary btn-sm" value="Añadir nuevo usuario" action="#{employeesController.addEmployees()}"></p:commandButton></div>
+                                                    </h:form>
                                                 </div>
-                                            </div>
-                                            <div class="card shadow mb-3">
-                                                <div class="card-header py-3"><button class="btn btn-primary btn-sm" type="button">Añadir nuevo usuario</button></div>
                                             </div>
                                         </div>
                                     </div>
@@ -175,21 +165,24 @@
                             </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="tab-3">
-                            <p>// Tab para editar usuarios, abierta a cambios</p>
                             <div class="row mb-3">
                                 <div class="col-lg-4">
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
                                             <h6 class="text-primary fw-bold m-0">DNI de Usuario</h6>
                                         </div>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col"><input type="text" id="DNI_input" class="form-control"/></div>
+                                        <h:form>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col"><p:inputText type="text" id="DNI_input" class="form-control" value="#{employeesController.dni}"/></div>
+                                                </div>
+                                                <p></p>
+                                                <div class="row">
+                                                    <div class="col">
+                                                    <p:commandButton class="btn btn-primary btn-sm" value="Buscar Usuario" action="#{employeesController.searchEmployees()}" ></p:commandButton></div>
+                                                </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col"><button class="btn btn-primary btn-sm" type="button">Buscar Usuario</button></div>
-                                            </div>
-                                        </div>
+                                        </h:form>
                                     </div>
                                     <div class="card mb-3">
                                         <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="./../assets/img/icons/sinespecificar1.png" width="160" height="160"/>
@@ -235,18 +228,18 @@
                                                     <p class="text-primary m-0 fw-bold">Datos de usuario</p>
                                                 </div>
                                                 <div class="card-body">
-                                                    <form>
+                                                    <h:form>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de usuario</strong></label><input class="form-control" type="text" id="username-1" placeholder="" name="username"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de usuario</strong></label><p:inputText class="form-control" type="text" id="username-1" placeholder="#{employeesController.employeeEdit.nameEmp}" /></div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="email"><strong>Nombre</strong></label><input class="form-control" type="email" id="name-1" placeholder="" name="name"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="email"><strong>Nombre</strong></label><p:inputText class="form-control" type="email" id="name-1" placeholder="" /></div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="first_name"><strong>Fecha de nacimiento</strong></label><input class="form-control" type="text" id="Birthday-1" placeholder="" name="Birthday"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="first_name"><strong>Fecha de nacimiento</strong></label><p:inputText class="form-control" type="text" id="Birthday-1" placeholder=""/></div>
                                                             </div>
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="last_name"><strong>Rol</strong></label><select class="form-select">
@@ -257,7 +250,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="mb-3"></div>
-                                                    </form>
+                                                    </h:form>
                                                 </div>
                                             </div>
                                             <div class="card shadow">
@@ -265,18 +258,18 @@
                                                     <p class="text-primary m-0 fw-bold">Datos sensibles</p>
                                                 </div>
                                                 <div class="card-body">
-                                                    <form>
-                                                        <div class="mb-3"><label class="form-label" for="address"><strong>DNI</strong></label><input class="form-control" type="text" id="dni-1" placeholder="" name="dni"/></div>
+                                                    <h:form>
+                                                        <div class="mb-3"><label class="form-label" for="address"><strong>DNI</strong></label><p:inputText class="form-control" type="text" id="dni-1" placeholder=""/></div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="city"><strong>SSN</strong></label><input class="form-control" type="text" id="ssn-1" placeholder="" name="ssn"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="city"><strong>SSN</strong></label><p:inputText class="form-control" type="text" id="ssn-1" placeholder=""/></div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="country"><strong>Número de Telefono</strong></label><input class="form-control" type="text" id="tlfn-1" placeholder="" name="tlfn"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="country"><strong>Número de Telefono</strong></label><p:inputText class="form-control" type="text" id="tlfn-1" placeholder=""/></div>
                                                             </div>
                                                         </div>
                                                         <div class="mb-3"></div>
-                                                    </form>
+                                                    </h:form>
                                                 </div>
                                             </div>
                                             <div class="card shadow mb-3">
@@ -293,5 +286,5 @@
 
         </ui:composition>
 
-    </body>
+    </h:body>
 </html>
