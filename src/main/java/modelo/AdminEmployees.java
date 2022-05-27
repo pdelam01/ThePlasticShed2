@@ -12,8 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -27,21 +25,33 @@ import javax.persistence.Table;
 public class AdminEmployees implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idAdmin;
+    
+    @JoinColumn(name = "idemployee")
     @OneToOne
-    private Employees id;
+    private Employees employee;
 
-    public Employees getId() {
-        return id;
+    public int getId() {
+        return idAdmin;
     }
 
-    public void setId(Employees id) {
-        this.id = id;
+    public void setId(int id) {
+        this.idAdmin = id;
+    }
+
+    public Employees getEmp() {
+        return employee;
+    }
+
+    public void setEmp(Employees emp) {
+        this.employee = emp;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 79 * hash + Objects.hashCode(this.id);
+        int hash = 7;
+        hash = 29 * hash + this.idAdmin;
+        hash = 29 * hash + Objects.hashCode(this.employee);
         return hash;
     }
 
@@ -57,7 +67,10 @@ public class AdminEmployees implements Serializable{
             return false;
         }
         final AdminEmployees other = (AdminEmployees) obj;
-        if (this.id != other.id) {
+        if (this.idAdmin != other.idAdmin) {
+            return false;
+        }
+        if (!Objects.equals(this.employee, other.employee)) {
             return false;
         }
         return true;

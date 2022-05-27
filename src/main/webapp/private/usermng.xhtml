@@ -32,9 +32,6 @@
                                                     <p:column headerText="Nombre">
                                                         <h:outputText value="#{empleados.nameEmp}"/>
                                                     </p:column>
-                                                    <p:column headerText="Id">
-                                                        <h:outputText value="#{empleados.idEmployee}"/>
-                                                    </p:column>
                                                     <p:column headerText="DNI">
                                                         <h:outputText value="#{empleados.dni}"/>
                                                     </p:column>
@@ -134,8 +131,7 @@
                                                         <div class="row">
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="birthday"><strong>Fecha de nacimiento</strong></label>
-                                                                    <p:outputLabel for="navigator" value="Navigator"/>
-                                                                    <p:datePicker id="navigator" value="#{employeesController.employee.birthday}" monthNavigator="true" yearNavigator="true" showWeek="true"/>
+                                                                    <p:datePicker class="form-range" id="navigator" value="#{employeesController.date2}" monthNavigator="true" yearNavigator="true"/>
                                                                 </div>
                                                             </div>
                                                             <div class="col">
@@ -179,7 +175,7 @@
                                                 <p></p>
                                                 <div class="row">
                                                     <div class="col">
-                                                    <p:commandButton class="btn btn-primary btn-sm" value="Buscar Usuario" action="#{employeesController.searchEmployees()}" ></p:commandButton></div>
+                                                    <p:commandButton class="btn btn-primary btn-sm" immediate="true" value="Buscar Usuario" action="#{employeesController.searchEmployees()}"></p:commandButton></div>
                                                 </div>
                                             </div>
                                         </h:form>

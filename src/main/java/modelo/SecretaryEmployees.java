@@ -6,10 +6,13 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,20 +25,33 @@ import javax.persistence.Table;
 public class SecretaryEmployees implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idSecretary;
+    
+    @JoinColumn(name = "idemployee")
+    @OneToOne
+    private Employees employee;
 
-    public int getId() {
-        return id;
+    public int getIdSecretary() {
+        return idSecretary;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdSecretary(int idSecretary) {
+        this.idSecretary = idSecretary;
+    }
+
+    public Employees getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employees employee) {
+        this.employee = employee;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + this.id;
+        int hash = 5;
+        hash = 23 * hash + this.idSecretary;
+        hash = 23 * hash + Objects.hashCode(this.employee);
         return hash;
     }
 
@@ -51,7 +67,10 @@ public class SecretaryEmployees implements Serializable{
             return false;
         }
         final SecretaryEmployees other = (SecretaryEmployees) obj;
-        if (this.id != other.id) {
+        if (this.idSecretary != other.idSecretary) {
+            return false;
+        }
+        if (!Objects.equals(this.employee, other.employee)) {
             return false;
         }
         return true;
