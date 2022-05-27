@@ -108,6 +108,10 @@ public class Employees implements Serializable{
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");  
         return format.format(birthday);  
     }
+    
+    public Date getBirthdayDate() {
+        return this.birthday;
+    }
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;

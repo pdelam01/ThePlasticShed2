@@ -43,7 +43,7 @@ public class EmployeesController implements Serializable{
     private Employees employeeEdit;
     private String dni;
     private List<SelectItem> roleList;
-    private Date date2;
+    private Date date;
             
     @EJB
     private EmployeesFacadeLocal employeesEJB;
@@ -93,7 +93,7 @@ public class EmployeesController implements Serializable{
     }
     
     public void addEmployees() {
-        employee.setBirthday(date2);
+        employee.setBirthday(date);
         employee.setRole(rol);
         employee.setPass("admin");
         System.out.println("IDe: "+employee.getIdEmployee());
@@ -106,7 +106,7 @@ public class EmployeesController implements Serializable{
                 employeeEdit = employeesList.get(i);
             }
         }
-        System.out.println("Nombre: "+employeeEdit.getNameEmp());
+        dni = "";
     }
     
     public List<Employees> getEmployeesList(){
@@ -158,11 +158,11 @@ public class EmployeesController implements Serializable{
     }
     
     public Date getDate2() {
-        return date2;
+        return date;
     }
 
     public void setDate2(Date date2) {
-        this.date2 = date2;
+        this.date = date2;
     }
     
 }

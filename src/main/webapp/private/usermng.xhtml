@@ -161,13 +161,13 @@
                             </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="tab-3">
-                            <div class="row mb-3">
-                                <div class="col-lg-4">
-                                    <div class="card shadow mb-4">
-                                        <div class="card-header py-3">
-                                            <h6 class="text-primary fw-bold m-0">DNI de Usuario</h6>
-                                        </div>
-                                        <h:form>
+                            <h:form id="form1">
+                                <div class="row mb-3">
+                                    <div class="col-lg-4">
+                                        <div class="card shadow mb-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="text-primary fw-bold m-0">DNI de Usuario</h6>
+                                            </div>
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col"><p:inputText type="text" id="DNI_input" class="form-control" value="#{employeesController.dni}"/></div>
@@ -175,106 +175,106 @@
                                                 <p></p>
                                                 <div class="row">
                                                     <div class="col">
-                                                    <p:commandButton class="btn btn-primary btn-sm" immediate="true" value="Buscar Usuario" action="#{employeesController.searchEmployees()}"></p:commandButton></div>
+                                                    <p:commandButton class="btn btn-primary btn-sm" value="Buscar Usuario" action="#{employeesController.searchEmployees()}" update="form1"></p:commandButton></div>
                                                 </div>
                                             </div>
-                                        </h:form>
+                                        </div>
+                                        <div class="card mb-3">
+                                            <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="./../assets/img/icons/sinespecificar1.png" width="160" height="160"/>
+                                                <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Editar Imagen</button></div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="card mb-3">
-                                        <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="./../assets/img/icons/sinespecificar1.png" width="160" height="160"/>
-                                            <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Editar Imagen</button></div>
+                                    <div class="col-lg-8">
+                                        <div class="row mb-3 d-none">
+                                            <div class="col">
+                                                <div class="card textwhite bg-primary text-white shadow">
+                                                    <div class="card-body">
+                                                        <div class="row mb-2">
+                                                            <div class="col">
+                                                                <p class="m-0">Peformance</p>
+                                                                <p class="m-0"><strong>65.2%</strong></p>
+                                                            </div>
+                                                            <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                                        </div>
+                                                        <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="card textwhite bg-success text-white shadow">
+                                                    <div class="card-body">
+                                                        <div class="row mb-2">
+                                                            <div class="col">
+                                                                <p class="m-0">Peformance</p>
+                                                                <p class="m-0"><strong>65.2%</strong></p>
+                                                            </div>
+                                                            <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                                        </div>
+                                                        <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col offset-lg-0">
+                                                <div class="card shadow mb-3">
+                                                    <div class="card-header py-3">
+                                                        <p class="text-primary m-0 fw-bold">Datos de usuario</p>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <!--<h:form>-->
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de usuario</strong></label><p:inputText class="form-control" type="text" id="username-1" placeholder="#{employeesController.employeeEdit.username}" /></div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="mb-3"><label class="form-label" for="email"><strong>Nombre</strong></label><p:inputText class="form-control" type="text" id="name-1" placeholder="#{employeesController.employeeEdit.nameEmp}"/></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <div class="mb-3"><label class="form-label" for="first_name"><strong>Fecha de nacimiento</strong></label>
+                                                                        <p:inputText class="form-control" type="text" id="rolee-1" placeholder="#{employeesController.employeeEdit.role}"/>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="mb-3"><label class="form-label" for="last_name"><strong>Rol</strong></label>
+                                                                        <p:inputText class="form-control" type="text" id="rol-1" placeholder="#{employeesController.employeeEdit.role}"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3"></div>
+                                                        <!--</h:form>-->
+                                                    </div>
+                                                </div>
+                                                <div class="card shadow">
+                                                    <div class="card-header py-3">
+                                                        <p class="text-primary m-0 fw-bold">Datos sensibles</p>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <!--<h:form>-->
+                                                        <div class="mb-3"><label class="form-label" for="address"><strong>DNI</strong></label><p:inputText class="form-control" type="text" id="dni-1" placeholder="#{employeesController.employeeEdit.dni}"/></div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <div class="mb-3"><label class="form-label" for="city"><strong>SSN</strong></label><p:inputText class="form-control" type="text" id="ssn-1" placeholder="#{employeesController.employeeEdit.ssn}"/></div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="mb-3"><label class="form-label" for="country"><strong>Número de Telefono</strong></label><p:inputText class="form-control" type="text" id="tlfn-1" placeholder="#{employeesController.employeeEdit.phoneNum}"/></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3"></div>
+                                                        <!--</h:form>-->
+                                                    </div>
+                                                </div>
+                                                <div class="card shadow mb-3">
+                                                    <div class="card-header py-3"><p:commandButton class="btn btn-primary btn-sm" value="Guardar cambios"></p:commandButton></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-8">
-                                    <div class="row mb-3 d-none">
-                                        <div class="col">
-                                            <div class="card textwhite bg-primary text-white shadow">
-                                                <div class="card-body">
-                                                    <div class="row mb-2">
-                                                        <div class="col">
-                                                            <p class="m-0">Peformance</p>
-                                                            <p class="m-0"><strong>65.2%</strong></p>
-                                                        </div>
-                                                        <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                                                    </div>
-                                                    <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="card textwhite bg-success text-white shadow">
-                                                <div class="card-body">
-                                                    <div class="row mb-2">
-                                                        <div class="col">
-                                                            <p class="m-0">Peformance</p>
-                                                            <p class="m-0"><strong>65.2%</strong></p>
-                                                        </div>
-                                                        <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                                                    </div>
-                                                    <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col offset-lg-0">
-                                            <div class="card shadow mb-3">
-                                                <div class="card-header py-3">
-                                                    <p class="text-primary m-0 fw-bold">Datos de usuario</p>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h:form>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de usuario</strong></label><p:inputText class="form-control" type="text" id="username-1" placeholder="#{employeesController.employeeEdit.nameEmp}" /></div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="email"><strong>Nombre</strong></label><p:inputText class="form-control" type="email" id="name-1" placeholder="" /></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="first_name"><strong>Fecha de nacimiento</strong></label><p:inputText class="form-control" type="text" id="Birthday-1" placeholder=""/></div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="last_name"><strong>Rol</strong></label><select class="form-select">
-                                                                        <option value="12" selected="">Administrator</option>
-                                                                        <option value="13">Pawn</option>
-                                                                        <option value="14">Secretary</option>
-                                                                    </select></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3"></div>
-                                                    </h:form>
-                                                </div>
-                                            </div>
-                                            <div class="card shadow">
-                                                <div class="card-header py-3">
-                                                    <p class="text-primary m-0 fw-bold">Datos sensibles</p>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h:form>
-                                                        <div class="mb-3"><label class="form-label" for="address"><strong>DNI</strong></label><p:inputText class="form-control" type="text" id="dni-1" placeholder=""/></div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="city"><strong>SSN</strong></label><p:inputText class="form-control" type="text" id="ssn-1" placeholder=""/></div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="country"><strong>Número de Telefono</strong></label><p:inputText class="form-control" type="text" id="tlfn-1" placeholder=""/></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3"></div>
-                                                    </h:form>
-                                                </div>
-                                            </div>
-                                            <div class="card shadow mb-3">
-                                                <div class="card-header py-3"><button class="btn btn-primary btn-sm" type="button">Guardar cambios</button></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </h:form>
                         </div>
                     </div>
                 </div>
