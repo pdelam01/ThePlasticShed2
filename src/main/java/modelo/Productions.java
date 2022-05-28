@@ -31,9 +31,9 @@ public class Productions implements Serializable {
     @ManyToOne
     private Components idComponent;
 
-    @JoinColumn(name = "idPawn")
+    @JoinColumn(name = "idEmployee")
     @ManyToOne
-    private Employees idPawn;
+    private Employees employee;
 
     @Column(name = "Date")
     @Temporal(TemporalType.DATE)
@@ -59,11 +59,11 @@ public class Productions implements Serializable {
     }
 
     public Employees getIdPawn() {
-        return idPawn;
+        return employee;
     }
 
     public void setIdPawn(Employees idPawn) {
-        this.idPawn = idPawn;
+        this.employee = idPawn;
     }
 
     public Date getDate() {
@@ -87,7 +87,7 @@ public class Productions implements Serializable {
         int hash = 3;
         hash = 29 * hash + this.id;
         hash = 29 * hash + Objects.hashCode(this.idComponent);
-        hash = 29 * hash + Objects.hashCode(this.idPawn);
+        hash = 29 * hash + Objects.hashCode(this.employee);
         hash = 29 * hash + Objects.hashCode(this.date);
         hash = 29 * hash + this.quantity;
         return hash;
@@ -114,7 +114,7 @@ public class Productions implements Serializable {
         if (!Objects.equals(this.idComponent, other.idComponent)) {
             return false;
         }
-        if (!Objects.equals(this.idPawn, other.idPawn)) {
+        if (!Objects.equals(this.employee, other.employee)) {
             return false;
         }
         if (!Objects.equals(this.date, other.date)) {

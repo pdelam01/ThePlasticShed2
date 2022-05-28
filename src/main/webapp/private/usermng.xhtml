@@ -1,89 +1,72 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
-    <body>
+    <h:body>
 
         <ui:composition template="./../WEB-INF/templates/homeTemplate.xhtml">
 
             <ui:define name="content">
-                <h3 class="text-dark mb-1">Gestión de usuarios</h3>
+                <h3 class="text-dark mb-1">Gestión de empleados</h3>
                 <div>
                     <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1">Usuarios</a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">Añadir Usuarios</a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">Editar Usuarios</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1">Empleados</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">Añadir Empleados</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">Editar Empleados</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" role="tabpanel" id="tab-1">
-                            <p>// Tabla para visión general de los usuarios de la aplicación. Show employees table</p>
                             <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>DNI</th>
-                                            <th>SSN</th>
-                                            <th>Rol</th>
-                                            <th>Nº Tlfn</th>
-                                            <th>Fecha Nacimiento</th>
-                                            <th>Username</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td><a href="#">Eliminar</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Text<br/></td>
-                                            <td>Text</td>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td>Text<br/></td>
-                                            <td><a href="#">Eliminar</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td><a href="#">Eliminar</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td>Text</td>
-                                            <td><a href="#">Eliminar</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="card shadow">
+                                    <div class="card-header py-3">
+                                        <p class="text-primary m-0 fw-bold">Empleados</p>
+                                    </div>
+                                    <h:form>
+                                        <div class="card-body">
+                                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                                <p:dataTable class="table my-0" id="dataTable" var="empleados" value="#{employeesController.employeesList}">
+                                                    <p:column headerText="Nombre">
+                                                        <h:outputText value="#{empleados.nameEmp}"/>
+                                                    </p:column>
+                                                    <p:column headerText="DNI">
+                                                        <h:outputText value="#{empleados.dni}"/>
+                                                    </p:column>
+                                                    <p:column headerText="SSN">
+                                                        <h:outputText value="#{empleados.ssn}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Rol">
+                                                        <h:outputText value="#{empleados.role}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Tlfn">
+                                                        <h:outputText value="#{empleados.phoneNum}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Fecha de nacimiento">
+                                                        <h:outputText value="#{empleados.birthday}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Username">
+                                                        <h:outputText value="#{empleados.username}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Eliminar">
+                                                        <h:commandLink value="Eliminar" action="#{employeesController.removeEmployees(empleados.idEmployee)}"/>
+                                                    </p:column>
+                                                </p:dataTable>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="tab-2">
-                            <p>// Tab para añadir usuarios, abierta a cambios</p>
                             <div class="row mb-3">
                                 <div class="col-lg-4">
                                     <div class="card mb-3">
                                         <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="./../assets/img/icons/sinespecificar1.png" width="160" height="160"/>
-                                            <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Añadir Imagen</button></div>
+                                            <div class="mb-3"><button class="btn btn-primary" type="button">Añadir Imagen</button></div>
                                         </div>
                                     </div>
                                     <div class="card shadow mb-4">
@@ -100,89 +83,76 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-8">
-                                    <div class="row mb-3 d-none">
-                                        <div class="col">
-                                            <div class="card textwhite bg-primary text-white shadow">
-                                                <div class="card-body">
-                                                    <div class="row mb-2">
-                                                        <div class="col">
-                                                            <p class="m-0">Peformance</p>
-                                                            <p class="m-0"><strong>65.2%</strong></p>
-                                                        </div>
-                                                        <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                                                    </div>
-                                                    <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="card textwhite bg-success text-white shadow">
-                                                <div class="card-body">
-                                                    <div class="row mb-2">
-                                                        <div class="col">
-                                                            <p class="m-0">Peformance</p>
-                                                            <p class="m-0"><strong>65.2%</strong></p>
-                                                        </div>
-                                                        <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                                                    </div>
-                                                    <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                     <div class="row">
                                         <div class="col offset-lg-0">
                                             <div class="card shadow mb-3">
                                                 <div class="card-header py-3">
-                                                    <p class="text-primary m-0 fw-bold">Datos de nuevo usuario</p>
+                                                    <p class="text-primary m-0 fw-bold">Datos de nuevo empleado</p>
                                                 </div>
                                                 <div class="card-body">
-                                                    <form>
+                                                    <h:form>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de usuario</strong></label><input class="form-control" type="text" id="username" placeholder="" name="username"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de empleado</strong></label><p:inputText class="form-control" type="text" id="username" placeholder="" value="#{employeesController.employee.username}"/></div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="email"><strong>Nombre</strong></label><input class="form-control" type="email" id="name" placeholder="" name="name"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="email"><strong>Nombre</strong></label><p:inputText class="form-control" type="text" id="name" placeholder="" value="#{employeesController.employee.nameEmp}"/></div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="first_name"><strong>Fecha de nacimiento</strong></label><input class="form-control" type="text" id="Birthday" placeholder="" name="Birthday"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="birthday"><strong>Fecha de nacimiento</strong></label>
+                                                                    <p:datePicker class="form-range" id="navigator" value="#{employeesController.date2}" monthNavigator="true" yearNavigator="true"/>
+                                                                </div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="last_name"><strong>Rol</strong></label><select class="form-select">
-                                                                        <option value="12" selected="">Administrator</option>
-                                                                        <option value="13">Pawn</option>
-                                                                        <option value="14">Secretary</option>
-                                                                    </select></div>
+                                                                <div class="mb-3"><label class="form-label" for="last_name"><strong>Rol</strong></label>
+                                                                    <h:selectOneMenu class="form-select" value="#{employeesController.rol}">
+                                                                        <f:selectItems value="#{employeesController.listRoles}" />
+                                                                    </h:selectOneMenu>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="mb-3"></div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <div class="card shadow">
-                                                <div class="card-header py-3">
-                                                    <p class="text-primary m-0 fw-bold">Datos sensibles</p>
-                                                </div>
-                                                <div class="card-body">
-                                                    <form>
-                                                        <div class="mb-3"><label class="form-label" for="address"><strong>DNI</strong></label><input class="form-control" type="text" id="dni" placeholder="" name="dni"/></div>
+                                                        <div class="mb-3"><label class="form-label" for="address"><strong>DNI</strong></label><p:inputText class="form-control" type="text" id="dni" placeholder="" value="#{employeesController.employee.dni}"/></div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="city"><strong>SSN</strong></label><input class="form-control" type="text" id="ssn" placeholder="" name="ssn"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="city"><strong>SSN</strong></label><p:inputText class="form-control" type="text" id="ssn" placeholder="" value="#{employeesController.employee.ssn}"/></div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="country"><strong>Número de Telefono</strong></label><input class="form-control" type="text" id="tlfn" placeholder="" name="tlfn"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="country"><strong>Número de Telefono</strong></label><p:inputText class="form-control" type="text" id="tlfn" placeholder="" value="#{employeesController.employee.phoneNum}"/></div>
+                                                                <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h4 class="modal-title">Añadiendo empleado...</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <div class="row">
+                                                                                    <div class="col d-flex align-items-center justify-content-center"><img class=" mb-3 mt-4" src="./../assets/img/icons/apreton-de-manos.png" width="160" height="160"/></div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col d-flex align-items-center justify-content-center">
+                                                                                        <p>¡Se ha añadido el empleado correctamente!</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col">
+                                                                                        <div class="progress">
+                                                                                            <div class="progress-bar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">100%</div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>                                                                                       <!-- Hacer Action de redirect -->
+                                                                            <div class="modal-footer"><p:commandButton class="btn btn-primary" type="button" value="Vale" pt:data-bs-dismiss="modal"></p:commandButton></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="mb-3"></div>
-                                                    </form>
+                                                        <div class="mb-3"><p:commandButton class="btn btn-primary" value="Añadir nuevo empleado"  action="#{employeesController.addEmployees()}" pt:data-bs-toggle="modal" pt:data-bs-target="#modal-1"></p:commandButton></div>
+                                                    </h:form>
                                                 </div>
-                                            </div>
-                                            <div class="card shadow mb-3">
-                                                <div class="card-header py-3"><button class="btn btn-primary btn-sm" type="button">Añadir nuevo usuario</button></div>
                                             </div>
                                         </div>
                                     </div>
@@ -190,117 +160,121 @@
                             </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="tab-3">
-                            <p>// Tab para editar usuarios, abierta a cambios</p>
-                            <div class="row mb-3">
-                                <div class="col-lg-4">
-                                    <div class="card shadow mb-4">
-                                        <div class="card-header py-3">
-                                            <h6 class="text-primary fw-bold m-0">DNI de Usuario</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col"><input type="text" id="DNI_input" class="form-control"/></div>
+                            <h:form id="form1">
+                                <div class="row mb-3">
+                                    <div class="col-lg-4">
+                                        <div class="card shadow mb-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="text-primary fw-bold m-0">DNI de empleado</h6>
                                             </div>
-                                            <div class="row">
-                                                <div class="col"><button class="btn btn-primary btn-sm" type="button">Buscar Usuario</button></div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col"><p:inputText type="text" id="DNI_input" class="form-control" value="#{employeesController.dni}"/></div>
+                                                </div>
+                                                <p></p>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <p:commandButton class="btn btn-primary btn-sm" value="Buscar empleado" action="#{employeesController.searchEmployees()}" update="form1"></p:commandButton></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-3">
+                                            <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="./../assets/img/icons/sinespecificar1.png" width="160" height="160"/>
+                                                <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Editar Imagen</button></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card mb-3">
-                                        <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="./../assets/img/icons/sinespecificar1.png" width="160" height="160"/>
-                                            <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Editar Imagen</button></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-8">
-                                    <div class="row mb-3 d-none">
-                                        <div class="col">
-                                            <div class="card textwhite bg-primary text-white shadow">
-                                                <div class="card-body">
-                                                    <div class="row mb-2">
-                                                        <div class="col">
-                                                            <p class="m-0">Peformance</p>
-                                                            <p class="m-0"><strong>65.2%</strong></p>
-                                                        </div>
-                                                        <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                    <div class="col-lg-8">
+                                        <div class="row">
+                                            <div class="col offset-lg-0">
+                                                <div class="card shadow mb-3">
+                                                    <div class="card-header py-3">
+                                                        <p class="text-primary m-0 fw-bold">Datos de empleado</p>
                                                     </div>
-                                                    <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="card textwhite bg-success text-white shadow">
-                                                <div class="card-body">
-                                                    <div class="row mb-2">
-                                                        <div class="col">
-                                                            <p class="m-0">Peformance</p>
-                                                            <p class="m-0"><strong>65.2%</strong></p>
-                                                        </div>
-                                                        <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                                                    </div>
-                                                    <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col offset-lg-0">
-                                            <div class="card shadow mb-3">
-                                                <div class="card-header py-3">
-                                                    <p class="text-primary m-0 fw-bold">Datos de usuario</p>
-                                                </div>
-                                                <div class="card-body">
-                                                    <form>
+                                                    <div class="card-body">
+                                                        <!--<h:form>-->
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de usuario</strong></label><input class="form-control" type="text" id="username-1" placeholder="" name="username"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de usuario</strong></label><p:inputText class="form-control" type="text" id="username-1" placeholder="#{employeesController.employeeEdit.username}" value="#{employeesController.employeeEdit.username}"/></div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="email"><strong>Nombre</strong></label><input class="form-control" type="email" id="name-1" placeholder="" name="name"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="email"><strong>Nombre</strong></label><p:inputText class="form-control" type="text" id="name-1" placeholder="#{employeesController.employeeEdit.nameEmp}" value="#{employeesController.employeeEdit.nameEmp}"/></div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="first_name"><strong>Fecha de nacimiento</strong></label><input class="form-control" type="text" id="Birthday-1" placeholder="" name="Birthday"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="first_name"><strong>Fecha de nacimiento</strong></label>
+                                                                    <p:datePicker class="form-range" id="navigator" value="#{employeesController.dateEdit}" monthNavigator="true" yearNavigator="true"/>
+                                                                </div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="last_name"><strong>Rol</strong></label><select class="form-select">
-                                                                        <option value="12" selected="">Administrator</option>
-                                                                        <option value="13">Pawn</option>
-                                                                        <option value="14">Secretary</option>
-                                                                    </select></div>
+                                                                <div class="mb-3"><label class="form-label" for="last_name"><strong>Rol</strong></label>
+                                                                    <h:selectOneMenu class="form-select" value="#{employeesController.rol}">
+                                                                        <f:selectItems value="#{employeesController.listRoles}" />
+                                                                    </h:selectOneMenu>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="mb-3"></div>
-                                                    </form>
+                                                        <!--</h:form>-->
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="card shadow">
-                                                <div class="card-header py-3">
-                                                    <p class="text-primary m-0 fw-bold">Datos sensibles</p>
-                                                </div>
-                                                <div class="card-body">
-                                                    <form>
-                                                        <div class="mb-3"><label class="form-label" for="address"><strong>DNI</strong></label><input class="form-control" type="text" id="dni-1" placeholder="" name="dni"/></div>
+                                                <div class="card shadow">
+                                                    <div class="card-header py-3">
+                                                        <p class="text-primary m-0 fw-bold">Datos sensibles</p>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <!--<h:form>-->
+                                                        <div class="mb-3"><label class="form-label" for="address"><strong>DNI</strong></label><p:inputText class="form-control" type="text" id="dni-1" placeholder="#{employeesController.employeeEdit.dni}" value="#{employeesController.employeeEdit.dni}"/></div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="city"><strong>SSN</strong></label><input class="form-control" type="text" id="ssn-1" placeholder="" name="ssn"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="city"><strong>SSN</strong></label><p:inputText class="form-control" type="text" id="ssn-1" placeholder="#{employeesController.employeeEdit.ssn}" value="#{employeesController.employeeEdit.ssn}"/></div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="country"><strong>Número de Telefono</strong></label><input class="form-control" type="text" id="tlfn-1" placeholder="" name="tlfn"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="country"><strong>Número de Telefono</strong></label><p:inputText class="form-control" type="text" id="tlfn-1" placeholder="#{employeesController.employeeEdit.phoneNum}" value="#{employeesController.employeeEdit.phoneNum}"/></div>
                                                             </div>
                                                         </div>
                                                         <div class="mb-3"></div>
-                                                    </form>
+                                                        <!--</h:form>-->
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="card shadow mb-3">
-                                                <div class="card-header py-3"><button class="btn btn-primary btn-sm" type="button">Guardar cambios</button></div>
+                                                <div class="card shadow mb-3">
+                                                    <div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Editando empleado...</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col d-flex align-items-center justify-content-center"><img class=" mb-3 mt-4" src="./../assets/img/icons/editarEmpleado.png" width="160" height="160"/></div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col d-flex align-items-center justify-content-center">
+                                                                            <p>¡Se ha editado el empleado correctamente!</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col">
+                                                                            <div class="progress">
+                                                                                <div class="progress-bar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">100%</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal" update="form1">Vale</button></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-header py-3">
+                                                        <p:commandButton class="btn btn-primary" value="Guardar cambios" action="#{employeesController.updateEmployee()}" pt:data-bs-toggle="modal" pt:data-bs-target="#modal-2"></p:commandButton>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </h:form>
                         </div>
                     </div>
                 </div>
@@ -308,5 +282,5 @@
 
         </ui:composition>
 
-    </body>
+    </h:body>
 </html>

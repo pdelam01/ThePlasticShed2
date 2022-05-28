@@ -6,9 +6,17 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table (name = "pawnemployees")
 
 /**
  *
@@ -17,20 +25,33 @@ import javax.persistence.Id;
 public class PawnEmployees implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idPawn;
+    
+    @JoinColumn(name = "idpawnemployees")
+    @OneToOne
+    private Employees employee;
 
     public int getId() {
-        return id;
+        return idPawn;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idPawn = id;
+    }
+
+    public Employees getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employees employee) {
+        this.employee = employee;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + this.id;
+        int hash = 3;
+        hash = 67 * hash + this.idPawn;
+        hash = 67 * hash + Objects.hashCode(this.employee);
         return hash;
     }
 
@@ -46,9 +67,15 @@ public class PawnEmployees implements Serializable{
             return false;
         }
         final PawnEmployees other = (PawnEmployees) obj;
-        if (this.id != other.id) {
+        if (this.idPawn != other.idPawn) {
+            return false;
+        }
+        if (!Objects.equals(this.employee, other.employee)) {
             return false;
         }
         return true;
     }
+    
+    
+
 }

@@ -31,9 +31,9 @@ public class Sales implements Serializable {
     @ManyToOne
     private Components idComponent;
 
-    @JoinColumn(name = "idSecretary")
+    @JoinColumn(name = "idEmployee")
     @ManyToOne
-    private SecretaryEmployees idSecretary;
+    private Employees employee;
 
     @JoinColumn(name = "idClient")
     @ManyToOne
@@ -65,12 +65,12 @@ public class Sales implements Serializable {
         this.idComponent = idComponent;
     }
 
-    public SecretaryEmployees getIdSecretary() {
-        return idSecretary;
+    public Employees getIdSecretary() {
+        return employee;
     }
 
-    public void setIdSecretary(SecretaryEmployees idSecretary) {
-        this.idSecretary = idSecretary;
+    public void setIdSecretary(Employees employee) {
+        this.employee = employee;
     }
 
     public Clients getIdClient() {
@@ -107,14 +107,14 @@ public class Sales implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + this.id;
-        hash = 97 * hash + Objects.hashCode(this.idComponent);
-        hash = 97 * hash + Objects.hashCode(this.idSecretary);
-        hash = 97 * hash + Objects.hashCode(this.idClient);
-        hash = 97 * hash + Objects.hashCode(this.date);
-        hash = 97 * hash + this.quantity;
-        hash = 97 * hash + this.totalPrice;
+        int hash = 7;
+        hash = 29 * hash + this.id;
+        hash = 29 * hash + Objects.hashCode(this.idComponent);
+        hash = 29 * hash + Objects.hashCode(this.employee);
+        hash = 29 * hash + Objects.hashCode(this.idClient);
+        hash = 29 * hash + Objects.hashCode(this.date);
+        hash = 29 * hash + this.quantity;
+        hash = 29 * hash + this.totalPrice;
         return hash;
     }
 
@@ -142,7 +142,7 @@ public class Sales implements Serializable {
         if (!Objects.equals(this.idComponent, other.idComponent)) {
             return false;
         }
-        if (!Objects.equals(this.idSecretary, other.idSecretary)) {
+        if (!Objects.equals(this.employee, other.employee)) {
             return false;
         }
         if (!Objects.equals(this.idClient, other.idClient)) {
@@ -153,6 +153,5 @@ public class Sales implements Serializable {
         }
         return true;
     }
-
     
 }
