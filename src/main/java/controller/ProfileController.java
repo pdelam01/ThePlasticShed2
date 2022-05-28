@@ -7,6 +7,7 @@ package controller;
 
 import EJB.EmployeesFacadeLocal;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -26,6 +27,8 @@ public class ProfileController implements Serializable{
     private Employees employees;
     
     private Employees employeeToUpdate;
+    
+    private Date date;
     
     @EJB
     private EmployeesFacadeLocal employeesEJB;
@@ -147,4 +150,14 @@ public class ProfileController implements Serializable{
     public void setEmployeesToUpdate(Employees employees) {
         this.employeeToUpdate = employees;
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    
+    
 }

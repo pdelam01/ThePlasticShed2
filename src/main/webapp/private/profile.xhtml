@@ -69,9 +69,7 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="mb-3"><label class="form-label" for="birthday"><strong>Fecha de nacimiento</strong></label>
-                                                            <p:inputText class="form-control" type="text" id="birthday" placeholder="#{profileController.employees.birthday}" disabled="True">
-                                                                <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                                            </p:inputText>
+                                                            <p:datePicker class="form-range" id="navigator" value="#{profileController.date}" monthNavigator="true" yearNavigator="true"/>
                                                         </div>
                                                     </div>
                                                     <div class="col">
