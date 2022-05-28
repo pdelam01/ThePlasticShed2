@@ -11,19 +11,19 @@
         <ui:composition template="./../WEB-INF/templates/homeTemplate.xhtml">
 
             <ui:define name="content">
-                <h3 class="text-dark mb-1">Gestión de usuarios</h3>
+                <h3 class="text-dark mb-1">Gestión de empleados</h3>
                 <div>
                     <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1">Usuarios</a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">Añadir Usuarios</a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">Editar Usuarios</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1">Empleados</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">Añadir Empleados</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">Editar Empleados</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" role="tabpanel" id="tab-1">
                             <div class="table-responsive">
                                 <div class="card shadow">
                                     <div class="card-header py-3">
-                                        <p class="text-primary m-0 fw-bold">Usuarios</p>
+                                        <p class="text-primary m-0 fw-bold">Empleados</p>
                                     </div>
                                     <h:form>
                                         <div class="card-body">
@@ -116,13 +116,13 @@
                                         <div class="col offset-lg-0">
                                             <div class="card shadow mb-3">
                                                 <div class="card-header py-3">
-                                                    <p class="text-primary m-0 fw-bold">Datos de nuevo usuario</p>
+                                                    <p class="text-primary m-0 fw-bold">Datos de nuevo empleado</p>
                                                 </div>
                                                 <div class="card-body">
                                                     <h:form>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de usuario</strong></label><p:inputText class="form-control" type="text" id="username" placeholder="" value="#{employeesController.employee.username}"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de empleado</strong></label><p:inputText class="form-control" type="text" id="username" placeholder="" value="#{employeesController.employee.username}"/></div>
                                                             </div>
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="email"><strong>Nombre</strong></label><p:inputText class="form-control" type="text" id="name" placeholder="" value="#{employeesController.employee.nameEmp}"/></div>
@@ -151,7 +151,7 @@
                                                                 <div class="mb-3"><label class="form-label" for="country"><strong>Número de Telefono</strong></label><p:inputText class="form-control" type="text" id="tlfn" placeholder="" value="#{employeesController.employee.phoneNum}"/></div>
                                                             </div>
                                                         </div>
-                                                        <div class="mb-3"><p:commandButton class="btn btn-primary btn-sm" value="Añadir nuevo usuario" action="#{employeesController.addEmployees()}"></p:commandButton></div>
+                                                        <div class="mb-3"><p:commandButton class="btn btn-primary btn-sm" value="Añadir nuevo empleado" action="#{employeesController.addEmployees()}"></p:commandButton></div>
                                                     </h:form>
                                                 </div>
                                             </div>
@@ -166,7 +166,7 @@
                                     <div class="col-lg-4">
                                         <div class="card shadow mb-4">
                                             <div class="card-header py-3">
-                                                <h6 class="text-primary fw-bold m-0">DNI de Usuario</h6>
+                                                <h6 class="text-primary fw-bold m-0">DNI de empleado</h6>
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
@@ -175,7 +175,7 @@
                                                 <p></p>
                                                 <div class="row">
                                                     <div class="col">
-                                                    <p:commandButton class="btn btn-primary btn-sm" value="Buscar Usuario" action="#{employeesController.searchEmployees()}" update="form1"></p:commandButton></div>
+                                                    <p:commandButton class="btn btn-primary btn-sm" value="Buscar empleado" action="#{employeesController.searchEmployees()}" update="form1"></p:commandButton></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -220,16 +220,16 @@
                                             <div class="col offset-lg-0">
                                                 <div class="card shadow mb-3">
                                                     <div class="card-header py-3">
-                                                        <p class="text-primary m-0 fw-bold">Datos de usuario</p>
+                                                        <p class="text-primary m-0 fw-bold">Datos de empleado</p>
                                                     </div>
                                                     <div class="card-body">
                                                         <!--<h:form>-->
                                                             <div class="row">
                                                                 <div class="col">
-                                                                    <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de usuario</strong></label><p:inputText class="form-control" type="text" id="username-1" placeholder="#{employeesController.employeeEdit.username}" /></div>
+                                                                    <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de usuario</strong></label><p:inputText class="form-control" type="text" id="username-1" placeholder="#{employeesController.employeeEdit.username}" value="#{employeesController.employeeEdit.username}"/></div>
                                                                 </div>
                                                                 <div class="col">
-                                                                    <div class="mb-3"><label class="form-label" for="email"><strong>Nombre</strong></label><p:inputText class="form-control" type="text" id="name-1" placeholder="#{employeesController.employeeEdit.nameEmp}"/></div>
+                                                                    <div class="mb-3"><label class="form-label" for="email"><strong>Nombre</strong></label><p:inputText class="form-control" type="text" id="name-1" placeholder="#{employeesController.employeeEdit.nameEmp}" value="#{employeesController.employeeEdit.nameEmp}"/></div>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
@@ -256,13 +256,13 @@
                                                     </div>
                                                     <div class="card-body">
                                                         <!--<h:form>-->
-                                                        <div class="mb-3"><label class="form-label" for="address"><strong>DNI</strong></label><p:inputText class="form-control" type="text" id="dni-1" placeholder="#{employeesController.employeeEdit.dni}"/></div>
+                                                        <div class="mb-3"><label class="form-label" for="address"><strong>DNI</strong></label><p:inputText class="form-control" type="text" id="dni-1" placeholder="#{employeesController.employeeEdit.dni}" value="#{employeesController.employeeEdit.dni}"/></div>
                                                             <div class="row">
                                                                 <div class="col">
-                                                                    <div class="mb-3"><label class="form-label" for="city"><strong>SSN</strong></label><p:inputText class="form-control" type="text" id="ssn-1" placeholder="#{employeesController.employeeEdit.ssn}"/></div>
+                                                                    <div class="mb-3"><label class="form-label" for="city"><strong>SSN</strong></label><p:inputText class="form-control" type="text" id="ssn-1" placeholder="#{employeesController.employeeEdit.ssn}" value="#{employeesController.employeeEdit.ssn}"/></div>
                                                                 </div>
                                                                 <div class="col">
-                                                                    <div class="mb-3"><label class="form-label" for="country"><strong>Número de Telefono</strong></label><p:inputText class="form-control" type="text" id="tlfn-1" placeholder="#{employeesController.employeeEdit.phoneNum}"/></div>
+                                                                    <div class="mb-3"><label class="form-label" for="country"><strong>Número de Telefono</strong></label><p:inputText class="form-control" type="text" id="tlfn-1" placeholder="#{employeesController.employeeEdit.phoneNum}" value="#{employeesController.employeeEdit.phoneNum}"/></div>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3"></div>
@@ -270,7 +270,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="card shadow mb-3">
-                                                    <div class="card-header py-3"><p:commandButton class="btn btn-primary btn-sm" value="Guardar cambios"></p:commandButton></div>
+                                                    <div class="card-header py-3">
+                                                        <p:commandButton class="btn btn-primary btn-sm" value="Guardar cambios" action="#{employeesController.updateEmployee()}" update="form1"></p:commandButton>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

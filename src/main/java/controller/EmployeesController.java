@@ -54,6 +54,7 @@ public class EmployeesController implements Serializable{
         employeesList = loadEmployeesList();
         employee = new Employees();
         roleList = new ArrayList<SelectItem>();
+        employeeEdit = new Employees();
         addItems();
     }
 
@@ -99,6 +100,11 @@ public class EmployeesController implements Serializable{
         employee.setPass("admin");
         System.out.println("IDe: "+employee.getIdEmployee());
         employeesEJB.create(employee);
+        try{
+            FacesContext.getCurrentInstance().getExternalContext().redirect("usermng.xhtml");
+        } catch (Exception e) {
+            System.out.println("Error al redireccionar");
+        }
     }
     
     public void searchEmployees() {
@@ -110,6 +116,13 @@ public class EmployeesController implements Serializable{
         dni = "";
         rol = employeeEdit.getRole();
         dateEdit = employeeEdit.getBirthdayDate();
+    }
+    
+    public void updateEmployee() {
+        employeeEdit.setBirthday(dateEdit);
+        employeeEdit.setRole(rol);
+        employeesEJB.edit(employeeEdit);
+        
     }
     
     public List<Employees> getEmployeesList(){
