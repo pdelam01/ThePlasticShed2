@@ -44,6 +44,7 @@ public class EmployeesController implements Serializable{
     private String dni;
     private List<SelectItem> roleList;
     private Date date;
+    private Date dateEdit;
             
     @EJB
     private EmployeesFacadeLocal employeesEJB;
@@ -107,6 +108,8 @@ public class EmployeesController implements Serializable{
             }
         }
         dni = "";
+        rol = employeeEdit.getRole();
+        dateEdit = employeeEdit.getBirthdayDate();
     }
     
     public List<Employees> getEmployeesList(){
@@ -164,5 +167,15 @@ public class EmployeesController implements Serializable{
     public void setDate2(Date date2) {
         this.date = date2;
     }
+
+    public Date getDateEdit() {
+        return dateEdit;
+    }
+
+    public void setDateEdit(Date dateEdit) {
+        this.dateEdit = dateEdit;
+    }
+    
+    
     
 }
