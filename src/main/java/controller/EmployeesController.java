@@ -100,13 +100,16 @@ public class EmployeesController implements Serializable{
         employee.setPass("admin");
         System.out.println("IDe: "+employee.getIdEmployee());
         employeesEJB.create(employee);
+
+    }
+    
+    public void redirectAdd() {
         try{
             FacesContext.getCurrentInstance().getExternalContext().redirect("usermng.xhtml");
         } catch (Exception e) {
             System.out.println("Error al redireccionar");
         }
     }
-    
     public void searchEmployees() {
         for(int i=0; i<employeesList.size(); i++) {
             if(this.dni.equals(employeesList.get(i).getDni())) {
