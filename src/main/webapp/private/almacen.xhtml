@@ -16,7 +16,7 @@
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1">Componentes</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">Materiales</a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">Reponer Materiales </a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">Secciones</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" role="tabpanel" id="tab-1">
@@ -86,7 +86,76 @@
                             </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="tab-3">
-                            <p>En este tab irá un pequeño menu para añadir materiales a la tabla materiales, como si fuera una "compra a suplier"</p>
+                            <p>En este tab irá una pequeña tabla de las diferentes secciones de nuestro almacén donde se almacenan los componentes</p>
+                            <div class="card shadow">
+                                <div class="card-header py-3">
+                                    <p class="text-primary m-0 fw-bold">Secciones</p>
+                                </div>
+                                <h:form>
+                                    <div class="card-body">
+                                        <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                            <table class="table my-0" id="dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nombre de sección</th>
+                                                        <th>Tipo de componentes almacenados</th>
+                                                        <th>Sector</th>
+                                                        <th>Fecha de creación</th>
+                                                        <th>Presupuesto</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><img class="rounded-circle me-2" width="50" height="50" src="./../assets/img/secciones/cepilleria.png"/>Cepillería</td>
+                                                        <td>Piezas para la industria cepillera</td>
+                                                        <td>F</td>
+                                                        <td>2008/11/28</td>
+                                                        <td>162,700€</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><img class="rounded-circle me-2" width="50" height="50" src="./../assets/img/secciones/prodpropios.png"/>Productos propios</td>
+                                                        <td>Productos no catalogados en una sección</td>
+                                                        <td>A</td>
+                                                        <td>2009/10/09<br/></td>
+                                                        <td>1,200,000€</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><img class="rounded-circle me-2" width="50" height="50" src="./../assets/img/secciones/confiteria.png"/>Confitería</td>
+                                                        <td>Platos y bandejas de confitería artesana</td>
+                                                        <td>C</td>
+                                                        <td>2009/01/12<br/></td>
+                                                        <td>86,000€</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><img class="rounded-circle me-2" width="50" height="50" src="./../assets/img/secciones/3D.png"/>Modelado 3D</td>
+                                                        <td>Piezas industriales a medida en 3D</td>
+                                                        <td>B</td>
+                                                        <td>2012/10/13<br/></td>
+                                                        <td>132,000€</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><img class="rounded-circle me-2" width="50" height="50" src="./../assets/img/secciones/pajareria.png"/>Pajarería</td>
+                                                        <td>Toda clase de piezas de plástico para la industria pajarera</td>
+                                                        <td>D</td>
+                                                        <td>2011/06/07<br/></td>
+                                                        <td>206,850€</td>
+                                                    </tr>
+
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td><strong>Nombre de sección</strong></td>
+                                                        <td><strong>Tipo de componentes almacenados</strong></td>
+                                                        <td><strong>Sector</strong></td>
+                                                        <td><strong>Fecha de creación</strong></td>
+                                                        <td><strong>Presupuesto</strong></td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </h:form>
+                            </div>
                         </div>
                     </div>
                 </div>
