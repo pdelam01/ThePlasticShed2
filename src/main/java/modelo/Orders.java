@@ -29,7 +29,7 @@ public class Orders implements Serializable {
 
     @JoinColumn(name = "idMaterial")
     @ManyToOne
-    private Materials idMaterial;
+    private Materials material;
 
     @JoinColumn(name = "idEmployee")
     @ManyToOne
@@ -37,7 +37,7 @@ public class Orders implements Serializable {
 
     @JoinColumn(name = "idSupplier")
     @ManyToOne
-    private Suppliers idSupplier;
+    private Suppliers supplier;
 
     @Column(name = "Date")
     @Temporal(TemporalType.DATE)
@@ -47,7 +47,7 @@ public class Orders implements Serializable {
     private int quantity;
 
     @Column(name = "TotalPrice")
-    private int totalPrice;
+    private double totalPrice;
 
     public int getId() {
         return idOrder;
@@ -57,12 +57,12 @@ public class Orders implements Serializable {
         this.idOrder = id;
     }
 
-    public Materials getIdMaterial() {
-        return idMaterial;
+    public Materials getMaterial() {
+        return material;
     }
 
-    public void setIdMaterial(Materials idMaterial) {
-        this.idMaterial = idMaterial;
+    public void setMaterial(Materials material) {
+        this.material = material;
     }
 
     public Employees getIdEmployee() {
@@ -73,12 +73,12 @@ public class Orders implements Serializable {
         this.employee = emp;
     }
 
-    public Suppliers getIdSupplier() {
-        return idSupplier;
+    public Suppliers getSupplier() {
+        return supplier;
     }
 
-    public void setIdSupplier(Suppliers idSupplier) {
-        this.idSupplier = idSupplier;
+    public void setSupplier(Suppliers supplier) {
+        this.supplier = supplier;
     }
 
     public Date getDate() {
@@ -97,24 +97,24 @@ public class Orders implements Serializable {
         this.quantity = quantity;
     }
 
-    public int getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 41 * hash + this.id;
-        hash = 41 * hash + Objects.hashCode(this.idMaterial);
-        hash = 41 * hash + Objects.hashCode(this.employee);
-        hash = 41 * hash + Objects.hashCode(this.idSupplier);
-        hash = 41 * hash + Objects.hashCode(this.date);
-        hash = 41 * hash + this.quantity;
-        hash = 41 * hash + this.totalPrice;
+        int hash = 7;
+        hash = 53 * hash + this.idOrder;
+        hash = 53 * hash + Objects.hashCode(this.material);
+        hash = 53 * hash + Objects.hashCode(this.employee);
+        hash = 53 * hash + Objects.hashCode(this.supplier);
+        hash = 53 * hash + Objects.hashCode(this.date);
+        hash = 53 * hash + this.quantity;
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.totalPrice) ^ (Double.doubleToLongBits(this.totalPrice) >>> 32));
         return hash;
     }
 
@@ -139,13 +139,13 @@ public class Orders implements Serializable {
         if (this.totalPrice != other.totalPrice) {
             return false;
         }
-        if (!Objects.equals(this.idMaterial, other.idMaterial)) {
+        if (!Objects.equals(this.material, other.material)) {
             return false;
         }
         if (!Objects.equals(this.employee, other.employee)) {
             return false;
         }
-        if (!Objects.equals(this.idSupplier, other.idSupplier)) {
+        if (!Objects.equals(this.supplier, other.supplier)) {
             return false;
         }
         if (!Objects.equals(this.date, other.date)) {
