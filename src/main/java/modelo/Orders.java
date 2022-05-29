@@ -25,7 +25,7 @@ import javax.persistence.TemporalType;
 public class Orders implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idOrder;
 
     @JoinColumn(name = "idMaterial")
     @ManyToOne
@@ -50,11 +50,11 @@ public class Orders implements Serializable {
     private int totalPrice;
 
     public int getId() {
-        return id;
+        return idOrder;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idOrder = id;
     }
 
     public Materials getIdMaterial() {
@@ -130,7 +130,7 @@ public class Orders implements Serializable {
             return false;
         }
         final Orders other = (Orders) obj;
-        if (this.id != other.id) {
+        if (this.idOrder != other.idOrder) {
             return false;
         }
         if (this.quantity != other.quantity) {
