@@ -29,7 +29,7 @@ public class Sales implements Serializable {
 
     @JoinColumn(name = "idComponent")
     @ManyToOne
-    private Components idComponent;
+    private Components component;
 
     @JoinColumn(name = "idEmployee")
     @ManyToOne
@@ -37,7 +37,7 @@ public class Sales implements Serializable {
 
     @JoinColumn(name = "idClient")
     @ManyToOne
-    private Clients idClient;
+    private Clients client;
 
     @Column(name = "Date")
     @Temporal(TemporalType.DATE)
@@ -57,12 +57,12 @@ public class Sales implements Serializable {
         this.id = id;
     }
 
-    public Components getIdComponent() {
-        return idComponent;
+    public Components getComponent() {
+        return component;
     }
 
-    public void setIdComponent(Components idComponent) {
-        this.idComponent = idComponent;
+    public void setComponent(Components component) {
+        this.component = component;
     }
 
     public Employees getIdSecretary() {
@@ -73,12 +73,12 @@ public class Sales implements Serializable {
         this.employee = employee;
     }
 
-    public Clients getIdClient() {
-        return idClient;
+    public Clients getClient() {
+        return client;
     }
 
-    public void setIdClient(Clients idClient) {
-        this.idClient = idClient;
+    public void setClient(Clients client) {
+        this.client = client;
     }
 
     public Date getDate() {
@@ -108,13 +108,13 @@ public class Sales implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 29 * hash + this.id;
-        hash = 29 * hash + Objects.hashCode(this.idComponent);
-        hash = 29 * hash + Objects.hashCode(this.employee);
-        hash = 29 * hash + Objects.hashCode(this.idClient);
-        hash = 29 * hash + Objects.hashCode(this.date);
-        hash = 29 * hash + this.quantity;
-        hash = 29 * hash + this.totalPrice;
+        hash = 23 * hash + this.id;
+        hash = 23 * hash + Objects.hashCode(this.component);
+        hash = 23 * hash + Objects.hashCode(this.employee);
+        hash = 23 * hash + Objects.hashCode(this.client);
+        hash = 23 * hash + Objects.hashCode(this.date);
+        hash = 23 * hash + this.quantity;
+        hash = 23 * hash + (int) (Double.doubleToLongBits(this.totalPrice) ^ (Double.doubleToLongBits(this.totalPrice) >>> 32));
         return hash;
     }
 
@@ -139,13 +139,13 @@ public class Sales implements Serializable {
         if (this.totalPrice != other.totalPrice) {
             return false;
         }
-        if (!Objects.equals(this.idComponent, other.idComponent)) {
+        if (!Objects.equals(this.component, other.component)) {
             return false;
         }
         if (!Objects.equals(this.employee, other.employee)) {
             return false;
         }
-        if (!Objects.equals(this.idClient, other.idClient)) {
+        if (!Objects.equals(this.client, other.client)) {
             return false;
         }
         if (!Objects.equals(this.date, other.date)) {
