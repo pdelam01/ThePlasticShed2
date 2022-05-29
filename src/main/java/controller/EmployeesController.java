@@ -5,28 +5,18 @@
  */
 package controller;
 
-import EJB.AdminEmployeesFacadeLocal;
 import EJB.EmployeesFacadeLocal;
-import EJB.PawnEmployeesFacadeLocal;
-import EJB.SecretaryEmployeesFacadeLocal;
 import java.io.Serializable;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.component.behavior.FacesBehavior;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import javax.validation.constraints.Future;
-import modelo.AdminEmployees;
 import modelo.Employees;
-import modelo.PawnEmployees;
-import modelo.SecretaryEmployees;
 
 /**
  *
