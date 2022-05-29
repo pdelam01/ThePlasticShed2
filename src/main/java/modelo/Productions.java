@@ -29,7 +29,7 @@ public class Productions implements Serializable {
 
     @JoinColumn(name = "idComponent")
     @ManyToOne
-    private Components idComponent;
+    private Components component;
 
     @JoinColumn(name = "idEmployee")
     @ManyToOne
@@ -51,11 +51,11 @@ public class Productions implements Serializable {
     }
 
     public Components getIdComponent() {
-        return idComponent;
+        return component;
     }
 
     public void setIdComponent(Components idComponent) {
-        this.idComponent = idComponent;
+        this.component = idComponent;
     }
 
     public Employees getIdPawn() {
@@ -86,7 +86,7 @@ public class Productions implements Serializable {
     public int hashCode() {
         int hash = 3;
         hash = 29 * hash + this.id;
-        hash = 29 * hash + Objects.hashCode(this.idComponent);
+        hash = 29 * hash + Objects.hashCode(this.component);
         hash = 29 * hash + Objects.hashCode(this.employee);
         hash = 29 * hash + Objects.hashCode(this.date);
         hash = 29 * hash + this.quantity;
@@ -111,7 +111,7 @@ public class Productions implements Serializable {
         if (this.quantity != other.quantity) {
             return false;
         }
-        if (!Objects.equals(this.idComponent, other.idComponent)) {
+        if (!Objects.equals(this.component, other.component)) {
             return false;
         }
         if (!Objects.equals(this.employee, other.employee)) {

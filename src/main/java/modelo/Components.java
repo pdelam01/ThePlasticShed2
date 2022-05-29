@@ -32,7 +32,7 @@ public class Components implements Serializable {
 
     @JoinColumn(name = "UPCAditionalComponent")
     @ManyToOne
-    private Components upcAditionalComponent;
+    private Components aditionalComponent;
 
     @Column(name = "Quantity")
     private int quantity;
@@ -65,11 +65,11 @@ public class Components implements Serializable {
     }
 
     public Components getUpcAditionalComponents() {
-        return upcAditionalComponent;
+        return aditionalComponent;
     }
 
     public void setUpcAditionalComponents(Components upcAditionalComponents) {
-        this.upcAditionalComponent = upcAditionalComponents;
+        this.aditionalComponent = upcAditionalComponents;
     }
     
     public int getQuantity() {
@@ -94,7 +94,7 @@ public class Components implements Serializable {
         hash = 41 * hash + this.idComponent;
         hash = 41 * hash + Objects.hashCode(this.name);
         hash = 41 * hash + Objects.hashCode(this.upc);
-        hash = 41 * hash + Objects.hashCode(this.upcAditionalComponent);
+        hash = 41 * hash + Objects.hashCode(this.aditionalComponent);
         hash = 41 * hash + this.quantity;
         hash = 41 * hash + Float.floatToIntBits(this.price);
         return hash;
@@ -127,7 +127,7 @@ public class Components implements Serializable {
         if (!Objects.equals(this.upc, other.upc)) {
             return false;
         }
-        if (!Objects.equals(this.upcAditionalComponent, other.upcAditionalComponent)) {
+        if (!Objects.equals(this.aditionalComponent, other.aditionalComponent)) {
             return false;
         }
         return true;

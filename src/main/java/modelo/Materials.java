@@ -33,7 +33,7 @@ public class Materials implements Serializable {
 
     @JoinColumn(name = "idSupplier")
     @ManyToOne
-    private Suppliers idSupplier;
+    private Suppliers supplier;
 
     public int getId() {
         return idMaterial;
@@ -76,11 +76,11 @@ public class Materials implements Serializable {
     }
 
     public Suppliers getIdSupplier() {
-        return idSupplier;
+        return supplier;
     }
 
     public void setIdSupplier(Suppliers idSupplier) {
-        this.idSupplier = idSupplier;
+        this.supplier = idSupplier;
     }
 
     @Override
@@ -91,7 +91,7 @@ public class Materials implements Serializable {
         hash = 23 * hash + Objects.hashCode(this.upc);
         hash = 23 * hash + this.quantity;
         hash = 23 * hash + Float.floatToIntBits(this.price);
-        hash = 23 * hash + Objects.hashCode(this.idSupplier);
+        hash = 23 * hash + Objects.hashCode(this.supplier);
         return hash;
     }
 
@@ -122,7 +122,7 @@ public class Materials implements Serializable {
         if (!Objects.equals(this.upc, other.upc)) {
             return false;
         }
-        if (!Objects.equals(this.idSupplier, other.idSupplier)) {
+        if (!Objects.equals(this.supplier, other.supplier)) {
             return false;
         }
         return true;
