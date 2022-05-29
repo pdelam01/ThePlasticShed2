@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -44,81 +45,82 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane" role="tabpanel" id="tab-2">
-                                    <p>// Pestaña para hacer venta de componentes a los clientes</p>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="card shadow mb-3">
-                                                <div class="card-header py-3">
-                                                    <p class="text-primary m-0 fw-bold">Venta de componentes</p>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col d-flex align-items-center justify-content-end"><button class="btn btn-primary" type="button"><i class="fas fa-arrow-left"/></button></div>
-                                                        <div class="col d-flex align-items-center justify-content-center"><img class="rounded-circle mb-3 mt-4" src="./../assets/img/components/componente1.png" width="160" height="160"/><div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
-                                                                <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h4 class="modal-title">Realizando la venta...</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <div class="row">
-                                                                                <div class="col d-flex align-items-center justify-content-center"><img class=" mb-3 mt-4" src="./../assets/img/icons/moneda.png" width="160" height="160"/></div>
+                                    <h:form id="form-sales">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="card shadow mb-3">
+                                                    <div class="card-header py-3">
+                                                        <p class="text-primary m-0 fw-bold">Venta de componentes</p>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col d-flex align-items-center justify-content-end"><p:commandButton class="btn btn-primary" icon="fas fa-arrow-left" action="#{clientsController.moveLeft()}" update="form-sales"></p:commandButton></div>
+                                                            <div class="col d-flex align-items-center justify-content-center"><img class="rounded-circle mb-3 mt-4" src="./../assets/img/components/componente#{clientsController.index}.png" width="190" height="190"/><div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h4 class="modal-title">Realizando la venta...</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                             </div>
-                                                                            <div class="row">
-                                                                                <div class="col d-flex align-items-center justify-content-center">
-                                                                                    <p>¡Se ha realizado la venta correctamente!</p>
+                                                                            <div class="modal-body">
+                                                                                <div class="row">
+                                                                                    <div class="col d-flex align-items-center justify-content-center"><img class=" mb-3 mt-4" src="./../assets/img/icons/moneda.png" width="160" height="160"/></div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col">
-                                                                                    <div class="progress">
-                                                                                        <div class="progress-bar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">100%</div>
+                                                                                <div class="row">
+                                                                                    <div class="col d-flex align-items-center justify-content-center">
+                                                                                        <p>¡Se ha realizado la venta correctamente!</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col">
+                                                                                        <div class="progress">
+                                                                                            <div class="progress-bar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">100%</div>
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
+                                                                            <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Vale</button></div>
                                                                         </div>
-                                                                        <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Vale</button></div>
                                                                     </div>
-                                                                </div>
-                                                            </div></div>
-                                                        <div class="col d-flex align-items-center justify-content-start"><button class="btn btn-primary" type="button"><i class="fas fa-arrow-right"/></button></div>
-                                                    </div>
-                                                    <form>
+                                                                </div></div>
+                                                            <div class="col d-flex align-items-center justify-content-start"><p:commandButton class="btn btn-primary" icon="fas fa-arrow-right" action="#{clientsController.moveRight()}" update="form-sales"></p:commandButton></div>
+                                                        </div>
+
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de componente</strong></label><input class="form-control" type="text" id="material" placeholder="Comedero Triple (0001)"/></div>
-                                                            </div>
+                                                                <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de componente</strong></label><p:inputText class="form-control" type="text" id="material" value="#{clientsController.component.name}" disabled="true"/></div>
+                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="email"><strong>Cantidad</strong><br/></label><input class="form-control" type="email" id="cantidad" placeholder="100"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="email"><strong>Cantidad</strong><br/></label><p:inputText class="form-control" type="email" id="cantidad" value="#{clientsController.quantity}">
+                                                                        <p:ajax listener="#{clientsController.calculatePrice()}" event="keyup" update="form-sales"/> </p:inputText>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="first_name"><strong>Cliente</strong><br/></label><select class="form-select">
-                                                                        <optgroup label="Clientes">
-                                                                            <option value="12" selected="">This is item 1</option>
-                                                                            <option value="13">This is item 2</option>
-                                                                            <option value="14">This is item 3</option>
-                                                                        </optgroup>
-                                                                    </select></div>
+                                                                <div class="mb-3"><label class="form-label" for="last_name"><strong>Cliente</strong></label>
+                                                                    <h:selectOneMenu class="form-select" value="#{clientsController.cliente}">
+                                                                        <f:selectItems value="#{clientsController.clientsItemsList}" />
+                                                                    </h:selectOneMenu>
+                                                                </div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="last_name"><strong>Precio del Componente</strong></label><input class="form-control" type="text" id="precio" placeholder="9.99"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="last_name"><strong>Precio del Componente</strong></label><p:inputText class="form-control" type="text" id="precio" value="#{clientsController.component.price} €" disabled="true"/></div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col d-flex align-items-center justify-content-center">
-                                                                <div class="mb-3"><button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modal-1">Realizar Venta</button></div>
+                                                                <div class="mb-3"><p:commandButton class="btn btn-primary btn-sm" value="Realizar Venta" action="#{clientsController.doSale()}"></p:commandButton></div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="last_name"><strong>Precio Total de la Venta</strong></label><input class="form-control" type="text" id="total_price" placeholder="999"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="last_name"><strong>Precio Total de la Venta</strong></label><p:inputText class="form-control" type="text" id="total_price" value="#{clientsController.totalPrice} €" disabled="true"/></div>
                                                             </div>
                                                         </div>
-                                                    </form>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </h:form>
                                 </div>
                             </div>
                         </div>

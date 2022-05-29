@@ -47,7 +47,7 @@ public class Sales implements Serializable {
     private int quantity;
 
     @Column(name = "TotalPrice")
-    private int totalPrice;
+    private double totalPrice;
 
     public int getId() {
         return id;
@@ -97,11 +97,11 @@ public class Sales implements Serializable {
         this.quantity = quantity;
     }
 
-    public int getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
