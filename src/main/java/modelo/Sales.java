@@ -47,7 +47,7 @@ public class Sales implements Serializable {
     private int quantity;
 
     @Column(name = "TotalPrice")
-    private int totalPrice;
+    private double totalPrice;
 
     public int getId() {
         return id;
@@ -97,11 +97,11 @@ public class Sales implements Serializable {
         this.quantity = quantity;
     }
 
-    public int getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -114,7 +114,7 @@ public class Sales implements Serializable {
         hash = 97 * hash + Objects.hashCode(this.idClient);
         hash = 97 * hash + Objects.hashCode(this.date);
         hash = 97 * hash + this.quantity;
-        hash = 97 * hash + this.totalPrice;
+        hash = 97 * hash + Objects.hashCode(this.totalPrice);
         return hash;
     }
 
