@@ -9,7 +9,6 @@ import EJB.MaterialsFacadeLocal;
 import EJB.OrdersFacadeLocal;
 import EJB.SuppliersFacadeLocal;
 import java.io.Serializable;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +36,7 @@ public class SuppliersController implements Serializable {
     private List<Suppliers> suppliersList;
     private List<SelectItem> suppliersItemsList;
     private List<Materials> materialsList;
+    private List<Orders> ordersList;
     private Materials material;
     private Employees employeeSession;
     private Orders order;
@@ -61,6 +61,7 @@ public class SuppliersController implements Serializable {
         supplierId = 0;
         index = 1;
         materialsList = loadMaterialsList();
+        ordersList = loadOrdersList();
         material = materialsList.get(index-1);
         quantity = 1;
         order = new Orders();
@@ -90,9 +91,21 @@ public class SuppliersController implements Serializable {
         }
     }
     
+    public List<Orders> loadOrdersList(){
+        try {
+            List<Orders> lista = ordersEJB.findOrdersList();
+            System.out.println("Pedidos size: "+lista.size());
+            return ordersEJB.findOrdersList();
+        } catch (Exception e) {
+            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            return null;
+        }
+    }
+    
+    
     public void addItems(){
         for(int i=0; i<suppliersList.size(); i++){
-            suppliersItemsList.add(new SelectItem(suppliersList.get(i).getId(), suppliersList.get(i).getName()+", a cargo: "+suppliersList.get(i).getContactPerson()));
+            suppliersItemsList.add(new SelectItem(suppliersList.get(i).getId(), suppliersList.get(i).getName()+" a cargo "+suppliersList.get(i).getContactPerson()));
         }
     }
     
@@ -138,6 +151,14 @@ public class SuppliersController implements Serializable {
         }
         material = materialsList.get(index-1);
         calculatePrice();
+    }
+
+    public List<Orders> getOrdersList() {
+        return ordersList;
+    }
+
+    public void setOrdersList(List<Orders> ordersList) {
+        this.ordersList = ordersList;
     }
     
     public List<Suppliers> getSuppliersList(){

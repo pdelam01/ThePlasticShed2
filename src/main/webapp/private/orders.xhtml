@@ -117,7 +117,7 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col d-flex align-items-center justify-content-center">
-                                                                <div class="mb-3"><p:commandButton class="btn btn-primary btn-sm" value="Realizar Pedido" action="#{suppliersController.doOrder()}" pt:data-bs-toggle="modal" pt:data-bs-target="#modal-1" ></p:commandButton></div>
+                                                                <div class="mb-3"><p:commandButton class="btn btn-primary btn-sm" value="Realizar Pedido" action="#{suppliersController.doOrder()}" update="form-historial" pt:data-bs-toggle="modal" pt:data-bs-target="#modal-1" ></p:commandButton></div>
                                                             </div>
 
                                                             <div class="col">
@@ -136,24 +136,30 @@
                                         <div class="card-header py-3">
                                             <p class="text-primary m-0 fw-bold">Historial de Pedidos</p>
                                         </div>
-                                        <h:form>
+                                        <h:form id="form-historial">
                                             <div class="card-body">
                                                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                                                    <p:dataTable class="table my-0" id="dataTable" var="proveedores" value=""> <!-- RETRIEVE DATA ORDERS TABLE -->
+                                                    <p:dataTable class="table my-0" id="dataTable" var="orders" value="#{suppliersController.ordersList}">
+                                                         <p:column headerText="Imagen de Material">
+                                                             <h:graphicImage class="rounded-circle me-2" width="40" height="40" url="../../assets/img/materials/material#{orders.material.id}.png" />
+                                                        </p:column>
                                                         <p:column headerText="Material Pedido">
-                                                            <h:outputText value="//Controller.order.Material"/>
+                                                            <h:outputText value="#{orders.material.name}"/>
                                                         </p:column>
                                                         <p:column headerText="Empleado">
-                                                            <h:outputText value="//Controller.order.Employee"/>
+                                                            <h:outputText value="#{orders.idEmployee.nameEmp}"/>
+                                                        </p:column>
+                                                        <p:column headerText="Proveedor">
+                                                            <h:outputText value="#{orders.supplier.name}"/>
                                                         </p:column>
                                                         <p:column headerText="Cantidad">
-                                                            <h:outputText value="//Controller.order.Cantidad"/>
+                                                            <h:outputText value="#{orders.quantity}"/>
                                                         </p:column>
-                                                        <p:column headerText="Precio">
-                                                            <h:outputText value="//Controller.order.Precio"/>
+                                                        <p:column headerText="Precio Total">
+                                                            <h:outputText value="#{orders.totalPrice}"/>
                                                         </p:column>
-                                                        <p:column headerText="Fecha del pedido">
-                                                            <h:outputText value="//Controller.order.Fecha"/>
+                                                        <p:column headerText="Fecha del Pedido">
+                                                            <h:outputText value="#{orders.dateFormat}"/>
                                                         </p:column>
                                                     </p:dataTable>
                                                 </div>
