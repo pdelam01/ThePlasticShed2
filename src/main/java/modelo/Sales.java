@@ -65,11 +65,11 @@ public class Sales implements Serializable {
         this.component = component;
     }
 
-    public Employees getIdSecretary() {
+    public Employees getEmployee() {
         return employee;
     }
 
-    public void setIdSecretary(Employees employee) {
+    public void setEmployee(Employees employee) {
         this.employee = employee;
     }
 

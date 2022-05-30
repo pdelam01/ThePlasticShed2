@@ -38,7 +38,7 @@ public class Components implements Serializable {
     private int quantity;
     
     @Column(name = "Price")
-    private float price;
+    private double price;
 
     public int getId() {
         return idComponent;
@@ -80,23 +80,23 @@ public class Components implements Serializable {
         this.quantity = quantity;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + this.idComponent;
-        hash = 41 * hash + Objects.hashCode(this.name);
-        hash = 41 * hash + Objects.hashCode(this.upc);
-        hash = 41 * hash + Objects.hashCode(this.aditionalComponent);
-        hash = 41 * hash + this.quantity;
-        hash = 41 * hash + Float.floatToIntBits(this.price);
+        int hash = 5;
+        hash = 61 * hash + this.idComponent;
+        hash = 61 * hash + Objects.hashCode(this.name);
+        hash = 61 * hash + Objects.hashCode(this.upc);
+        hash = 61 * hash + Objects.hashCode(this.aditionalComponent);
+        hash = 61 * hash + this.quantity;
+        hash = 61 * hash + (int) (Double.doubleToLongBits(this.price) ^ (Double.doubleToLongBits(this.price) >>> 32));
         return hash;
     }
 
@@ -118,7 +118,7 @@ public class Components implements Serializable {
         if (this.quantity != other.quantity) {
             return false;
         }
-        if (Float.floatToIntBits(this.price) != Float.floatToIntBits(other.price)) {
+        if (Double.doubleToLongBits(this.price) != Double.doubleToLongBits(other.price)) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
@@ -132,6 +132,8 @@ public class Components implements Serializable {
         }
         return true;
     }
+
+    
     
     
     

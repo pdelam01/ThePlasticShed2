@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <body>
 
@@ -91,14 +92,14 @@
                                                              </div>
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="email"><strong>Cantidad</strong><br/></label><p:inputText class="form-control" type="email" id="cantidad" value="#{clientsController.quantity}">
-                                                                        <p:ajax listener="#{clientsController.calculatePrice()}" event="keyup" update="form-sales"/> </p:inputText>
+                                                                        <p:ajax listener="#{clientsController.calculatePrice()}" event="mouseout" update="form-sales"/> </p:inputText>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="last_name"><strong>Cliente</strong></label>
-                                                                    <h:selectOneMenu class="form-select" value="#{clientsController.cliente}">
+                                                                    <h:selectOneMenu class="form-select" value="#{clientsController.clienteId}">
                                                                         <f:selectItems value="#{clientsController.clientsItemsList}" />
                                                                     </h:selectOneMenu>
                                                                 </div>
@@ -109,7 +110,7 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col d-flex align-items-center justify-content-center">
-                                                                <div class="mb-3"><p:commandButton class="btn btn-primary btn-sm" value="Realizar Venta" action="#{clientsController.doSale()}"></p:commandButton></div>
+                                                                <div class="mb-3"><p:commandButton class="btn btn-primary btn-sm" value="Realizar Venta" action="#{clientsController.doSale()}" pt:data-bs-toggle="modal" pt:data-bs-target="#modal-1" ></p:commandButton></div>
                                                             </div>
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="last_name"><strong>Precio Total de la Venta</strong></label><p:inputText class="form-control" type="text" id="total_price" value="#{clientsController.totalPrice} €" disabled="true"/></div>

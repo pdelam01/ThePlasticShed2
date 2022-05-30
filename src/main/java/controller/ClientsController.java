@@ -9,15 +9,21 @@ import EJB.ClientsFacadeLocal;
 import EJB.ComponentsFacadeLocal;
 import EJB.SalesFacadeLocal;
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Clients;
 import modelo.Components;
+import modelo.Employees;
 import modelo.Sales;
 
 /**
@@ -31,13 +37,14 @@ public class ClientsController implements Serializable {
     
     private List<Clients> clientsList;
     private List<SelectItem> clientsItemsList;
-    private String cliente;
+    private int clienteId;
     private int index;
     private List<Components> componentsList;
     private Components component;
     private int quantity;
     private double totalPrice;
     private Sales sale;
+    private Employees employeeSession;
     
     @EJB
     private ClientsFacadeLocal clientsEJB;
@@ -52,7 +59,7 @@ public class ClientsController implements Serializable {
     public void init(){
         clientsList = loadClientsList();
         clientsItemsList = new ArrayList<SelectItem>();
-        cliente = "";
+        clienteId = 0;
         index = 1;
         componentsList = loadComponentList();
         component = componentsList.get(index-1);
@@ -79,21 +86,27 @@ public class ClientsController implements Serializable {
         }
     }
     
+    public Date getLocalDate(){
+        Date now = new Date();
+        return now;
+    }
+    
     public void doSale(){
-        //Crear obj Sale, ejbsale añadir o crear y pasar obj sale creado. Chekar cantidad
-        if(quantity > 0 || quantity < salesEJB.find(index).getQuantity()){
-            /*sale.setQuantity(quantity);
-            sale.setDate();
-            sale.setId(index);
-            sale.setIdClient(clientsList.get(index).getIdClient());
-            sale.setIdComponent(component.getId());
-            sale.setIdSecretary();
-            sale.setTotalPrice(totalPrice);*/
+        employeeSession = (Employees) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleadoLogged");
+        if(quantity > 0 && quantity < componentsEJB.find(index).getQuantity()){
+            sale.setComponent(component);
+            sale.setEmployee(employeeSession);
+            sale.setClient(clientsEJB.find(clienteId));
+            sale.setDate(getLocalDate());
+            sale.setQuantity(quantity);
+            sale.setTotalPrice(totalPrice);
+            component.setQuantity(componentsEJB.find(index).getQuantity()-quantity);
+            
+            salesEJB.create(sale);
+            componentsEJB.edit(component);
         }else{
-            //Venta no se realiza, cantidad < 0 || cantidad > cantidad db
+            //Venta no realizada
         }
-        
-        salesEJB.edit(sale);
     }
     
     public List<Components> loadComponentList(){
@@ -107,8 +120,12 @@ public class ClientsController implements Serializable {
         }
     }
     
+    public double roundTwoDecimals(){
+        return (double) Math.round( (quantity * component.getPrice() * 100d) / 100d);
+    }
+    
     public void calculatePrice(){
-        totalPrice = quantity * component.getPrice();
+        totalPrice = roundTwoDecimals();
     }
     
     public void moveLeft(){
@@ -151,12 +168,12 @@ public class ClientsController implements Serializable {
         this.clientsEJB = clientsEJB;
     }
 
-    public String getCliente() {
-        return cliente;
+    public int getClienteId() {
+        return clienteId;
     }
 
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
+    public void setClienteId(int cliente) {
+        this.clienteId = cliente;
     }
 
     public int getIndex() {
