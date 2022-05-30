@@ -19,6 +19,7 @@
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1">Clientes</a></li>
                                 <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">Ventas</a></li>
+                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">Historial de ventas</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" role="tabpanel" id="tab-1">
@@ -89,7 +90,7 @@
                                                         <div class="row">
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de componente</strong></label><p:inputText class="form-control" type="text" id="material" value="#{clientsController.component.name}" disabled="true"/></div>
-                                                             </div>
+                                                            </div>
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="email"><strong>Cantidad</strong><br/></label><p:inputText class="form-control" type="email" id="cantidad" value="#{clientsController.quantity}">
                                                                         <p:ajax listener="#{clientsController.calculatePrice()}" event="mouseout" update="form-sales"/> </p:inputText>
@@ -122,6 +123,39 @@
                                             </div>
                                         </div>
                                     </h:form>
+                                </div>
+                                <div class="tab-pane" role="tabpanel" id="tab-3">
+                                    <div class="card shadow">
+                                        <div class="card-header py-3">
+                                            <p class="text-primary m-0 fw-bold">Historial de ventas</p>
+                                        </div>
+                                        <h:form>
+                                            <div class="card-body">
+                                                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                                    <p:dataTable class="table my-0" id="dataTable" var="sales" value=""><!-- TODO RETRIEVE TABLA DE SALES -->
+                                                        <p:column headerText="Componente vendido">
+                                                            <h:outputText value="//Controller.sale.ComponenteVendido"/>
+                                                        </p:column>
+                                                        <p:column headerText="Empleado">
+                                                            <h:outputText value="//Controller.sale.Empleado"/>
+                                                        </p:column>
+                                                        <p:column headerText="Cliente">
+                                                            <h:outputText value="//Controller.sale.Cliente"/>
+                                                        </p:column>
+                                                        <p:column headerText="Cantidad">
+                                                            <h:outputText value="//Controller.sale.Cantidad"/>
+                                                        </p:column>
+                                                        <p:column headerText="Precio Total">
+                                                            <h:outputText value="//Controller.componente.Price"/>
+                                                        </p:column>
+                                                        <p:column headerText="Fecha de Venta">
+                                                            <h:outputText value="//Controller.componente.Fecha"/>
+                                                        </p:column>
+                                                    </p:dataTable>
+                                                </div>
+                                            </div>
+                                        </h:form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
