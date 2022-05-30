@@ -9,9 +9,6 @@ import EJB.ClientsFacadeLocal;
 import EJB.ComponentsFacadeLocal;
 import EJB.SalesFacadeLocal;
 import java.io.Serializable;
-import java.text.DecimalFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,14 +35,15 @@ public class ClientsController implements Serializable {
     
     private List<Clients> clientsList;
     private List<SelectItem> clientsItemsList;
-    private int clienteId;
-    private int index;
+    private List<Sales> salesList;
     private List<Components> componentsList;
     private Components component;
-    private int quantity;
-    private double totalPrice;
     private Sales sale;
     private Employees employeeSession;
+    private int clienteId;
+    private int index;
+    private int quantity;
+    private double totalPrice;   
     
     @EJB
     private ClientsFacadeLocal clientsEJB;
@@ -59,6 +57,7 @@ public class ClientsController implements Serializable {
     @PostConstruct
     public void init(){
         clientsList = loadClientsList();
+        salesList = loadSalesList();
         clientsItemsList = new ArrayList<SelectItem>();
         clienteId = 0;
         index = 1;
@@ -75,6 +74,17 @@ public class ClientsController implements Serializable {
             List<Clients> lista = clientsEJB.findClientsList();
             System.out.println("Clientes size: "+lista.size());
             return clientsEJB.findClientsList();
+        } catch (Exception e) {
+            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            return null;
+        }
+    }
+    
+    public List<Sales> loadSalesList(){
+        try {
+            List<Sales> lista = salesEJB.findSalesList();
+            System.out.println("Ventas size: "+lista.size());
+            return salesEJB.findSalesList();
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
             return null;
@@ -144,6 +154,14 @@ public class ClientsController implements Serializable {
         }
         component = componentsList.get(index-1);
         calculatePrice();
+    }
+
+    public List<Sales> getSalesList() {
+        return salesList;
+    }
+
+    public void setSalesList(List<Sales> salesList) {
+        this.salesList = salesList;
     }
     
     public List<Clients> getClientsList(){

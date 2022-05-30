@@ -6,6 +6,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -25,7 +26,7 @@ import javax.persistence.TemporalType;
 public class Sales implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idSale;
 
     @JoinColumn(name = "idComponent")
     @ManyToOne
@@ -50,11 +51,11 @@ public class Sales implements Serializable {
     private double totalPrice;
 
     public int getId() {
-        return id;
+        return idSale;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int idSale) {
+        this.idSale = idSale;
     }
 
     public Components getComponent() {
@@ -88,6 +89,11 @@ public class Sales implements Serializable {
     public void setDate(Date date) {
         this.date = date;
     }
+    
+    public String getDateFormat() {
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");  
+        return format.format(date);  
+    }
 
     public int getQuantity() {
         return quantity;
@@ -108,7 +114,7 @@ public class Sales implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 23 * hash + this.id;
+        hash = 23 * hash + this.idSale;
         hash = 23 * hash + Objects.hashCode(this.component);
         hash = 23 * hash + Objects.hashCode(this.employee);
         hash = 23 * hash + Objects.hashCode(this.client);
@@ -130,7 +136,7 @@ public class Sales implements Serializable {
             return false;
         }
         final Sales other = (Sales) obj;
-        if (this.id != other.id) {
+        if (this.idSale != other.idSale) {
             return false;
         }
         if (this.quantity != other.quantity) {

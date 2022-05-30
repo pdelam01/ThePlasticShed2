@@ -132,24 +132,27 @@
                                         <h:form>
                                             <div class="card-body">
                                                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                                                    <p:dataTable class="table my-0" id="dataTable" var="sales" value=""><!-- TODO RETRIEVE TABLA DE SALES -->
+                                                    <p:dataTable class="table my-0" id="dataTable" var="sales" value="#{clientsController.salesList}">
+                                                        <p:column headerText="Imagen de componente">
+                                                            <h:graphicImage class="rounded-circle me-2" width="40" height="40" url="../../assets/img/components/componente#{sales.component.id}.png" />
+                                                        </p:column>
                                                         <p:column headerText="Componente vendido">
-                                                            <h:outputText value="//Controller.sale.ComponenteVendido"/>
+                                                            <h:outputText value="#{sales.component.name}"/>
                                                         </p:column>
                                                         <p:column headerText="Empleado">
-                                                            <h:outputText value="//Controller.sale.Empleado"/>
+                                                            <h:outputText value="#{sales.employee.nameEmp}"/>
                                                         </p:column>
                                                         <p:column headerText="Cliente">
-                                                            <h:outputText value="//Controller.sale.Cliente"/>
+                                                            <h:outputText value="#{sales.client.name} #{sales.client.surname}"/>
                                                         </p:column>
                                                         <p:column headerText="Cantidad">
-                                                            <h:outputText value="//Controller.sale.Cantidad"/>
+                                                            <h:outputText value="#{sales.quantity}"/>
                                                         </p:column>
                                                         <p:column headerText="Precio Total">
-                                                            <h:outputText value="//Controller.componente.Price"/>
+                                                            <h:outputText value="#{sales.totalPrice}€"/>
                                                         </p:column>
                                                         <p:column headerText="Fecha de Venta">
-                                                            <h:outputText value="//Controller.componente.Fecha"/>
+                                                            <h:outputText value="#{sales.dateFormat}"/>
                                                         </p:column>
                                                     </p:dataTable>
                                                 </div>

@@ -5,6 +5,7 @@
  */
 package EJB;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,18 @@ public class SalesFacade extends AbstractFacade<Sales> implements SalesFacadeLoc
 
     public SalesFacade() {
         super(Sales.class);
+    }
+
+    @Override
+    public List<Sales> findSalesList() {
+        try {
+            return em.createQuery(
+                    "FROM Sales s")
+                    .getResultList();
+        } catch (Exception e) {
+             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+             return null;
+        }
     }
     
 }
