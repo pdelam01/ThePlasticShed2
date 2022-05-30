@@ -6,6 +6,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -87,6 +88,11 @@ public class Orders implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+    
+    public String getDateFormat() {
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");  
+        return format.format(date);  
     }
 
     public int getQuantity() {
