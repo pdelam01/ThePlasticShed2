@@ -153,24 +153,24 @@
                                 <div class="card-header py-3">
                                     <p class="text-primary m-0 fw-bold">Historial de Producción</p>
                                 </div>
-                                <h:form>
+                                <h:form id="form-historial">
                                     <div class="card-body">
                                         <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                                            <p:dataTable class="table my-0" id="dataTable" var="clientes" value=""> <!-- RETRIEVE TABLA DE PRODUCCIÓN-->
+                                            <p:dataTable class="table my-0" id="dataTable" var="production" value="#{productionsController.productionsList}">
                                                 <p:column headerText="Imagen del Componente">
-                                                    <h:outputText value="//Controller.production.component.imagen"/>
+                                                    <h:graphicImage class="rounded-circle me-2" width="40" height="40" url="../../assets/img/components/componente#{production.idComponent.id}.png" />
                                                 </p:column>
                                                 <p:column headerText="Componente Producido">
-                                                    <h:outputText value="//Controller.production.component"/>
+                                                    <h:outputText value="#{production.idComponent.name}"/>
                                                 </p:column>
                                                 <p:column headerText="Empleado">
-                                                    <h:outputText value="//Controller.production.employee"/>
+                                                    <h:outputText value="#{production.idPawn.nameEmp}"/>
                                                 </p:column>
                                                 <p:column headerText="Cantidad producida">
-                                                    <h:outputText value="//Controller.production.quantity"/>
+                                                    <h:outputText value="#{production.quantity}"/>
                                                 </p:column>
                                                 <p:column headerText="Fecha de produccion">
-                                                    <h:outputText value="//Controller.production.fecha"/>
+                                                    <h:outputText value="#{production.dateFormat}"/>
                                                 </p:column>
                                             </p:dataTable>
                                         </div>

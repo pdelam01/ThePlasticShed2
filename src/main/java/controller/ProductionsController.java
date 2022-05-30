@@ -10,9 +10,7 @@ import EJB.ArrayMaterialsFacadeLocal;
 import EJB.ComponentsFacadeLocal;
 import EJB.MaterialsFacadeLocal;
 import EJB.ProductionsFacadeLocal;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -37,6 +35,7 @@ public class ProductionsController implements Serializable{
     private List<Components> componentList;
     private List<Materials> materialList;
     private List<ArrayMaterials> arrayMaterils;
+    private List<Productions> productionsList;
     
     private int index;
     private int quantity;
@@ -62,6 +61,7 @@ public class ProductionsController implements Serializable{
     public void init(){
         componentList = loadComponentList();
         materialList = loadMaterialList();
+        productionsList = loadProductionsList();
         index = 1;
         component = componentList.get(index-1);
         arrayMaterils = loadArrayMaterialList();
@@ -82,6 +82,15 @@ public class ProductionsController implements Serializable{
     private List<Materials> loadMaterialList() {
         try {
             return materialsEJB.findMaterialsList();
+        } catch (Exception e) {
+            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            return null;
+        }
+    }
+    
+    private List<Productions> loadProductionsList() {
+        try {
+            return productionEJB.findProductionsList();
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
             return null;
@@ -229,7 +238,15 @@ public class ProductionsController implements Serializable{
             System.out.println("Error al redireccionar");
         }
     }
-    
+
+    public List<Productions> getProductionsList() {
+        return productionsList;
+    }
+
+    public void setProductionsList(List<Productions> productionsList) {
+        this.productionsList = productionsList;
+    }
+
     public List<Components> getComponentList() {
         return componentList;
     }

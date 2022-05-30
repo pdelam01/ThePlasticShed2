@@ -27,6 +27,8 @@ public interface ProductionsFacadeLocal {
     List<Productions> findAll();
 
     List<Productions> findRange(int[] range);
+    
+    List<Productions> findProductionsList();
 
     int count();
     
