@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
@@ -121,7 +122,8 @@ public class ClientsController implements Serializable {
     }
     
     public double roundTwoDecimals(){
-        return (double) Math.round( (quantity * component.getPrice() * 100d) / 100d);
+        String totalPriceString = String.format(Locale.US,"%.2f", quantity * component.getPrice());
+        return Double.parseDouble(totalPriceString);
     }
     
     public void calculatePrice(){
