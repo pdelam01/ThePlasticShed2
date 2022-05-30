@@ -19,6 +19,7 @@
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1">Proveedores</a></li>
                                 <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">Pedidos</a></li>
+                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">Historial de Pedidos</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" role="tabpanel" id="tab-1">
@@ -98,7 +99,7 @@
                                                             </div>
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="email"><strong>Cantidad</strong><br/></label><p:inputText class="form-control" type="text" id="cantidad" value="#{suppliersController.quantity}">
-                                                                    <p:ajax listener="#{suppliersController.calculatePrice()}" event="mouseout" update="form-orders"/> </p:inputText>
+                                                                        <p:ajax listener="#{suppliersController.calculatePrice()}" event="mouseout" update="form-orders"/> </p:inputText>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -118,7 +119,7 @@
                                                             <div class="col d-flex align-items-center justify-content-center">
                                                                 <div class="mb-3"><p:commandButton class="btn btn-primary btn-sm" value="Realizar Pedido" action="#{suppliersController.doOrder()}" pt:data-bs-toggle="modal" pt:data-bs-target="#modal-1" ></p:commandButton></div>
                                                             </div>
-                                                            
+
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="last_name"><strong>Precio Total del Pedido</strong></label><p:inputText class="form-control" type="text" id="total_price" value="#{suppliersController.totalPrice} €" disabled="true"/></div>
                                                             </div>
@@ -129,6 +130,36 @@
                                             </div>
                                         </div>
                                     </h:form>
+                                </div>
+                                <div class="tab-pane" role="tabpanel" id="tab-3">
+                                    <div class="card shadow">
+                                        <div class="card-header py-3">
+                                            <p class="text-primary m-0 fw-bold">Historial de Pedidos</p>
+                                        </div>
+                                        <h:form>
+                                            <div class="card-body">
+                                                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                                    <p:dataTable class="table my-0" id="dataTable" var="proveedores" value=""> <!-- RETRIEVE DATA ORDERS TABLE -->
+                                                        <p:column headerText="Material Pedido">
+                                                            <h:outputText value="//Controller.order.Material"/>
+                                                        </p:column>
+                                                        <p:column headerText="Empleado">
+                                                            <h:outputText value="//Controller.order.Employee"/>
+                                                        </p:column>
+                                                        <p:column headerText="Cantidad">
+                                                            <h:outputText value="//Controller.order.Cantidad"/>
+                                                        </p:column>
+                                                        <p:column headerText="Precio">
+                                                            <h:outputText value="//Controller.order.Precio"/>
+                                                        </p:column>
+                                                        <p:column headerText="Fecha del pedido">
+                                                            <h:outputText value="//Controller.order.Fecha"/>
+                                                        </p:column>
+                                                    </p:dataTable>
+                                                </div>
+                                            </div>
+                                        </h:form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
