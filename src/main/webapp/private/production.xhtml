@@ -12,47 +12,48 @@
 
             <ui:define name="content">
                 <h3 class="text-dark mb-1">Producción</h3>
-
-                <div class="row">
-                    <div class="col">
-                        <div class="card shadow mb-3">
-                            <div class="card-header py-3">
-                                <p class="text-primary m-0 fw-bold">Cantidad de Componentes disponibles</p>
+                <h:form>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card shadow mb-3">
+                                <div class="card-header py-3">
+                                    <p class="text-primary m-0 fw-bold">Cantidad de Componentes disponibles</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive table mt-2" id="dataTableComponent" role="grid" aria-describedby="dataTable_info">
+                                        <p:dataTable class="table my-0" id="dataTableComponent" var="componente" value="#{productionsController.componentList}" paginator="true" paginatorPosition="bottom" rows="3" lazy="true">
+                                            <p:column headerText="Nombre">
+                                                <h:outputText value="#{componente.name}"/>
+                                            </p:column>
+                                            <p:column headerText="Cantidad">
+                                                <h:outputText value="#{componente.quantity}"/>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive table mt-2" id="dataTableComponent" role="grid" aria-describedby="dataTable_info">
-                                    <p:dataTable class="table my-0" id="dataTableComponent" var="componente" value="#{productionsController.componentList}" paginator="true" paginatorPosition="bottom" rows="3" lazy="true">
-                                        <p:column headerText="Nombre">
-                                            <h:outputText value="#{componente.name}"/>
-                                        </p:column>
-                                        <p:column headerText="Cantidad">
-                                            <h:outputText value="#{componente.quantity}"/>
-                                        </p:column>
-                                    </p:dataTable>
+                        </div>
+                        <div class="col">
+                            <div class="card shadow mb-3">
+                                <div class="card-header py-3">
+                                    <p class="text-primary m-0 fw-bold">Cantidad de Materiales disponibles</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive table mt-2" id="dataTableMaterial" role="grid" aria-describedby="dataTable_info">
+                                        <p:dataTable class="table my-0" id="dataTableMaterial" var="materiales" value="#{productionsController.materialList}" paginator="true" paginatorPosition="bottom" rows="3" lazy="true">
+                                            <p:column headerText="Nombre">
+                                                <h:outputText value="#{materiales.name}"/>
+                                            </p:column>
+                                            <p:column headerText="Cantidad">
+                                                <h:outputText value="#{materiales.quantity}"/>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card shadow mb-3">
-                            <div class="card-header py-3">
-                                <p class="text-primary m-0 fw-bold">Cantidad de Materiales disponibles</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive table mt-2" id="dataTableMaterial" role="grid" aria-describedby="dataTable_info">
-                                    <p:dataTable class="table my-0" id="dataTableMaterial" var="materiales" value="#{productionsController.materialList}" paginator="true" paginatorPosition="bottom" rows="3" lazy="true">
-                                        <p:column headerText="Nombre">
-                                            <h:outputText value="#{materiales.name}"/>
-                                        </p:column>
-                                        <p:column headerText="Cantidad">
-                                            <h:outputText value="#{materiales.quantity}"/>
-                                        </p:column>
-                                    </p:dataTable>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </h:form>
                 <div class="row">
                     <div class="col">
                         <div class="card shadow mb-3">
@@ -89,7 +90,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Vale</button></div>
+                                                        <div class="modal-footer"><p:commandButton class="btn btn-primary" type="button" pt:data-bs-dismiss="modal" value="Vale" action="#{productionsController.redirect()}"></p:commandButton></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -105,32 +106,32 @@
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <div class="mb-3"><label class="form-label"><strong>UPC</strong><br/></label>
-                                                <p:inputText class="form-control" type="text" id="upc" value="#{productionsController.component.name}" disabled="true"/>
+                                            <div class="mb-3"><label class="form-label"><strong>Cantidad</strong><br/></label>
+                                                <p:inputText class="form-control" type="text" id="upc" value="#{productionsController.quantity}"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
                                             <div class="mb-3"><label class="form-label" for="first_name"><strong>Componente necesario</strong>
-                                                </label><p:inputText class="form-control" type="text" id="complement_component" placeholder="-" disabled="true"/>
+                                                </label><p:inputText class="form-control" type="text" id="complement_component" value="#{productionsController.aditionalComponent()}" disabled="true"/>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="mb-3"><label class="form-label" for="last_name"><strong>Material Necesario 1</strong></label>
-                                                <p:inputText class="form-control" type="text" id="complement_material" placeholder="PVC" disabled="true"/>
+                                                <p:inputText class="form-control" type="text" id="complement_material" value="#{productionsController.obtainFirstMaterial()}" disabled="true"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col d-flex align-items-center justify-content-center">
                                             <div class="mb-3">
-                                                <p:commandButton class="btn btn-primary" value="Producir componente" action="a" pt:data-bs-toggle="modal" pt:data-bs-target="#modal-1"></p:commandButton>
+                                                <p:commandButton class="btn btn-primary" value="Producir componente" action="#{productionsController.doProduction()}" pt:data-bs-toggle="modal" pt:data-bs-target="#modal-1"></p:commandButton>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="mb-3"><label class="form-label" for="last_name"><strong>Material Necesario 2</strong></label>
-                                                <input class="form-control" type="text" id="complement_material-1" placeholder="PVC" disabled="true"/>
+                                                <p:inputText class="form-control" type="text" id="complement_material-1" value="#{productionsController.obtainSecondMaterial()}" disabled="true"/>
                                             </div>
                                         </div>
                                     </div>
