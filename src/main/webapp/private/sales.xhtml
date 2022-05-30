@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <body>
 
@@ -18,6 +19,7 @@
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1">Clientes</a></li>
                                 <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">Ventas</a></li>
+                                <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">Historial de ventas</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" role="tabpanel" id="tab-1">
@@ -88,17 +90,17 @@
                                                         <div class="row">
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de componente</strong></label><p:inputText class="form-control" type="text" id="material" value="#{clientsController.component.name}" disabled="true"/></div>
-                                                             </div>
+                                                            </div>
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="email"><strong>Cantidad</strong><br/></label><p:inputText class="form-control" type="email" id="cantidad" value="#{clientsController.quantity}">
-                                                                        <p:ajax listener="#{clientsController.calculatePrice()}" event="keyup" update="form-sales"/> </p:inputText>
+                                                                        <p:ajax listener="#{clientsController.calculatePrice()}" event="mouseout" update="form-sales"/> </p:inputText>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="last_name"><strong>Cliente</strong></label>
-                                                                    <h:selectOneMenu class="form-select" value="#{clientsController.cliente}">
+                                                                    <h:selectOneMenu class="form-select" value="#{clientsController.clienteId}">
                                                                         <f:selectItems value="#{clientsController.clientsItemsList}" />
                                                                     </h:selectOneMenu>
                                                                 </div>
@@ -109,7 +111,7 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col d-flex align-items-center justify-content-center">
-                                                                <div class="mb-3"><p:commandButton class="btn btn-primary btn-sm" value="Realizar Venta" action="#{clientsController.doSale()}"></p:commandButton></div>
+                                                                <div class="mb-3"><p:commandButton class="btn btn-primary btn-sm" value="Realizar Venta" action="#{clientsController.doSale()}" pt:data-bs-toggle="modal" pt:data-bs-target="#modal-1" ></p:commandButton></div>
                                                             </div>
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="last_name"><strong>Precio Total de la Venta</strong></label><p:inputText class="form-control" type="text" id="total_price" value="#{clientsController.totalPrice} €" disabled="true"/></div>
@@ -121,6 +123,42 @@
                                             </div>
                                         </div>
                                     </h:form>
+                                </div>
+                                <div class="tab-pane" role="tabpanel" id="tab-3">
+                                    <div class="card shadow">
+                                        <div class="card-header py-3">
+                                            <p class="text-primary m-0 fw-bold">Historial de ventas</p>
+                                        </div>
+                                        <h:form>
+                                            <div class="card-body">
+                                                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                                    <p:dataTable class="table my-0" id="dataTable" var="sales" value="#{clientsController.salesList}">
+                                                        <p:column headerText="Imagen de componente">
+                                                            <h:graphicImage class="rounded-circle me-2" width="40" height="40" url="../../assets/img/components/componente#{sales.component.id}.png" />
+                                                        </p:column>
+                                                        <p:column headerText="Componente vendido">
+                                                            <h:outputText value="#{sales.component.name}"/>
+                                                        </p:column>
+                                                        <p:column headerText="Empleado">
+                                                            <h:outputText value="#{sales.employee.nameEmp}"/>
+                                                        </p:column>
+                                                        <p:column headerText="Cliente">
+                                                            <h:outputText value="#{sales.client.name} #{sales.client.surname}"/>
+                                                        </p:column>
+                                                        <p:column headerText="Cantidad">
+                                                            <h:outputText value="#{sales.quantity}"/>
+                                                        </p:column>
+                                                        <p:column headerText="Precio Total">
+                                                            <h:outputText value="#{sales.totalPrice}€"/>
+                                                        </p:column>
+                                                        <p:column headerText="Fecha de Venta">
+                                                            <h:outputText value="#{sales.dateFormat}"/>
+                                                        </p:column>
+                                                    </p:dataTable>
+                                                </div>
+                                            </div>
+                                        </h:form>
+                                    </div>
                                 </div>
                             </div>
                         </div>

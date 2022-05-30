@@ -27,6 +27,8 @@ public interface SalesFacadeLocal {
     List<Sales> findAll();
 
     List<Sales> findRange(int[] range);
+    
+    List<Sales> findSalesList();
 
     int count();
     
