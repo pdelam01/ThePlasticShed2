@@ -5,6 +5,7 @@
  */
 package EJB;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -57,13 +58,14 @@ public class EmployeesFacade extends AbstractFacade<Employees> implements Employ
         }
     }
     
-    public void updateEmployee(String user, String name, String dni) {
+    public void updateEmployee(String user, String name, String dni, Date date) {
         try {
             em.createQuery(
-                    "UPDATE Employees e SET e.username=:user, e.name=:name"
+                    "UPDATE Employees e SET e.username=:user, e.name=:name, e.birthday=:date"
                             + " WHERE e.dni=:dni")
                     .setParameter("user", user)
                     .setParameter("name", name)
+                    .setParameter("date", date)
                     .setParameter("dni", dni)
                     .executeUpdate();
         } catch (Exception e) {

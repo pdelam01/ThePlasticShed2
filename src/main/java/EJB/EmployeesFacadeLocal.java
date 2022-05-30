@@ -5,6 +5,7 @@
  */
 package EJB;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 import modelo.Employees;
@@ -34,7 +35,7 @@ public interface EmployeesFacadeLocal {
 
     List showEmployeeInfo(int id);
     
-    void updateEmployee(String user, String name, String dni);
+    void updateEmployee(String user, String name, String dni, Date date);
     
     void updateEmployeeSensibiliti(String ssn, String phone, String dni, int id); 
     
