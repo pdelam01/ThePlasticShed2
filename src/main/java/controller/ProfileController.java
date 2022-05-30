@@ -36,6 +36,7 @@ public class ProfileController implements Serializable{
     @PostConstruct
     public void init(){
         employees = showInfo();
+        date = employees.getBirthdayDate();
         employeeToUpdate = new Employees();
     }
     
@@ -45,7 +46,6 @@ public class ProfileController implements Serializable{
             Employees pr = (Employees) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleadoLogged");
             System.out.println(pr.getIdEmployee());
             List result = employeesEJB.showEmployeeInfo(pr.getIdEmployee());
-            //List result = employeesEJB.showEmployeeInfo("Admin"); 
             if(!result.isEmpty()) {
                 return (Employees) result.get(0);
             } else {
@@ -76,7 +76,7 @@ public class ProfileController implements Serializable{
                 name = employees.getNameEmp();
             }
             System.out.println("User: "+user+", name: "+name);
-            employeesEJB.updateEmployee(user, name, employees.getDni());
+            employeesEJB.updateEmployee(user, name, employees.getDni(), date);
             FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml");
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
