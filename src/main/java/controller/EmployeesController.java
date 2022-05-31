@@ -87,7 +87,7 @@ public class EmployeesController implements Serializable{
     public void addEmployees() {
         employee.setBirthday(date);
         employee.setRole(rol);
-        employee.setPass("admin");
+        //employee.setPass("admin");
         System.out.println("IDe: "+employee.getIdEmployee());
         employeesEJB.create(employee);
 
