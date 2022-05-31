@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Employees;
+import utils.PasswordUtils;
 
 /**
  *
@@ -34,13 +35,17 @@ public class LoginController implements Serializable {
     }
 
     public void checkCredentials() {
-
         try {
-            List result = employeesEJB.loginCredentials(employees.getUsername(), employees.getPass());
+            List result = employeesEJB.loginCredentials(employees.getUsername());
             if (!result.isEmpty()) {
-                System.out.println(result.get(0).toString());
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("empleadoLogged", result.get(0));
-                FacesContext.getCurrentInstance().getExternalContext().redirect("faces/private/home.xhtml");
+                if(verifyPassword((Employees) result.get(0))) {
+                    System.out.println(result.get(0).toString());
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("empleadoLogged", result.get(0));
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("faces/private/home.xhtml");
+                } else {
+                    System.out.println("USUARIO O CONTRASEÑA INCORRECTA");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("public/error404.xhtml");
+                }
             } else {
                 System.out.println("USUARIO O CONTRASEÑA INCORRECTA");
                 FacesContext.getCurrentInstance().getExternalContext().redirect("public/error404.xhtml");
@@ -48,7 +53,17 @@ public class LoginController implements Serializable {
         } catch (Exception e) {
             System.out.println("controller.LoginController.checkCredentials" + e.getMessage());
         }
-
+    }
+    
+    private boolean verifyPassword(Employees emp) {
+        System.out.println("Hola");
+        if(PasswordUtils.verifyUserPassword(employees.getPass(), emp.getPass(), emp.getSalt())) {
+            System.out.println("Bien");
+            return true;
+        }else{
+            System.out.println("mal");
+            return false;
+        }
     }
 
     public void closeSession() {

@@ -98,7 +98,7 @@ public class EmployeesController implements Serializable{
         String salt = PasswordUtils.getSalt(30);
         String mySecurePassword = PasswordUtils.generateSecurePassword(pass, salt);
         employee.setPass(mySecurePassword);
-        System.out.println("Contraseña encriptada: " +mySecurePassword);
+        employee.setSalt(salt);
     }
     
     public void redirectAdd() {

@@ -32,13 +32,12 @@ public class EmployeesFacade extends AbstractFacade<Employees> implements Employ
     }
 
 
-    public List loginCredentials(String username, String password) {
+    public List loginCredentials(String username) {
         try {
-            System.out.println(username+" "+password);
+            System.out.println(username);
             return em.createQuery(
-                    "FROM Employees e WHERE e.username=:user AND e.pass=:pass")
+                    "FROM Employees e WHERE e.username=:user")
                     .setParameter("user", username)
-                    .setParameter("pass", password)
                     .getResultList();
         } catch (Exception e) {
              System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
