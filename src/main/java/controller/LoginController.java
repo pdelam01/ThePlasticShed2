@@ -56,14 +56,7 @@ public class LoginController implements Serializable {
     }
     
     private boolean verifyPassword(Employees emp) {
-        System.out.println("Hola");
-        if(PasswordUtils.verifyUserPassword(employees.getPass(), emp.getPass(), emp.getSalt())) {
-            System.out.println("Bien");
-            return true;
-        }else{
-            System.out.println("mal");
-            return false;
-        }
+        return PasswordUtils.verifyUserPassword(employees.getPass(), emp.getPass(), emp.getSalt());
     }
 
     public void closeSession() {
