@@ -17,6 +17,7 @@ import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Employees;
+import utils.PasswordUtils;
 
 /**
  *
@@ -87,10 +88,17 @@ public class EmployeesController implements Serializable{
     public void addEmployees() {
         employee.setBirthday(date);
         employee.setRole(rol);
-        //employee.setPass("admin");
+        encryptPassword();
         System.out.println("IDe: "+employee.getIdEmployee());
         employeesEJB.create(employee);
-
+    }
+    
+    private void encryptPassword() {
+        String pass = employee.getPass();
+        String salt = PasswordUtils.getSalt(30);
+        String mySecurePassword = PasswordUtils.generateSecurePassword(pass, salt);
+        employee.setPass(mySecurePassword);
+        System.out.println("Contraseña encriptada: " +mySecurePassword);
     }
     
     public void redirectAdd() {
