@@ -5,14 +5,20 @@
  */
 package controller;
 
-import EJB.EmployeesFacadeLocal;
+import EJB.OrdersFacadeLocal;
+import EJB.SalesFacadeLocal;
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import modelo.Orders;
+import modelo.Sales;
 
 /**
  *
@@ -21,6 +27,12 @@ import javax.inject.Named;
 @Named //Ambitos de clase: Vista, aplicacion, sesion, peticion 
 @ViewScoped
 public class DashboardController implements Serializable{
+    
+    @EJB
+    private OrdersFacadeLocal ordersEJB;
+    
+    @EJB
+    private SalesFacadeLocal salesEJB;
     
     @PostConstruct
     public void init() {
@@ -57,5 +69,34 @@ public class DashboardController implements Serializable{
 
     }
     
+    public String materialWaste() {
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("es", "ES"));
+        List<Orders> orders = ordersEJB.findAll();
+        double totalPrice = 0;
+        for (int i=0; i<orders.size(); i++) {
+            System.out.println("Date: "+orders.get(i).getDate());
+            //LocalDate date = LocalDate.parse(orders.get(i).getDate().toString());
+            //if(date.getMonthValue()==LocalDate.now().getMonthValue() && 
+                    //date.getYear()==LocalDate.now().getYear()) {
+                totalPrice += orders.get(i).getTotalPrice();
+            //}
+        }
+        return format.format(totalPrice);
+    }
+    
+    public String saleProfit() {
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("es", "ES"));
+        List<Sales> sales = salesEJB.findAll();
+        double totalPrice = 0;
+        for (int i=0; i<sales.size(); i++) {
+            System.out.println("Date: "+sales.get(i).getDate());
+            //LocalDate date = LocalDate.parse(orders.get(i).getDate().toString());
+            //if(date.getMonthValue()==LocalDate.now().getMonthValue() && 
+                    //date.getYear()==LocalDate.now().getYear()) {
+                totalPrice += sales.get(i).getTotalPrice();
+            //}
+        }
+        return format.format(totalPrice);
+    }
     
 }
