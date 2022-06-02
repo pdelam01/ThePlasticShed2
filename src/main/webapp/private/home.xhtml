@@ -51,16 +51,10 @@
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
-                                            <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>Tareas de producción</span></div>
-                                            <div class="row g-0 align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="text-dark fw-bold h5 mb-0 me-3"><span>50%</span></div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm">
-                                                        <div class="progress-bar bg-info" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"><span class="visually-hidden">50%</span></div>
-                                                    </div>
-                                                </div>
+                                            <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Tareas producidas (MENSUAL)</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0">
+                                                <h:outputText value="#{dashboardController.workInProgress()}">    
+                                                </h:outputText>
                                             </div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-clipboard-list fa-2x text-gray-300"></i></div>
@@ -146,43 +140,6 @@
                                     <div class="progress-bar bg-success" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><span class="visually-hidden">100%</span></div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="text-primary fw-bold m-0">Lista de Tareas</h6>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2">
-                                            <h6 class="mb-0"><strong>Producción de Bebederos de tubo</strong></h6><span class="text-xs">10:30 AM</span>
-                                        </div>
-                                        <div class="col-auto">
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"/><label class="form-check-label" for="formCheck-1"></label></div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2">
-                                            <h6 class="mb-0"><strong>Compra de Poliestireno</strong></h6><span class="text-xs">11:30 AM</span>
-                                        </div>
-                                        <div class="col-auto">
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"/><label class="form-check-label" for="formCheck-2"></label></div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2">
-                                            <h6 class="mb-0"><strong>Meeting de proveedores </strong>(URGENTE)<br/></h6><span class="text-xs">12:30 AM</span>
-                                        </div>
-                                        <div class="col-auto">
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"/><label class="form-check-label" for="formCheck-3"></label></div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                     <div class="col">

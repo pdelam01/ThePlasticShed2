@@ -6,6 +6,7 @@
 package controller;
 
 import EJB.OrdersFacadeLocal;
+import EJB.ProductionsFacadeLocal;
 import EJB.SalesFacadeLocal;
 import java.io.Serializable;
 import java.text.NumberFormat;
@@ -21,6 +22,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Orders;
+import modelo.Productions;
 import modelo.Sales;
 
 /**
@@ -40,6 +42,9 @@ public class DashboardController implements Serializable{
     
     @EJB
     private SalesFacadeLocal salesEJB;
+    
+    @EJB
+    private ProductionsFacadeLocal productionsEJB;
     
     @PostConstruct
     public void init() {
@@ -106,6 +111,21 @@ public class DashboardController implements Serializable{
             }
         }
         return format.format(totalPrice);
+    }
+    
+    public int workInProgress() {
+        List<Productions> productions = productionsEJB.findAll();
+        int totalProductions = 0;
+        for (int i=0; i<productions.size(); i++) {
+            Date date = productions.get(i).getDate();
+            Instant ins = date.toInstant();
+            LocalDate localDate = ins.atZone(defaultZoneId).toLocalDate();
+            if(localDate.getMonthValue()==now.getDayOfMonth() &&
+                    localDate.getYear()==now.getYear()) {
+                totalProductions ++;
+            }
+        }
+        return totalProductions;
     }
 
     public ZoneId getDefaultZoneId() {
