@@ -101,10 +101,14 @@
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h6 class="text-primary fw-bold m-0">Espacio de almacén</h6>
                             </div>
-                            <div class="card-body">
-                                <div class="chart-area"><canvas data-bss-chart="{&quot;type&quot;:&quot;doughnut&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Componentes&quot;,&quot;Material&quot;,&quot;Vacío&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;backgroundColor&quot;:[&quot;#4e73df&quot;,&quot;#1cc88a&quot;,&quot;#36b9cc&quot;],&quot;borderColor&quot;:[&quot;#ffffff&quot;,&quot;#ffffff&quot;,&quot;#ffffff&quot;],&quot;data&quot;:[&quot;50&quot;,&quot;30&quot;,&quot;15&quot;]}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:false,&quot;labels&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;}},&quot;title&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;}}}"></canvas></div>
-                                <div class="text-center small mt-4"><span class="me-2"><i class="fas fa-circle text-primary"></i>&nbsp;Componentes</span><span class="me-2"><i class="fas fa-circle text-success"></i>&nbsp;Material</span><span class="me-2"><i class="fas fa-circle text-info"></i>&nbsp;Libre</span></div>
-                            </div>
+                            <h:form>
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <p:chart type="pie"  model="#{dashboardController.getCircularGraph()}" style="width: 100%; height: 350px;"/>
+                                    </div>
+                                    <div class="text-center small mt-4"><span class="me-2"><i class="fas fa-circle text-primary"></i>&nbsp;Componentes</span><span class="me-2"><i class="fas fa-circle text-success"></i>&nbsp;Material</span><span class="me-2"><i class="fas fa-circle text-info"></i>&nbsp;Libre</span></div>
+                                </div>
+                            </h:form>
                         </div>
                     </div>
                 </div>

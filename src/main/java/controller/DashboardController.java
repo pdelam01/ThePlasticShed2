@@ -5,7 +5,9 @@
  */
 package controller;
 
+import EJB.ComponentsFacadeLocal;
 import EJB.EmployeesFacadeLocal;
+import EJB.MaterialsFacadeLocal;
 import EJB.OrdersFacadeLocal;
 import EJB.ProductionsFacadeLocal;
 import EJB.SalesFacadeLocal;
@@ -28,7 +30,9 @@ import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import modelo.Components;
 import modelo.Employees;
+import modelo.Materials;
 import modelo.Orders;
 import modelo.Productions;
 import modelo.Sales;
@@ -39,6 +43,7 @@ import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
+import org.primefaces.model.chart.PieChartModel;
 
 /**
  *
@@ -65,6 +70,12 @@ public class DashboardController implements Serializable{
     
     @EJB
     private EmployeesFacadeLocal employeesEJB;
+    
+    @EJB
+    private ComponentsFacadeLocal componentsEJB;
+    
+    @EJB
+    private MaterialsFacadeLocal materialsEJB;
     
     @PostConstruct
     public void init() {
@@ -252,6 +263,34 @@ public class DashboardController implements Serializable{
             list.add(0.0);
         }
         return list;
+    }
+    
+    public PieChartModel getCircularGraph() {
+        PieChartModel pieModel = new PieChartModel(); 
+        
+        List<Materials> materials = materialsEJB.findAll();
+        pieModel.set("Componentes", obtaintComponentQuantity());  
+        pieModel.set("Materiales", obtaintMaterialQuantity());  
+        //pieModel.set("Volvo", 400);  
+        return pieModel;
+    }
+    
+    private int obtaintComponentQuantity() {
+        List<Components> components = componentsEJB.findAll();
+        int quantity = 0;
+        for (int i=0; i<components.size(); i++) {
+            quantity += components.get(i).getQuantity();
+        }
+        return quantity;
+    }
+    
+    private int obtaintMaterialQuantity() {
+        List<Materials> materials = materialsEJB.findAll();
+        int quantity = 0;
+        for (int i=0; i<materials.size(); i++) {
+            quantity += materials.get(i).getQuantity();
+        }
+        return quantity;
     }
 
     public ZoneId getDefaultZoneId() {
