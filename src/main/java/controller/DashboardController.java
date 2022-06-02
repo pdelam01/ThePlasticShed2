@@ -37,6 +37,26 @@ public class DashboardController implements Serializable{
 
     }
     
+    public void redirectProfilePawn() {
+        try {
+            System.out.println("redirecciono a perfil");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("profilePawn.xhtml");
+        } catch (Exception e) {
+            System.out.println("[ERR] controller dashboard redirect perfil error" + e.getMessage());
+        }
+
+    }
+    
+    public void redirectProfileSecretary() {
+        try {
+            System.out.println("redirecciono a perfil");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("profileSecretary.xhtml");
+        } catch (Exception e) {
+            System.out.println("[ERR] controller dashboard redirect perfil error" + e.getMessage());
+        }
+
+    }
+    
     public void redirectAlmacen() {
         try {
             System.out.println("redirecciono a almacen");
@@ -51,6 +71,26 @@ public class DashboardController implements Serializable{
         try {
             System.out.println("redirecciono a dashboard");
             FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
+        } catch (Exception e) {
+            System.out.println("[ERR] controller dashboard redirect almacen error" + e.getMessage());
+        }
+
+    }
+    
+    public void redirectDashboardSecretary() {
+        try {
+            System.out.println("redirecciono a dashboard");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("homeSecretary.xhtml");
+        } catch (Exception e) {
+            System.out.println("[ERR] controller dashboard redirect almacen error" + e.getMessage());
+        }
+
+    }
+    
+    public void redirectDashboardPawn() {
+        try {
+            System.out.println("redirecciono a dashboard");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("homePawn.xhtml");
         } catch (Exception e) {
             System.out.println("[ERR] controller dashboard redirect almacen error" + e.getMessage());
         }

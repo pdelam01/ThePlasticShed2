@@ -9,7 +9,7 @@
 
     <h:body>
 
-        <ui:composition template="./../WEB-INF/templates/homeTemplate.xhtml">
+        <ui:composition template="./../WEB-INF/templates/homeTemplate#{plantillaController.getRoleTemplate()}.xhtml">
 
             <ui:define name="content">
                 <h3 class="text-dark mb-1">Gestión de empleados</h3>

@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
+        <title>Dashboard - Plasticshed</title>
+        <link rel="stylesheet" href="./../assets/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="./../assets/css/untitled.css"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap"/>
+        <link rel="stylesheet" href="./../assets/fonts/fontawesome-all.min.css"/>
+    </h:head>
+
+    <h:body id="page-top">
+        <div id="wrapper">
+            <ui:insert name="left">
+                <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+                    <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                            <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-home"></i></div>
+                            <div class="sidebar-brand-text mx-3"><span>Plasticshed</span></div>
+                        </a>
+                        <hr class="sidebar-divider my-0"/>
+                        <ul class="navbar-nav text-light" id="accordionSidebar">
+                            <li class="nav-item"><a class="nav-link active" href="home.xhtml"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="profile.xhtml"><i class="fas fa-user"></i><span>Perfil</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="almacen.xhtml"><i class="fas fa-table"></i><span>Almacén</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="production.xhtml"><i class="fas fa-industry"></i><span>Producción</span></a></li> 
+                        </ul>
+                        <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0 bg-white" id="sidebarToggleTop" type="button"><i class="	fas fa-arrow-left"/></button></div>
+                    </div>
+                </nav>
+            </ui:insert>
+            <div class="d-flex flex-column" id="content-wrapper">
+                <div id="content">
+                    <ui:insert name="top">
+                        <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                            <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                                <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                    <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Buscar ..."/><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                                </form>
+                                <ul class="navbar-nav flex-nowrap ms-auto">
+                                    <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
+                                            <form class="me-auto navbar-search w-100">
+                                                <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ..."/>
+                                                    <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown no-arrow mx-1">
+                                        <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">3+</span><i class="fas fa-bell fa-fw"></i></a>
+                                            <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
+                                                <h6 class="dropdown-header">Centro de Alertas</h6><a class="dropdown-item d-flex align-items-center" href="#">
+                                                    <div class="me-3">
+                                                        <div class="bg-primary icon-circle"><i class="fas fa-file-alt text-white"></i></div>
+                                                    </div>
+                                                    <div><span class="small text-gray-500">Diciembre 12, 2019</span>
+                                                        <p>Hay un informe de resultados de producción listo para leer</p>
+                                                    </div>
+                                                </a><a class="dropdown-item d-flex align-items-center" href="#">
+                                                    <div class="me-3">
+                                                        <div class="bg-success icon-circle"><i class="fas fa-donate text-white"></i></div>
+                                                    </div>
+                                                    <div><span class="small text-gray-500">Diciembre 7, 2019</span>
+                                                        <p>$290.29 se han depositado procedentes de la venta de bebederos de tubo!</p>
+                                                    </div>
+                                                </a><a class="dropdown-item d-flex align-items-center" href="#">
+                                                    <div class="me-3">
+                                                        <div class="bg-warning icon-circle"><i class="fas fa-exclamation-triangle text-white"></i></div>
+                                                    </div>
+                                                    <div><span class="small text-gray-500">Diciembre 2, 2019</span>
+                                                        <p>Alerta: Se ha detectado un atasco en la máquina 3 de producción</p>
+                                                    </div>
+                                                </a><a class="dropdown-item text-center small text-gray-500" href="#">Mostrar todas las alertas</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown no-arrow mx-1">
+                                        <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">7</span><i class="fas fa-envelope fa-fw"></i></a>
+                                            <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
+                                                <h6 class="dropdown-header">Centro de mensajes</h6><a class="dropdown-item d-flex align-items-center" href="#">
+                                                    <div class="dropdown-list-image me-3"><img class="rounded-circle" src="./../assets/img/avatars/avatar5.jpeg"/>
+                                                        <div class="bg-success status-indicator"></div>
+                                                    </div>
+                                                    <div class="fw-bold">
+                                                        <div class="text-truncate"><span>Buenas chicos! Teneis un error de preRenderView en la parte del menu Template</span></div>
+                                                        <p class="small text-gray-500 mb-0">Rodrigo raposo - 58m</p>
+                                                    </div>
+                                                </a><a class="dropdown-item d-flex align-items-center" href="#">
+                                                    <div class="dropdown-list-image me-3"><img class="rounded-circle" src="./../assets/img/avatars/avatar2.jpg"/>
+                                                        <div class="status-indicator"></div>
+                                                    </div>
+                                                    <div class="fw-bold">
+                                                        <div class="text-truncate"><span>La IP de mi ordenador tiene algun error, debería revisar el protocolo TCP</span></div>
+                                                        <p class="small text-gray-500 mb-0">Adolfo Foces - 1d</p>
+                                                    </div>
+                                                </a><a class="dropdown-item d-flex align-items-center" href="#">
+                                                    <div class="dropdown-list-image me-3"><img class="rounded-circle" src="./../assets/img/avatars/avatar3.jpg"/>
+                                                        <div class="bg-warning status-indicator"></div>
+                                                    </div>
+                                                    <div class="fw-bold">
+                                                        <div class="text-truncate"><span>Mañana habrá inspección urgente por que en la Universidad se utiliza este protocolo</span></div>
+                                                        <p class="small text-gray-500 mb-0">La Insepcción - 2d</p>
+                                                    </div>
+                                                </a><a class="dropdown-item d-flex align-items-center" href="#">
+                                                    <div class="dropdown-list-image me-3"><img class="rounded-circle" src="./../assets/img/avatars/avatar4.jpg"/>
+                                                        <div class="bg-success status-indicator"></div>
+                                                    </div>
+                                                    <div class="fw-bold">
+                                                        <div class="text-truncate"><span>¿Vamos a fumar? Tengo mono desde ayer que salí de fiesta por Villaquejida</span></div>
+                                                        <p class="small text-gray-500 mb-0">Héctor Castro · 2w</p>
+                                                    </div>
+                                                </a><a class="dropdown-item text-center small text-gray-500" href="#">Mostrar todas las alertas</a>
+                                            </div>
+                                        </div>
+                                        <div class="shadow dropdown-list dropdown-menu dropdown-menu-end" aria-labelledby="alertsDropdown"></div>
+                                    </li>
+                                    <div class="d-none d-sm-block topbar-divider"></div>
+                                    <li class="nav-item dropdown no-arrow">
+                                        <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><h:outputText class="d-none d-lg-inline me-2 text-gray-600 small" value="#{profileController.employees.nameEmp}"></h:outputText><img class="border rounded-circle img-profile" src="./../assets/img/avatars/avatar7.jpg"/></a>
+                                            <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+                                                <h:form><h:commandLink class="dropdown-item" action="#{dashboardController.redirectDashboardPawn()}"><i class="fas fa-home fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Dashboard</h:commandLink></h:form>
+                                                <h:form><h:commandLink class="dropdown-item" action="#{dashboardController.redirectProfilePawn()}"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Perfil</h:commandLink ></h:form>
+                                                <h:form><h:commandLink class="dropdown-item" action="#{dashboardController.redirectAlmacen()}"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Almacén</h:commandLink></h:form>
+                                                <div class="dropdown-divider"></div><h:form><h:commandLink class="dropdown-item" action="#{loginController.closeSession()}"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Cerrar Sesión</h:commandLink ></h:form>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <f:event type="preRenderView" listener="#{plantillaController.checkLoggedUser()}"/>
+                    </ui:insert>
+                    <div class="container-fluid">
+                        <ui:insert name="content">Content</ui:insert>
+                    </div>
+                </div>
+                <ui:insert name="bottom">
+                    <footer class="bg-white sticky-footer">
+                        <div class="container my-auto">
+                            <div class="text-center my-auto copyright"><span>Copyright © Plasticshed 2022</span></div>
+                        </div>
+                    </footer>
+                </ui:insert>   
+            </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
+        <script src="./../assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="./../assets/js/chart.min.js"></script>
+        <script src="./../assets/js/bs-init.js"></script>
+        <script src="./../assets/js/theme.js"></script>
+    </h:body>
+
+</html>
