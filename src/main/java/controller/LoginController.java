@@ -6,6 +6,7 @@
 package controller;
 
 import EJB.EmployeesFacadeLocal;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -13,6 +14,7 @@ import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.sound.midi.SysexMessage;
 import modelo.Employees;
 
 /**
@@ -39,14 +41,26 @@ public class LoginController implements Serializable {
             List result = employeesEJB.loginCredentials(employees.getUsername(), employees.getPass());
             if (!result.isEmpty()) {
                 System.out.println(result.get(0).toString());
+                Employees emp = (Employees) result.get(0);
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("empleadoLogged", result.get(0));
-                FacesContext.getCurrentInstance().getExternalContext().redirect("faces/private/home.xhtml");
+                switch (emp.getRole()) {
+                    case "Administrador":
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("faces/private/home.xhtml");
+                        break;
+                    case "Secretario":
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("faces/private/homeSecretary.xhtml");
+                        break;
+                    default:
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("faces/private/homePawn.xhtml");
+                        break;
+                }
+      
             } else {
                 System.out.println("USUARIO O CONTRASEÑA INCORRECTA");
                 FacesContext.getCurrentInstance().getExternalContext().redirect("public/error404.xhtml");
             }
         } catch (Exception e) {
-            System.out.println("controller.LoginController.checkCredentials" + e.getMessage());
+            System.out.println("controller.LoginController.checkCredentials Ha lledago " + e.getMessage());
         }
 
     }
