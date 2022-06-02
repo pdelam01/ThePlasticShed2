@@ -21,14 +21,16 @@ import modelo.Employees;
 @Named
 @ViewScoped
 public class PlantillaController implements Serializable {
-
+    
+    private String role;
+    
     public void checkLoggedUser() throws IOException {
-        List<String> pagsPawn = Arrays.asList("homePawn.xhtml", "profilePawn.xhtml", "almacen.xhtml", "production.xhtml");
-        List<String> pagsSecretary = Arrays.asList("homeSecretary.xhtml", "profileSecretary.xhtml", "almacen.xhtml", "production.xhtml", "sales.xhtml", "orders.xhtml");
+        List<String> pagsPawn = Arrays.asList("home.xhtml", "profile.xhtml", "almacen.xhtml", "production.xhtml");
+        List<String> pagsSecretary = Arrays.asList("home.xhtml", "profile.xhtml", "almacen.xhtml", "production.xhtml", "sales.xhtml", "orders.xhtml");
         List<String> pagsAdmin = Arrays.asList("home.xhtml", "profile.xhtml", "almacen.xhtml", "production.xhtml", "sales.xhtml", "orders.xhtml", "usermng.xhtml");
 
         Employees empleado = (Employees) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleadoLogged");
-        if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleadoLogged") != null) {
+        if (empleado != null) {
             String direccionContexto = FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath();
             String requestPath = FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo();
             requestPath = requestPath.replace("/private/", "");
@@ -62,4 +64,26 @@ public class PlantillaController implements Serializable {
             FacesContext.getCurrentInstance().getExternalContext().redirect(direccionContexto + "/public/error404.xhtml");
         }
     }
+    
+    public String getRoleTemplate(){
+        Employees empleado = (Employees) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleadoLogged");
+        String rol;
+        if (empleado.getRole().equals("Peón")) {
+            rol = "Peon";
+        }else{
+            rol = empleado.getRole();
+        }
+        return rol;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+    
+    
+    
 }
