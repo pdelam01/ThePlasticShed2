@@ -14,6 +14,7 @@ import java.text.NumberFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -140,10 +141,25 @@ public class DashboardController implements Serializable{
     public String employeeOfTheMonth() {
         List<Employees> employees = employeesEJB.findAll();
         List<Sales> sales = salesEJB.findAll();
+        sales = filterSales(sales);
         Map<Employees, Double> map = createMap(employees);
         map = fillMap(map, sales);
-        Employees betterEmployee = betterEmployee(map);
+        Employees betterEmployee = bestEmployee(map);
         return betterEmployee.getNameEmp();
+    }
+    
+    private List<Sales> filterSales(List<Sales> sales) {
+        List<Sales> finalSales = new ArrayList<>();
+        for (int i=0; i<sales.size(); i++) {
+            Date date = sales.get(i).getDate();
+            Instant ins = date.toInstant();
+            LocalDate localDate = ins.atZone(defaultZoneId).toLocalDate();
+            if(localDate.getMonthValue()==now.getMonthValue() &&
+                    localDate.getYear()==now.getYear()) {
+                finalSales.add(sales.get(i));
+            }
+        }
+        return finalSales;
     }
     
     private Map<Employees, Double> createMap(List<Employees> emp) {
@@ -162,7 +178,7 @@ public class DashboardController implements Serializable{
         return map;
     }
     
-    private Employees betterEmployee(Map<Employees, Double> map) {
+    private Employees bestEmployee(Map<Employees, Double> map) {
         Iterator iterator = map.entrySet().iterator();
         double best = 0.0;
         Employees bestEmployee = new Employees();
@@ -173,7 +189,6 @@ public class DashboardController implements Serializable{
                 bestEmployee = (Employees) entry.getKey();
             }
         }
-        
         return bestEmployee;
     } 
 
