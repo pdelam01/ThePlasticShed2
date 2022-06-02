@@ -35,7 +35,7 @@ Para la prueba de caja negra:
   <img height=465 width=792 src="src/main/webapp/assets/img/README_imgs/pruebaCajaNegra.png">
 </p>
 <p align="center">
-  <img height=1141 width=506 src="src/main/webapp/assets/img/README_imgs/pruebaCajaNegra2.png">
+  <img height=506 width=1141 src="src/main/webapp/assets/img/README_imgs/pruebaCajaNegra2.png">
 </p>
 
 ## Autores ✒️
