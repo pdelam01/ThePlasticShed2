@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -31,6 +32,13 @@ import modelo.Employees;
 import modelo.Orders;
 import modelo.Productions;
 import modelo.Sales;
+import org.primefaces.component.linechart.LineChart;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.CartesianChartModel;
+import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.LineChartSeries;
 
 /**
  *
@@ -43,6 +51,8 @@ public class DashboardController implements Serializable{
     private ZoneId defaultZoneId;
     private NumberFormat format;
     private LocalDate now;
+    private List<Sales> sales;
+    private List<Double> salesMonth;
     
     @EJB
     private OrdersFacadeLocal ordersEJB;
@@ -61,6 +71,8 @@ public class DashboardController implements Serializable{
         defaultZoneId = ZoneId.systemDefault();
         format = NumberFormat.getCurrencyInstance(new Locale("es", "ES"));
         now = LocalDate.now();
+        sales = salesEJB.findAll();
+        salesMonth = salesPerMonth();
     }
     
     public void redirectProfile() {
@@ -100,8 +112,8 @@ public class DashboardController implements Serializable{
             Date date = orders.get(i).getDate();
             Instant ins = date.toInstant();
             LocalDate localDate = ins.atZone(defaultZoneId).toLocalDate();
-            if(localDate.getMonthValue()==now.getDayOfMonth() &&
-                    localDate.getYear()==now.getYear()) {
+            if(localDate.getMonthValue() == now.getMonthValue() &&
+                    localDate.getYear() == now.getYear()) {
                 totalPrice += orders.get(i).getTotalPrice();
             }
         }
@@ -109,14 +121,13 @@ public class DashboardController implements Serializable{
     }
     
     public String saleProfit() {
-        List<Sales> sales = salesEJB.findAll();
         double totalPrice = 0;
         for (int i=0; i<sales.size(); i++) {
             Date date = sales.get(i).getDate();
             Instant ins = date.toInstant();
             LocalDate localDate = ins.atZone(defaultZoneId).toLocalDate();
-            if(localDate.getMonthValue()==now.getDayOfMonth() &&
-                    localDate.getYear()==now.getYear()) {
+            if(localDate.getMonthValue() == now.getMonthValue() &&
+                    localDate.getYear() == now.getYear()) {
                 totalPrice += sales.get(i).getTotalPrice();
             }
         }
@@ -130,8 +141,8 @@ public class DashboardController implements Serializable{
             Date date = productions.get(i).getDate();
             Instant ins = date.toInstant();
             LocalDate localDate = ins.atZone(defaultZoneId).toLocalDate();
-            if(localDate.getMonthValue()==now.getDayOfMonth() &&
-                    localDate.getYear()==now.getYear()) {
+            if(localDate.getMonthValue() == now.getMonthValue() &&
+                    localDate.getYear() == now.getYear()) {
                 totalProductions ++;
             }
         }
@@ -140,7 +151,6 @@ public class DashboardController implements Serializable{
     
     public String employeeOfTheMonth() {
         List<Employees> employees = employeesEJB.findAll();
-        List<Sales> sales = salesEJB.findAll();
         sales = filterSales(sales);
         Map<Employees, Double> map = createMap(employees);
         map = fillMap(map, sales);
@@ -191,6 +201,58 @@ public class DashboardController implements Serializable{
         }
         return bestEmployee;
     } 
+    
+    public LineChartModel getGraph() {
+        LineChartModel salesGraph = new LineChartModel();
+        salesGraph.addSeries(createSeries());
+        salesGraph.setLegendPosition("Ventas");
+        //salesGraph
+        
+        Axis y = salesGraph.getAxis(AxisType.Y);
+        y.setMin(0);
+        y.setMax(1000);
+        y.setLabel("Euros");
+
+        Axis x = salesGraph.getAxis(AxisType.X);
+        x.setMin(1);
+        x.setMax(12);
+        x.setTickInterval("1");
+        x.setLabel("Meses");
+        return salesGraph;
+    }
+    
+    private LineChartSeries createSeries() {
+        LineChartSeries saleSerie = new LineChartSeries();
+        saleSerie.setLabel("Ventas");
+        for (int i=0; i<salesMonth.size(); i++) {
+            saleSerie.set(i+1, salesMonth.get(i));
+        }        
+        return saleSerie;
+    }
+    
+    private List<Double> salesPerMonth() {
+        List<Double> salesMonth = createList();
+        for (int i=1; i<13; i++) {
+            for (int j=0; j<sales.size(); j++) {
+                Sales sale = sales.get(j);
+                Date date = sale.getDate();
+                Instant ins = date.toInstant();
+                LocalDate localDate = ins.atZone(defaultZoneId).toLocalDate();
+                if(localDate.getMonthValue()==i) {
+                    salesMonth.set(i-1, salesMonth.get(i-1)+sale.getTotalPrice());
+                }
+            }
+        }
+        return salesMonth;
+    }
+    
+    private List<Double> createList() {
+        List<Double> list = new ArrayList<>();
+        for(int i=0; i<12; i++) {
+            list.add(0.0);
+        }
+        return list;
+    }
 
     public ZoneId getDefaultZoneId() {
         return defaultZoneId;
@@ -214,6 +276,22 @@ public class DashboardController implements Serializable{
 
     public void setNow(LocalDate now) {
         this.now = now;
+    }
+
+    public List<Sales> getSales() {
+        return sales;
+    }
+
+    public void setSales(List<Sales> sales) {
+        this.sales = sales;
+    }
+
+    public List<Double> getSalesMonth() {
+        return salesMonth;
+    }
+
+    public void setSalesMonth(List<Double> salesMonth) {
+        this.salesMonth = salesMonth;
     }
     
     
