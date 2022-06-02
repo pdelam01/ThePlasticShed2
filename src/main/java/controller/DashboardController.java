@@ -5,6 +5,7 @@
  */
 package controller;
 
+import EJB.EmployeesFacadeLocal;
 import EJB.OrdersFacadeLocal;
 import EJB.ProductionsFacadeLocal;
 import EJB.SalesFacadeLocal;
@@ -14,13 +15,18 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import modelo.Employees;
 import modelo.Orders;
 import modelo.Productions;
 import modelo.Sales;
@@ -45,6 +51,9 @@ public class DashboardController implements Serializable{
     
     @EJB
     private ProductionsFacadeLocal productionsEJB;
+    
+    @EJB
+    private EmployeesFacadeLocal employeesEJB;
     
     @PostConstruct
     public void init() {
@@ -127,6 +136,46 @@ public class DashboardController implements Serializable{
         }
         return totalProductions;
     }
+    
+    public String employeeOfTheMonth() {
+        List<Employees> employees = employeesEJB.findAll();
+        List<Sales> sales = salesEJB.findAll();
+        Map<Employees, Double> map = createMap(employees);
+        map = fillMap(map, sales);
+        Employees betterEmployee = betterEmployee(map);
+        return betterEmployee.getNameEmp();
+    }
+    
+    private Map<Employees, Double> createMap(List<Employees> emp) {
+        Map<Employees, Double> map = new HashMap<>();
+        for (int i=0; i<emp.size(); i++) {
+            map.put(emp.get(i), 0.0);
+        }
+        return map;
+    }
+    
+    private Map<Employees, Double> fillMap(Map<Employees, Double> map,  List<Sales> sales) {
+        for (int i=0; i<sales.size(); i++) {
+            Sales sale = sales.get(i);
+            map.put(sale.getEmployee(), map.get(sale.getEmployee())+sale.getTotalPrice());
+        }
+        return map;
+    }
+    
+    private Employees betterEmployee(Map<Employees, Double> map) {
+        Iterator iterator = map.entrySet().iterator();
+        double best = 0.0;
+        Employees bestEmployee = new Employees();
+        while(iterator.hasNext()) {
+            Entry entry = (Entry) iterator.next();
+            if((double)entry.getValue()>=best) {
+                best = (double) entry.getValue();
+                bestEmployee = (Employees) entry.getKey();
+            }
+        }
+        
+        return bestEmployee;
+    } 
 
     public ZoneId getDefaultZoneId() {
         return defaultZoneId;
