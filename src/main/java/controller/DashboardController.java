@@ -270,7 +270,8 @@ public class DashboardController implements Serializable{
         
         List<Materials> materials = materialsEJB.findAll();
         pieModel.set("Componentes", obtaintComponentQuantity());  
-        pieModel.set("Materiales", obtaintMaterialQuantity());  
+        pieModel.set("Materiales", obtaintMaterialQuantity());
+        pieModel.setLegendPosition("c"); 
         //pieModel.set("Volvo", 400);  
         return pieModel;
     }
