@@ -9,7 +9,10 @@ import EJB.OrdersFacadeLocal;
 import EJB.SalesFacadeLocal;
 import java.io.Serializable;
 import java.text.NumberFormat;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.annotation.PostConstruct;
@@ -28,6 +31,10 @@ import modelo.Sales;
 @ViewScoped
 public class DashboardController implements Serializable{
     
+    private ZoneId defaultZoneId;
+    private NumberFormat format;
+    private LocalDate now;
+    
     @EJB
     private OrdersFacadeLocal ordersEJB;
     
@@ -36,7 +43,9 @@ public class DashboardController implements Serializable{
     
     @PostConstruct
     public void init() {
-        //Para futura Funcionalidad
+        defaultZoneId = ZoneId.systemDefault();
+        format = NumberFormat.getCurrencyInstance(new Locale("es", "ES"));
+        now = LocalDate.now();
     }
     
     public void redirectProfile() {
@@ -70,33 +79,59 @@ public class DashboardController implements Serializable{
     }
     
     public String materialWaste() {
-        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("es", "ES"));
         List<Orders> orders = ordersEJB.findAll();
         double totalPrice = 0;
         for (int i=0; i<orders.size(); i++) {
-            System.out.println("Date: "+orders.get(i).getDate());
-            //LocalDate date = LocalDate.parse(orders.get(i).getDate().toString());
-            //if(date.getMonthValue()==LocalDate.now().getMonthValue() && 
-                    //date.getYear()==LocalDate.now().getYear()) {
+            Date date = orders.get(i).getDate();
+            Instant ins = date.toInstant();
+            LocalDate localDate = ins.atZone(defaultZoneId).toLocalDate();
+            if(localDate.getMonthValue()==now.getDayOfMonth() &&
+                    localDate.getYear()==now.getYear()) {
                 totalPrice += orders.get(i).getTotalPrice();
-            //}
+            }
         }
         return format.format(totalPrice);
     }
     
     public String saleProfit() {
-        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("es", "ES"));
         List<Sales> sales = salesEJB.findAll();
         double totalPrice = 0;
         for (int i=0; i<sales.size(); i++) {
-            System.out.println("Date: "+sales.get(i).getDate());
-            //LocalDate date = LocalDate.parse(orders.get(i).getDate().toString());
-            //if(date.getMonthValue()==LocalDate.now().getMonthValue() && 
-                    //date.getYear()==LocalDate.now().getYear()) {
+            Date date = sales.get(i).getDate();
+            Instant ins = date.toInstant();
+            LocalDate localDate = ins.atZone(defaultZoneId).toLocalDate();
+            if(localDate.getMonthValue()==now.getDayOfMonth() &&
+                    localDate.getYear()==now.getYear()) {
                 totalPrice += sales.get(i).getTotalPrice();
-            //}
+            }
         }
         return format.format(totalPrice);
     }
+
+    public ZoneId getDefaultZoneId() {
+        return defaultZoneId;
+    }
+
+    public void setDefaultZoneId(ZoneId defaultZoneId) {
+        this.defaultZoneId = defaultZoneId;
+    }
+
+    public NumberFormat getFormat() {
+        return format;
+    }
+
+    public void setFormat(NumberFormat format) {
+        this.format = format;
+    }
+
+    public LocalDate getNow() {
+        return now;
+    }
+
+    public void setNow(LocalDate now) {
+        this.now = now;
+    }
+    
+    
     
 }
