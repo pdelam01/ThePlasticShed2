@@ -32,10 +32,10 @@ Se ha empleado Java como principal lenguaje de programación, junto con xhtml, j
 Se han desarrollado distintas pruebas de caja negra y caja blanca (pruebas ciclomáticas) para comprobar el correcto funcionamiento de la aplicación.
 Para la prueba de caja negra:
 <p align="center">
-  <img height=325 width=650 src="src/main/webapp/assets/img/README_imgs/pruebaCajaNegra.png">
+  <img height=465 width=792 src="src/main/webapp/assets/img/README_imgs/pruebaCajaNegra.png">
 </p>
 <p align="center">
-  <img height=325 width=650 src="src/main/webapp/assets/img/README_imgs/pruebaCajaNegra2.png">
+  <img height=1141 width=506 src="src/main/webapp/assets/img/README_imgs/pruebaCajaNegra2.png">
 </p>
 
 ## Autores ✒️
