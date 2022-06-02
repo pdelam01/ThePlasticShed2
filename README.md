@@ -27,6 +27,11 @@ Se ha empleado Java como principal lenguaje de programación, junto con xhtml, j
 -   Parte frontend: Primefaces
 -   Controlador y gestor versiones: repositorio habilitado en GitHub
 
+## Pruebas ⚙
+
+Se han desarrollado distintas pruebas de caja negra y caja blanca (pruebas ciclomáticas) para comprobar el correcto funcionamiento de la aplicación.
+Para la prueba de caja negra:
+
 
 ## Autores ✒️
 
