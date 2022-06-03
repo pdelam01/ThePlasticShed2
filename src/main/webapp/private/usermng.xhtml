@@ -63,6 +63,9 @@
                         </div>
                         <div class="tab-pane" role="tabpanel" id="tab-2">
                             <h:form id="form-img">
+                                <p:messages for="MessageId2" id="messages" showDetail="true" closable="true">
+                                    <p:autoUpdate/>
+                                </p:messages>
                                 <div class="row mb-3">
                                     <div class="col-lg-4">
                                         <div class="card mb-3">
@@ -88,7 +91,6 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-8">
-
                                         <div class="row">
                                             <div class="col offset-lg-0">
                                                 <div class="card shadow mb-3">
@@ -96,7 +98,6 @@
                                                         <p class="text-primary m-0 fw-bold">Datos de nuevo empleado</p>
                                                     </div>
                                                     <div class="card-body">
-
                                                         <div class="row">
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de empleado</strong></label><p:inputText class="form-control" type="text" id="username" placeholder="" value="#{employeesController.employee.username}"/></div>
@@ -120,13 +121,13 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="mb-3"><label class="form-label" for="address"><strong>DNI</strong></label><p:inputText class="form-control" type="text" id="dni" placeholder="" value="#{employeesController.employee.dni}"/></div>
+                                                        <div class="mb-3"><label class="form-label" for="address"><strong>DNI</strong></label><p:inputText class="form-control" type="text" id="dni" maxlength="9" placeholder="" value="#{employeesController.employee.dni}"/></div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="city"><strong>SSN</strong></label><p:inputText class="form-control" type="text" id="ssn" placeholder="" value="#{employeesController.employee.ssn}"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="city"><strong>SSN</strong></label><p:inputText class="form-control" type="text" maxlength="10" id="ssn" placeholder="" value="#{employeesController.employee.ssn}"/></div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="country"><strong>Número de Telefono</strong></label><p:inputText class="form-control" type="text" id="tlfn" placeholder="" value="#{employeesController.employee.phoneNum}"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="country"><strong>Número de Telefono</strong></label><p:inputText class="form-control" type="text" maxlength="9" id="tlfn" placeholder="" value="#{employeesController.employee.phoneNum}"/></div>
                                                                 <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
                                                                     <div class="modal-dialog" role="document">
                                                                         <div class="modal-content">
@@ -156,7 +157,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="mb-3"><p:commandButton class="btn btn-primary" value="Añadir nuevo empleado"  action="#{employeesController.addEmployees()}" pt:data-bs-toggle="modal" pt:data-bs-target="#modal-1"></p:commandButton></div>
+                                                        <div class="mb-3"><p:commandButton class="btn btn-primary" value="Añadir nuevo empleado"  action="#{employeesController.addEmployees()}"></p:commandButton></div>
 
                                                     </div>
                                                 </div>
