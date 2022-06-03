@@ -43,7 +43,7 @@
                                                         <p:column headerText="Email">
                                                             <h:outputText value="#{proveedores.email}"/>
                                                         </p:column>
-                                                        <p:column headerText="Tlfn">
+                                                        <p:column headerText="Teléfono">
                                                             <h:outputText value="#{proveedores.phoneNumber}"/>
                                                         </p:column>
                                                     </p:dataTable>
@@ -98,8 +98,8 @@
                                                                 <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de material</strong></label><p:inputText class="form-control" type="text" id="material" value="#{suppliersController.material.name}" disabled="true"/></div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="email"><strong>Cantidad</strong><br/></label><p:inputText class="form-control" type="text" id="cantidad" value="#{suppliersController.quantity}">
-                                                                        <p:ajax listener="#{suppliersController.calculatePrice()}" event="mouseout" update="form-orders"/> </p:inputText>
+                                                                <div class="mb-3"><label class="form-label" for="email"><strong>Cantidad</strong><br/></label><p:inputText class="form-control" type="number" id="cantidad" value="#{suppliersController.quantity}">
+                                                                        <p:ajax listener="#{suppliersController.calculatePrice()}" event="mouseout" update="total_price"/> </p:inputText>
                                                                 </div>
                                                             </div>
                                                         </div>
