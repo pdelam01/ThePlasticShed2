@@ -156,7 +156,7 @@
                                 <h:form id="form-historial">
                                     <div class="card-body">
                                         <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                                            <p:dataTable class="table my-0" id="dataTable" var="production" value="#{productionsController.productionsList}">
+                                            <p:dataTable class="table my-0" id="dataTable" var="production" value="#{productionsController.productionsList}" paginator="true" paginatorPosition="bottom" rows="6" lazy="true">
                                                 <p:column headerText="Imagen del Componente">
                                                     <h:graphicImage class="rounded-circle me-2" width="40" height="40" url="../../assets/img/components/componente#{production.idComponent.id}.png" />
                                                 </p:column>
