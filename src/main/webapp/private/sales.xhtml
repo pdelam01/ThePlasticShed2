@@ -37,7 +37,7 @@
                                                         <p:column headerText="DNI">
                                                             <h:outputText value="#{clientes.dni}"/>
                                                         </p:column>
-                                                        <p:column headerText="Tlfn">
+                                                        <p:column headerText="Teléfono">
                                                             <h:outputText value="#{clientes.phoneNumber}"/>
                                                         </p:column>
                                                     </p:dataTable>
@@ -92,8 +92,8 @@
                                                                 <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de componente</strong></label><p:inputText class="form-control" type="text" id="material" value="#{clientsController.component.name}" disabled="true"/></div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="email"><strong>Cantidad</strong><br/></label><p:inputText class="form-control" type="email" id="cantidad" value="#{clientsController.quantity}">
-                                                                        <p:ajax listener="#{clientsController.calculatePrice()}" event="mouseout" update="form-sales"/> </p:inputText>
+                                                                <div class="mb-3"><label class="form-label" for="email"><strong>Cantidad</strong><br/></label><p:inputText class="form-control" type="number" id="cantidad" value="#{clientsController.quantity}">
+                                                                        <p:ajax listener="#{clientsController.calculatePrice()}" event="mouseout" update="total_price"/> </p:inputText>
                                                                 </div>
                                                             </div>
                                                         </div>
