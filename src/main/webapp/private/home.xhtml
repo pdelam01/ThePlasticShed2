@@ -89,7 +89,7 @@
                             </div>
                             <h:form>
                                 <div class="card-body">
-                                    <p:chart type="line" model="#{dashboardController.getGraph()}" style="width: 100%; height: 350px;"/>
+                                    <p:chart type="line" model="#{dashboardController.getGraph()}" style="height: 350px;" responsive="true"/>
                                 </div>
                             </h:form>
                         </div>
@@ -101,7 +101,7 @@
                             </div>
                             <h:form>
                                 <div class="card-body">
-                                    <p:chart type="pie"  model="#{dashboardController.getCircularGraph()}" style="width: 100%; height: 350px;"/>
+                                    <p:chart type="pie"  model="#{dashboardController.getCircularGraph()}" style="height: 350px;" responsive="true"/>
                                     <div class="text-center small mt-4"></div>
                                 </div>
                             </h:form>

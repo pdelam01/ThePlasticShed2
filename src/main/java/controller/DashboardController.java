@@ -222,7 +222,7 @@ public class DashboardController implements Serializable{
         Axis y = salesGraph.getAxis(AxisType.Y);
         y.setMin(0);
         y.setMax(1000);
-        y.setLabel("Euros");
+        y.setLabel("Euros €");
 
         Axis x = salesGraph.getAxis(AxisType.X);
         x.setMin(1);
