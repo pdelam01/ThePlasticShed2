@@ -66,8 +66,12 @@
                                 <div class="row mb-3">
                                     <div class="col-lg-4">
                                         <div class="card mb-3">
-                                            <div class="card-body text-center shadow"><h:form id="prueba"><h:graphicImage class="rounded-circle mb-3 mt-4" id="formimg" url="./../assets/img/icons/#{employeesController.rol}.png" width="160" height="160"></h:graphicImage></h:form>
-                                                <div class="mb-3"><button class="btn btn-primary" type="button">Añadir Imagen</button></div>
+                                            <div class="card-body text-center shadow">
+                                                <div class="card-header py-3">
+                                                    <p class="text-primary m-0 fw-bold">Imagen del empleado</p>
+                                                </div>
+                                                <h:form id="prueba"><h:graphicImage class="rounded-circle mb-3 mt-4" id="formimg" url="./../assets/img/icons/#{employeesController.rol}.png" width="160" height="160"></h:graphicImage></h:form>
+                                                <div class="mb-3"></div>
                                             </div>
                                         </div>
                                         <div class="card shadow mb-4">
@@ -182,8 +186,13 @@
                                             </div>
                                         </div>
                                         <div class="card mb-3">
-                                            <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="./../assets/img/icons/sinespecificar1.png" width="160" height="160"/>
-                                                <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Editar Imagen</button></div>
+
+                                            <div class="card-body text-center shadow">
+                                                <div class="card-header py-3">
+                                                    <p class="text-primary m-0 fw-bold">Imagen del empleado</p>
+                                                </div>
+                                                <h:form id="prueba2"><h:graphicImage class="rounded-circle mb-3 mt-4" id="formimg2" url="./../assets/img/icons/#{employeesController.rol}.png" width="160" height="160"></h:graphicImage></h:form>
+                                                <div class="mb-3"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -214,6 +223,7 @@
                                                                 <div class="mb-3"><label class="form-label" for="last_name"><strong>Rol</strong></label>
                                                                     <h:selectOneMenu class="form-select" value="#{employeesController.rol}">
                                                                         <f:selectItems value="#{employeesController.listRoles}" />
+                                                                        <p:ajax event="change" update="@form:prueba2:formimg2"/>
                                                                     </h:selectOneMenu>
                                                                 </div>
                                                             </div>
