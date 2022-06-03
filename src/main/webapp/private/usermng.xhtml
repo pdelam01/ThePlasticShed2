@@ -62,36 +62,37 @@
                             </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="tab-2">
-                            <div class="row mb-3">
-                                <div class="col-lg-4">
-                                    <div class="card mb-3">
-                                        <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="./../assets/img/icons/sinespecificar1.png" width="160" height="160"/>
-                                            <div class="mb-3"><button class="btn btn-primary" type="button">Añadir Imagen</button></div>
+                            <h:form id="form-img">
+                                <div class="row mb-3">
+                                    <div class="col-lg-4">
+                                        <div class="card mb-3">
+                                            <div class="card-body text-center shadow"><h:form id="prueba"><h:graphicImage class="rounded-circle mb-3 mt-4" id="formimg" url="./../assets/img/icons/#{employeesController.rol}.png" width="160" height="160"></h:graphicImage></h:form>
+                                                <div class="mb-3"><button class="btn btn-primary" type="button">Añadir Imagen</button></div>
+                                            </div>
+                                        </div>
+                                        <div class="card shadow mb-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="text-primary fw-bold m-0">Aptitudes en currículum</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="small fw-bold">Java<span class="float-end">20%</span></h4><input class="form-range" type="range"/>
+                                                <h4 class="small fw-bold">Javascript<span class="float-end">40%</span></h4><input class="form-range" type="range"/>
+                                                <h4 class="small fw-bold">Mysql&nbsp;<span class="float-end">60%</span></h4><input class="form-range" type="range"/>
+                                                <h4 class="small fw-bold">Linux<span class="float-end">80%</span></h4><input class="form-range" type="range"/>
+                                                <h4 class="small fw-bold">Administration<span class="float-end">100%</span></h4><input class="form-range" type="range"/>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="card shadow mb-4">
-                                        <div class="card-header py-3">
-                                            <h6 class="text-primary fw-bold m-0">Aptitudes en currículum</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <h4 class="small fw-bold">Java<span class="float-end">20%</span></h4><input class="form-range" type="range"/>
-                                            <h4 class="small fw-bold">Javascript<span class="float-end">40%</span></h4><input class="form-range" type="range"/>
-                                            <h4 class="small fw-bold">Mysql&nbsp;<span class="float-end">60%</span></h4><input class="form-range" type="range"/>
-                                            <h4 class="small fw-bold">Linux<span class="float-end">80%</span></h4><input class="form-range" type="range"/>
-                                            <h4 class="small fw-bold">Administration<span class="float-end">100%</span></h4><input class="form-range" type="range"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-8">
-                                    
-                                    <div class="row">
-                                        <div class="col offset-lg-0">
-                                            <div class="card shadow mb-3">
-                                                <div class="card-header py-3">
-                                                    <p class="text-primary m-0 fw-bold">Datos de nuevo empleado</p>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h:form>
+                                    <div class="col-lg-8">
+
+                                        <div class="row">
+                                            <div class="col offset-lg-0">
+                                                <div class="card shadow mb-3">
+                                                    <div class="card-header py-3">
+                                                        <p class="text-primary m-0 fw-bold">Datos de nuevo empleado</p>
+                                                    </div>
+                                                    <div class="card-body">
+
                                                         <div class="row">
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de empleado</strong></label><p:inputText class="form-control" type="text" id="username" placeholder="" value="#{employeesController.employee.username}"/></div>
@@ -108,8 +109,9 @@
                                                             </div>
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="last_name"><strong>Rol</strong></label>
-                                                                    <h:selectOneMenu class="form-select" value="#{employeesController.rol}">
+                                                                    <h:selectOneMenu class="form-select" value="#{employeesController.rol}" >
                                                                         <f:selectItems value="#{employeesController.listRoles}" />
+                                                                        <p:ajax event="change" update="@form:prueba:formimg"/>
                                                                     </h:selectOneMenu>
                                                                 </div>
                                                             </div>
@@ -151,13 +153,14 @@
                                                             </div>
                                                         </div>
                                                         <div class="mb-3"><p:commandButton class="btn btn-primary" value="Añadir nuevo empleado"  action="#{employeesController.addEmployees()}" pt:data-bs-toggle="modal" pt:data-bs-target="#modal-1"></p:commandButton></div>
-                                                    </h:form>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </h:form>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="tab-3">
                             <h:form id="form1">

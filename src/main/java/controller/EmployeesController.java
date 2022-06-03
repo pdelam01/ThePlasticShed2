@@ -45,6 +45,7 @@ public class EmployeesController implements Serializable{
         employee = new Employees();
         roleList = new ArrayList<SelectItem>();
         employeeEdit = new Employees();
+        rol = "Peón";
         addItems();
     }
 
