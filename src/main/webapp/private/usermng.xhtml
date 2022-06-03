@@ -29,7 +29,7 @@
                                     <h:form>
                                         <div class="card-body">
                                             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                                                <p:dataTable class="table my-0" id="dataTable" var="empleados" value="#{employeesController.employeesList}">
+                                                <p:dataTable class="table my-0" id="dataTable" var="empleados" value="#{employeesController.employeesList}" paginator="true" paginatorPosition="bottom" rows="6" lazy="true">
                                                     <p:column headerText="Nombre">
                                                         <h:outputText value="#{empleados.nameEmp}"/>
                                                     </p:column>

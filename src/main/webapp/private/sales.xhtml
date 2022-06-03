@@ -133,7 +133,7 @@
                                         <h:form>
                                             <div class="card-body">
                                                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                                                    <p:dataTable class="table my-0" id="dataTable" var="sales" value="#{clientsController.salesList}">
+                                                    <p:dataTable class="table my-0" id="dataTable" var="sales" value="#{clientsController.salesList}" paginator="true" paginatorPosition="bottom" rows="6" lazy="true">
                                                         <p:column headerText="Imagen de componente">
                                                             <h:graphicImage class="rounded-circle me-2" width="40" height="40" url="../../assets/img/components/componente#{sales.component.id}.png" />
                                                         </p:column>
