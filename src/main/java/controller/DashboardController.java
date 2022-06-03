@@ -310,13 +310,10 @@ public class DashboardController implements Serializable{
     
     /* METODOS DEL GRAFICO CIRCULAR */
     public PieChartModel getCircularGraph() {
-        PieChartModel pieModel = new PieChartModel(); 
-        
-        List<Materials> materials = materialsEJB.findAll();
+        PieChartModel pieModel = new PieChartModel();
         pieModel.set("Componentes", obtaintComponentQuantity());  
         pieModel.set("Materiales", obtaintMaterialQuantity());
         pieModel.setLegendPosition("c"); 
-        //pieModel.set("Volvo", 400);  
         return pieModel;
     }
     
@@ -359,7 +356,7 @@ public class DashboardController implements Serializable{
     
     private LineChartSeries createSerieProduction() {
         LineChartSeries productionSerie = new LineChartSeries();
-        productionSerie.setLabel("Pedidos");
+        productionSerie.setLabel("Producción");
         for (int i=0; i<productionsMonth.size(); i++) {
             productionSerie.set(i+1, productionsMonth.get(i));
         }        
@@ -392,6 +389,38 @@ public class DashboardController implements Serializable{
     
     private int obtainMaxYProduction() {
         return (int) (Collections.max(productionsMonth) + 10);
+    }
+    
+    /* METODOS DEL GRAFICO CIRCULAR DE PRODUCCION */
+    public PieChartModel getCircularGraphProductions() {
+        PieChartModel pieModel = new PieChartModel();
+        int num = obtainProductionsEmp();
+        pieModel.set("Mis producciones", obtainProductionsEmp());
+        pieModel.set("Resto producciones", obtaintProductionsQuantity()-num);
+        pieModel.setLegendPosition("c"); 
+        return pieModel;
+    }
+    
+    private int obtaintProductionsQuantity() {
+        return productionsMonth.get(LocalDate.now().getMonthValue()-1);
+    }
+    
+    private int obtainProductionsEmp() {
+        int month = LocalDate.now().getMonthValue();
+        int pro = 0;
+        Employees emp = (Employees) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleadoLogged");
+        for (int i=0; i<productions.size(); i++) {
+            Productions production = productions.get(i);
+            if(production.getIdPawn().getIdEmployee() == emp.getIdEmployee()) {
+                Date date = production.getDate();
+                Instant ins = date.toInstant();
+                LocalDate localDate = ins.atZone(defaultZoneId).toLocalDate();
+                if(localDate.getMonthValue()==month) {
+                    pro+=production.getQuantity();
+                }
+            }
+        }
+        return pro;
     }
 
     public ZoneId getDefaultZoneId() {
