@@ -42,7 +42,7 @@
                                                     <p:column headerText="Rol">
                                                         <h:outputText value="#{empleados.role}"/>
                                                     </p:column>
-                                                    <p:column headerText="Tlfn">
+                                                    <p:column headerText="Teléfono">
                                                         <h:outputText value="#{empleados.phoneNum}"/>
                                                     </p:column>
                                                     <p:column headerText="Fecha de nacimiento">
@@ -168,6 +168,9 @@
                         </div>
                         <div class="tab-pane" role="tabpanel" id="tab-3">
                             <h:form id="form1">
+                                <p:messages for="MessageId" id="messages" showDetail="true" closable="true">
+                                    <p:autoUpdate/>
+                                </p:messages>
                                 <div class="row mb-3">
                                     <div class="col-lg-4">
                                         <div class="card shadow mb-4">
@@ -176,7 +179,7 @@
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
-                                                    <div class="col"><p:inputText type="text" id="DNI_input" class="form-control" value="#{employeesController.dni}"/></div>
+                                                    <div class="col"><p:inputText type="text" maxlength="9" id="DNI_input" class="form-control" value="#{employeesController.dni}"/></div>
                                                 </div>
                                                 <p></p>
                                                 <div class="row">
@@ -238,13 +241,13 @@
                                                     </div>
                                                     <div class="card-body">
                                                         <!--<h:form>-->
-                                                        <div class="mb-3"><label class="form-label" for="address"><strong>DNI</strong></label><p:inputText class="form-control" type="text" id="dni-1" placeholder="#{employeesController.employeeEdit.dni}" value="#{employeesController.employeeEdit.dni}"/></div>
+                                                        <div class="mb-3"><label class="form-label" for="address"><strong>DNI</strong></label><p:inputText class="form-control" type="text" maxlength="9" id="dni-1" placeholder="#{employeesController.employeeEdit.dni}" value="#{employeesController.employeeEdit.dni}"/></div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="city"><strong>SSN</strong></label><p:inputText class="form-control" type="text" id="ssn-1" placeholder="#{employeesController.employeeEdit.ssn}" value="#{employeesController.employeeEdit.ssn}"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="city"><strong>SSN</strong></label><p:inputText class="form-control" type="text" maxlength="10" id="ssn-1" placeholder="#{employeesController.employeeEdit.ssn}" value="#{employeesController.employeeEdit.ssn}"/></div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="country"><strong>Número de Telefono</strong></label><p:inputText class="form-control" type="text" id="tlfn-1" placeholder="#{employeesController.employeeEdit.phoneNum}" value="#{employeesController.employeeEdit.phoneNum}"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="country"><strong>Número de Telefono</strong></label><p:inputText class="form-control" maxlength="9" type="text" id="tlfn-1" placeholder="#{employeesController.employeeEdit.phoneNum}" value="#{employeesController.employeeEdit.phoneNum}"/></div>
                                                             </div>
                                                         </div>
                                                         <div class="mb-3"></div>
@@ -280,7 +283,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="card-header py-3">                                                                                                                  
-                                                        <p:commandButton class="btn btn-primary" value="Guardar cambios" action="#{employeesController.updateEmployee()}" pt:data-bs-toggle="modal" pt:data-bs-target="#modal-2"></p:commandButton>
+                                                        <p:commandButton class="btn btn-primary" value="Guardar cambios" action="#{employeesController.updateEmployee()}"></p:commandButton>
                                                     </div>
                                                 </div>
                                             </div>
