@@ -17,6 +17,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -58,6 +59,10 @@ public class DashboardController implements Serializable{
     private LocalDate now;
     private List<Sales> sales;
     private List<Double> salesMonth;
+    private List<Orders> orders;
+    private List<Double> ordersMonth;
+    private List<Productions> productions;
+    private List<Integer> productionsMonth;
     
     @EJB
     private OrdersFacadeLocal ordersEJB;
@@ -84,6 +89,10 @@ public class DashboardController implements Serializable{
         now = LocalDate.now();
         sales = salesEJB.findAll();
         salesMonth = salesPerMonth();
+        orders = ordersEJB.findAll();
+        ordersMonth = wastesPerMonth();
+        productions = productionsEJB.findAll();
+        productionsMonth = productionsPerMonth();
     }
     
     public void redirectProfile() {
@@ -213,15 +222,18 @@ public class DashboardController implements Serializable{
         return bestEmployee;
     } 
     
+    /* METODOS DEL GRAFICO */
     public LineChartModel getGraph() {
         LineChartModel salesGraph = new LineChartModel();
-        salesGraph.addSeries(createSeries());
+        salesGraph.addSeries(createSerieSale());
         salesGraph.setLegendPosition("Ventas");
-        //salesGraph
+        salesGraph.addSeries(createSerieOrder());
+        salesGraph.setLegendPosition("Pedidos");
+        //Collections.max(salesMonth);
         
         Axis y = salesGraph.getAxis(AxisType.Y);
         y.setMin(0);
-        y.setMax(1000);
+        y.setMax(obtainMaxYSales());
         y.setLabel("Euros €");
 
         Axis x = salesGraph.getAxis(AxisType.X);
@@ -232,13 +244,22 @@ public class DashboardController implements Serializable{
         return salesGraph;
     }
     
-    private LineChartSeries createSeries() {
+    private LineChartSeries createSerieSale() {
         LineChartSeries saleSerie = new LineChartSeries();
         saleSerie.setLabel("Ventas");
         for (int i=0; i<salesMonth.size(); i++) {
             saleSerie.set(i+1, salesMonth.get(i));
         }        
         return saleSerie;
+    }
+    
+    private LineChartSeries createSerieOrder() {
+        LineChartSeries orderSerie = new LineChartSeries();
+        orderSerie.setLabel("Pedidos");
+        for (int i=0; i<ordersMonth.size(); i++) {
+            orderSerie.set(i+1, ordersMonth.get(i));
+        }        
+        return orderSerie;
     }
     
     private List<Double> salesPerMonth() {
@@ -257,6 +278,22 @@ public class DashboardController implements Serializable{
         return salesMonth;
     }
     
+    private List<Double> wastesPerMonth() {
+        List<Double> wastesMonth = createList();
+        for (int i=1; i<13; i++) {
+            for (int j=0; j<orders.size(); j++) {
+                Orders order = orders.get(j);
+                Date date = order.getDate();
+                Instant ins = date.toInstant();
+                LocalDate localDate = ins.atZone(defaultZoneId).toLocalDate();
+                if(localDate.getMonthValue()==i) {
+                    wastesMonth.set(i-1, wastesMonth.get(i-1)+order.getTotalPrice());
+                }
+            }
+        }
+        return wastesMonth;
+    }
+    
     private List<Double> createList() {
         List<Double> list = new ArrayList<>();
         for(int i=0; i<12; i++) {
@@ -265,6 +302,13 @@ public class DashboardController implements Serializable{
         return list;
     }
     
+    private double obtainMaxYSales() {
+        double maxSales = Collections.max(salesMonth);
+        double maxOrders = Collections.max(ordersMonth);
+        return Math.max(maxSales, maxOrders) + 250.0;
+    }
+    
+    /* METODOS DEL GRAFICO CIRCULAR */
     public PieChartModel getCircularGraph() {
         PieChartModel pieModel = new PieChartModel(); 
         
@@ -292,6 +336,62 @@ public class DashboardController implements Serializable{
             quantity += materials.get(i).getQuantity();
         }
         return quantity;
+    }
+    
+    /* METODOS DEL GRAFICO PRODUCCION */
+    public LineChartModel getGraphProduction() {
+        LineChartModel productionGraph = new LineChartModel();
+        productionGraph.addSeries(createSerieProduction());
+        productionGraph.setLegendPosition("Producción");
+        
+        Axis y = productionGraph.getAxis(AxisType.Y);
+        y.setMin(0);
+        y.setMax(obtainMaxYProduction());
+        y.setLabel("Componentes producidos");
+
+        Axis x = productionGraph.getAxis(AxisType.X);
+        x.setMin(1);
+        x.setMax(12);
+        x.setTickInterval("1");
+        x.setLabel("Meses");
+        return productionGraph;
+    }
+    
+    private LineChartSeries createSerieProduction() {
+        LineChartSeries productionSerie = new LineChartSeries();
+        productionSerie.setLabel("Pedidos");
+        for (int i=0; i<productionsMonth.size(); i++) {
+            productionSerie.set(i+1, productionsMonth.get(i));
+        }        
+        return productionSerie;
+    }
+    
+    private List<Integer> productionsPerMonth() {
+        List<Integer> productionsMonth = createListInteger();
+        for (int i=1; i<13; i++) {
+            for (int j=0; j<productions.size(); j++) {
+                Productions production = productions.get(j);
+                Date date = production.getDate();
+                Instant ins = date.toInstant();
+                LocalDate localDate = ins.atZone(defaultZoneId).toLocalDate();
+                if(localDate.getMonthValue()==i) {
+                    productionsMonth.set(i-1, productionsMonth.get(i-1)+production.getQuantity());
+                }
+            }
+        }
+        return productionsMonth;
+    }
+    
+    private List<Integer> createListInteger() {
+        List<Integer> list = new ArrayList<>();
+        for(int i=0; i<12; i++) {
+            list.add(0);
+        }
+        return list;
+    }
+    
+    private int obtainMaxYProduction() {
+        return (int) (Collections.max(productionsMonth) + 10);
     }
 
     public ZoneId getDefaultZoneId() {
@@ -333,7 +433,39 @@ public class DashboardController implements Serializable{
     public void setSalesMonth(List<Double> salesMonth) {
         this.salesMonth = salesMonth;
     }
-    
+
+    public List<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
+    }
+
+    public List<Double> getOrdersMonth() {
+        return ordersMonth;
+    }
+
+    public void setOrdersMonth(List<Double> ordersMonth) {
+        this.ordersMonth = ordersMonth;
+    }
+
+    public List<Productions> getProductions() {
+        return productions;
+    }
+
+    public void setProductions(List<Productions> productions) {
+        this.productions = productions;
+    }
+
+    public List<Integer> getProductionsMonth() {
+        return productionsMonth;
+    }
+
+    public void setProductionsMonth(List<Integer> productionsMonth) {
+        this.productionsMonth = productionsMonth;
+    }
+
     
     
 }
