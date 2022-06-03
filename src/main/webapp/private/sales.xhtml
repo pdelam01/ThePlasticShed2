@@ -57,7 +57,8 @@
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col d-flex align-items-center justify-content-end"><p:commandButton class="btn btn-primary" icon="fas fa-arrow-left" action="#{clientsController.moveLeft()}" update="form-sales"></p:commandButton></div>
-                                                            <div class="col d-flex align-items-center justify-content-center"><img class="rounded-circle mb-3 mt-4" src="./../assets/img/components/componente#{clientsController.index}.png" width="190" height="190"/><div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+                                                            <div class="col d-flex align-items-center justify-content-center"><img class="rounded-circle mb-3 mt-4" src="./../assets/img/components/componente#{clientsController.index}.png" width="190" height="190"/>
+                                                                <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
                                                                     <div class="modal-dialog" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
@@ -80,7 +81,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Vale</button></div>
+                                                                            <div class="modal-footer"><p:button class="btn btn-primary" pt:data-bs-dismiss="modal" value="Vale"></p:button></div>
                                                                         </div>
                                                                     </div>
                                                                 </div></div>
