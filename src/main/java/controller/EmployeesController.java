@@ -7,11 +7,14 @@ package controller;
 
 import EJB.EmployeesFacadeLocal;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
@@ -86,36 +89,135 @@ public class EmployeesController implements Serializable{
     }
     
     public void addEmployees() {
-        employee.setBirthday(date);
-        employee.setRole(rol);
-        employee.setPass("admin");
-        System.out.println("IDe: "+employee.getIdEmployee());
-        employeesEJB.create(employee);
-
+        boolean todoOk = true;
+        
+        if (!utils.Utils.validUsername(employee.getUsername())) {
+            FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Username introducido erróneo, "
+                            + "se procede a dejar el almacenado en base de datos"));
+            todoOk = false;
+        }
+        
+        if (!utils.Utils.validName(employee.getNameEmp())) {
+            FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Nombre introducido erróneo, "
+                            + "se procede a dejar el almacenado en base de datos"));
+            todoOk = false;
+        }
+        
+        if(!utils.Utils.validDNI(employee.getDni())){
+            FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "DNI introducido erróneo, "
+                            + "se procede a dejar el almacenado en base de datos")); 
+            todoOk = false;
+        }
+        
+        if(!utils.Utils.validSSN(employee.getSsn())){
+            FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "SSN introducido erróneo, "
+                            + "se procede a dejar el almacenado en base de datos")); 
+            todoOk = false;
+        }
+        
+        if(!utils.Utils.validPhoneNumber(employee.getPhoneNum())){
+            FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Número de teléfono introducido erróneo, "
+                            + "se procede a dejar el almacenado en base de datos"));
+            todoOk = false;
+        }
+        
+        if (todoOk) {
+            employee.setBirthday(date);
+            employee.setRole(rol);
+            employee.setPass("admin");
+            
+            try {
+                employeesEJB.create(employee);
+            } catch (EJBException e) {
+                cleanValuesDuplicate();
+                FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error, elementos duplicados")); 
+                System.out.println("Oh no! Algo ha ido mal: ");
+            }
+        }
+    }
+    
+    private void cleanValuesDuplicate(){
+        employee = new Employees();
+        rol = "Peón";
+        date = null;
     }
     
     public void redirectAdd() {
         try{
             FacesContext.getCurrentInstance().getExternalContext().redirect("usermng.xhtml");
         } catch (Exception e) {
-            System.out.println("Error al redireccionar");
+            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
         }
     }
     public void searchEmployees() {
-        for(int i=0; i<employeesList.size(); i++) {
-            if(this.dni.equals(employeesList.get(i).getDni())) {
-                employeeEdit = employeesList.get(i);
+        try {
+            boolean todoOk=false;
+            for(int i=0; i<employeesList.size(); i++) {
+                if(this.dni.equals(employeesList.get(i).getDni())) {
+                    System.out.println("Culo "+employeesList.get(i).getDni());
+                    employeeEdit = employeesList.get(i);
+                    todoOk=true;
+                }
             }
+            
+            if(!todoOk){
+                dni="";
+                cleanValuesDNIFalse();
+                FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "DNI introducido erróneo")); 
+            } else {
+                dni = "";
+                rol = employeeEdit.getRole();
+                dateEdit = employeeEdit.getBirthdayDate();
+            }
+        } catch (Exception e) {
+            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
         }
-        dni = "";
-        rol = employeeEdit.getRole();
-        dateEdit = employeeEdit.getBirthdayDate();
+    }
+    
+    private void cleanValuesDNIFalse(){
+        employeeEdit = new Employees();
+        rol = "Peón";
+        dateEdit = null;
     }
     
     public void updateEmployee() {
-        employeeEdit.setBirthday(dateEdit);
-        employeeEdit.setRole(rol);
-        employeesEJB.edit(employeeEdit);
+        boolean todoOk = true;
+        
+        if (!utils.Utils.validUsername(employeeEdit.getUsername())) {
+            FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Username introducido erróneo, "
+                            + "se procede a dejar el almacenado en base de datos"));
+            todoOk = false;
+        }
+        
+        if (!utils.Utils.validName(employeeEdit.getNameEmp())) {
+            FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Nombre introducido erróneo, "
+                            + "se procede a dejar el almacenado en base de datos"));
+            todoOk = false;
+        }
+        
+        if(!utils.Utils.validDNI(employeeEdit.getDni())){
+            FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "DNI introducido erróneo, "
+                            + "se procede a dejar el almacenado en base de datos")); 
+            todoOk = false;
+        }
+        
+        if(!utils.Utils.validSSN(employeeEdit.getSsn())){
+            FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "SSN introducido erróneo, "
+                            + "se procede a dejar el almacenado en base de datos")); 
+            todoOk = false;
+        }
+        
+        if(!utils.Utils.validPhoneNumber(employeeEdit.getPhoneNum())){
+            FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Número de teléfono introducido erróneo, "
+                            + "se procede a dejar el almacenado en base de datos"));
+            todoOk = false;
+        }
+        
+        if (todoOk) {
+            employeeEdit.setBirthday(dateEdit);
+            employeeEdit.setRole(rol);
+            employeesEJB.edit(employeeEdit);
+        }
         
     }
     

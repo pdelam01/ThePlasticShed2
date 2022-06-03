@@ -11,10 +11,12 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Employees;
+import utils.Utils;
 
 /**
  *
@@ -59,25 +61,47 @@ public class ProfileController implements Serializable{
     }
     
     public void updateInfoEmployee() {
-        System.out.println("Probar");
         try {
             String user = "", name = "";
+            boolean todoOk = false;
+            boolean todoOk2 = false;
+            
             String returnUsername = employeeToUpdate.getUsername().trim();
-            if(returnUsername.length()!=0) {
+            if(Utils.validUsername(returnUsername)) {
                 user = employeeToUpdate.getUsername();
+                todoOk=true;
             }else{
-                user = employees.getUsername();
+                if(returnUsername.length()==0){
+                     user = employees.getUsername();
+                     todoOk=true;
+                }else{
+                    FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Username introducido erróneo, "
+                            + "se procede a dejar el almacenado en base de datos"));
+                    user = employees.getUsername();
+                }
             }
+            
             String returnName = employeeToUpdate.getNameEmp().trim();
-            if(returnName.length()!=0) {
-                System.out.println("El nombre es:"+employeeToUpdate.getNameEmp());
+            if(Utils.validName(returnName)) {
                 name = employeeToUpdate.getNameEmp();
+                todoOk2=true;
             }else{
-                name = employees.getNameEmp();
+                if(returnName.length()==0){
+                    name = employees.getNameEmp();
+                    todoOk2=true;
+                }else{
+                    FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Nombre introducido erróneo, "
+                            + "se procede a dejar el almacenado en base de datos"));
+                    name = employees.getNameEmp();
+                }
+                
             }
-            System.out.println("User: "+user+", name: "+name);
+            
+            if(todoOk && todoOk2){
+                FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml");
+            }
+            
             employeesEJB.updateEmployee(user, name, employees.getDni(), date);
-            FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml");
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
         }
@@ -86,53 +110,72 @@ public class ProfileController implements Serializable{
     public void updateInfoSensibilityEmployee() {
         try {
             String ssn = "", phoneNumber = "", dni = "";
+            boolean todoOk = false;
+            boolean todoOk2 = false;
+            boolean todoOk3 = false;
+            
             String returnSSN = employeeToUpdate.getSsn().trim();
-            if(returnSSN.length()==10) {
+            if(Utils.validSSN(returnSSN)) {
                 ssn = employeeToUpdate.getSsn().trim();
+                todoOk=true;
+                System.out.println("SSN OK");
             }else{
-                ssn = employees.getSsn();
+                if(returnSSN.length()==0) {
+                    ssn = employees.getSsn();
+                    todoOk=true;
+                    System.out.println("SSN OK ==== 0");
+                }else{
+                    FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "SSN introducido erróneo, "
+                            + "se procede a dejar el almacenado en base de datos"));
+                    ssn = employees.getSsn();
+                    System.out.println("SSN bad");
+                }
             }
+            
             String returnPhoneNumber = employeeToUpdate.getPhoneNum().trim();
-            if(returnPhoneNumber.length()==9 && checkNumbers(returnPhoneNumber)) {
+            if(Utils.validPhoneNumber(returnPhoneNumber)) {
                 phoneNumber = employeeToUpdate.getPhoneNum().trim();
+                todoOk2 = true;
+                System.out.println("phone number OK");
             }else{
-                phoneNumber = employees.getPhoneNum();
+                if (returnPhoneNumber.length() == 0) {
+                    phoneNumber = employees.getPhoneNum();
+                    todoOk2 = true;
+                    System.out.println("phonenumber OK ==== 0");
+                }else{
+                    FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Número de teléfono introducido erróneo, "
+                            + "se procede a dejar el almacenado en base de datos"));
+                     phoneNumber = employees.getPhoneNum();
+                     System.out.println("phone number bad");
+                }
             }
+            
             String returnDNI = employeeToUpdate.getDni().trim();
-            if(checkDni(returnDNI)) {
+            if(Utils.validDNI(returnDNI)) {
                 dni = employeeToUpdate.getDni().trim();
+                todoOk3 = true;
+                System.out.println("DNI OK");
             }else{
-                dni = employees.getDni();
+                if (returnDNI.length()==0) {
+                    dni = employees.getDni();
+                    todoOk3 = true;
+                    System.out.println("DNI OK ==== 0");
+                }else{
+                    FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "DNI introducido erróneo, "
+                            + "se procede a dejar el almacenado en base de datos"));
+                    dni = employees.getDni();
+                    System.out.println("DNI BAD");
+                } 
             }
+            
+            if(todoOk && todoOk2 && todoOk3){
+                FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml");
+            }
+            
             employeesEJB.updateEmployeeSensibiliti(ssn, phoneNumber, dni, employees.getIdEmployee());
-            FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml");
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
         }
-    }
-    
-    private boolean checkNumbers(String phone) {
-        for(int i=0; i<phone.length(); i++) {
-            if(!Character.isDigit(phone.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    private boolean checkDni(String dni) {
-        if(dni.length()!=9) {
-            return false;
-        }
-        for(int i=0; i<7; i++) {
-            if(!Character.isDigit(dni.charAt(i))) {
-                return false;
-            }
-        }
-        if(!Character.isUpperCase(dni.charAt(8))) {
-            return false;
-        }
-        return true;
     }
     
     public Employees getEmployees() {
