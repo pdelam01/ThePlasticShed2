@@ -52,7 +52,14 @@ public class EmployeesController implements Serializable {
 
     public List<Employees> loadEmployeesList() {
         try {
-            return employeesEJB.findEmployeesList();
+            List<Employees> empList = employeesEJB.findEmployeesList();
+            List<Employees> emp = new ArrayList<>();
+            for(Employees employ : empList) {
+                if(employ.getActive()==1) {
+                    emp.add(employ);
+                }
+            }
+            return emp;
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal");
             return null;
@@ -62,7 +69,8 @@ public class EmployeesController implements Serializable {
     public void removeEmployees(int id) {
         try {
             Employees aux = getEmployee(id);
-            employeesEJB.remove(aux);
+            aux.setActive(0);
+            employeesEJB.edit(aux);
             FacesContext.getCurrentInstance().getExternalContext().redirect("usermng.xhtml");
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal");
@@ -114,11 +122,13 @@ public class EmployeesController implements Serializable {
         if (todoOk) {
             employee.setBirthday(date);
             employee.setRole(rol);
+            employee.setActive(1);
             encryptPassword();
             try {
                 employeesEJB.create(employee);
                 cleanValuesDuplicate();
                 employeesList = loadEmployeesList();
+                FacesContext.getCurrentInstance().getExternalContext().redirect("usermng.xhtml");
             } catch (Exception e) {
                 cleanValuesDuplicate();
                 FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error, elementos duplicados"));

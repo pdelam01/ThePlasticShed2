@@ -58,6 +58,9 @@ public class Employees implements Serializable{
     
     @Column (name = "Salt")
     private String salt;
+    
+    @Column (name = "Active")
+    private int active;
 
     public int getIdEmployee() {
         return idEmployee;
@@ -144,18 +147,28 @@ public class Employees implements Serializable{
         this.salt = salt;
     }
 
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 19 * hash + this.idEmployee;
-        hash = 19 * hash + Objects.hashCode(this.name);
-        hash = 19 * hash + Objects.hashCode(this.ssn);
-        hash = 19 * hash + Objects.hashCode(this.role);
-        hash = 19 * hash + Objects.hashCode(this.phoneNum);
-        hash = 19 * hash + Objects.hashCode(this.birthday);
-        hash = 19 * hash + Objects.hashCode(this.username);
-        hash = 19 * hash + Objects.hashCode(this.pass);
-        hash = 19 * hash + Objects.hashCode(this.salt);
+        hash = 53 * hash + this.idEmployee;
+        hash = 53 * hash + Objects.hashCode(this.name);
+        hash = 53 * hash + Objects.hashCode(this.dni);
+        hash = 53 * hash + Objects.hashCode(this.ssn);
+        hash = 53 * hash + Objects.hashCode(this.role);
+        hash = 53 * hash + Objects.hashCode(this.phoneNum);
+        hash = 53 * hash + Objects.hashCode(this.birthday);
+        hash = 53 * hash + Objects.hashCode(this.username);
+        hash = 53 * hash + Objects.hashCode(this.pass);
+        hash = 53 * hash + Objects.hashCode(this.salt);
+        hash = 53 * hash + this.active;
         return hash;
     }
 
@@ -172,6 +185,9 @@ public class Employees implements Serializable{
         }
         final Employees other = (Employees) obj;
         if (this.idEmployee != other.idEmployee) {
+            return false;
+        }
+        if (this.active != other.active) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
@@ -203,6 +219,8 @@ public class Employees implements Serializable{
         }
         return true;
     }
+
+    
     
     
   
