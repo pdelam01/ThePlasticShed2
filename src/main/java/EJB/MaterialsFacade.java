@@ -36,7 +36,7 @@ public class MaterialsFacade extends AbstractFacade<Materials> implements Materi
                    "FROM Materials m")
                    .getResultList();
        } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
             return null;
        }
     }

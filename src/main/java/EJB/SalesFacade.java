@@ -37,7 +37,7 @@ public class SalesFacade extends AbstractFacade<Sales> implements SalesFacadeLoc
                     "FROM Sales s")
                     .getResultList();
         } catch (Exception e) {
-             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+             System.out.println("Oh no! Algo ha ido mal");
              return null;
         }
     }

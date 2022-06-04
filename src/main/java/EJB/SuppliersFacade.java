@@ -36,7 +36,7 @@ public class SuppliersFacade extends AbstractFacade<Suppliers> implements Suppli
                     "FROM Suppliers s")
                     .getResultList();
         } catch (Exception e) {
-             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+             System.out.println("Oh no! Algo ha ido mal");
              return null;
         }
     }

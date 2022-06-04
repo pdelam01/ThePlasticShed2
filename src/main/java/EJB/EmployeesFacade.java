@@ -40,7 +40,7 @@ public class EmployeesFacade extends AbstractFacade<Employees> implements Employ
                     .setParameter("user", username)
                     .getResultList();
         } catch (Exception e) {
-             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+             System.out.println("Oh no! Algo ha ido mal");
              return null;
         }
     }
@@ -52,7 +52,7 @@ public class EmployeesFacade extends AbstractFacade<Employees> implements Employ
                     .setParameter("id", id)
                     .getResultList();
         } catch (Exception e) {
-             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+             System.out.println("Oh no! Algo ha ido mal");
              return null;
         }
     }
@@ -68,7 +68,7 @@ public class EmployeesFacade extends AbstractFacade<Employees> implements Employ
                     .setParameter("dni", dni)
                     .executeUpdate();
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
         }
     }
     
@@ -83,7 +83,7 @@ public class EmployeesFacade extends AbstractFacade<Employees> implements Employ
                     .setParameter("id", id)
                     .executeUpdate();
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
         }
     }
     
@@ -93,7 +93,7 @@ public class EmployeesFacade extends AbstractFacade<Employees> implements Employ
                     "FROM Employees e")
                     .getResultList();
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
             return null;
         }
     }

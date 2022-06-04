@@ -36,7 +36,7 @@ public class ClientsFacade extends AbstractFacade<Clients> implements ClientsFac
                     "FROM Clients c")
                     .getResultList();
         } catch (Exception e) {
-             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+             System.out.println("Oh no! Algo ha ido mal");
              return null;
         }
     }

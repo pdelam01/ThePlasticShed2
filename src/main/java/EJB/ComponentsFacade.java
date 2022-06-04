@@ -36,8 +36,8 @@ public class ComponentsFacade extends AbstractFacade<Components> implements Comp
                     "FROM Components c")
                     .getResultList();
         } catch (Exception e) {
-             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
-             return null;
+            System.out.println("Oh no! Algo ha ido mal");
+            return null;
         }
     }
     
