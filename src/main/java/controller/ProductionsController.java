@@ -160,6 +160,8 @@ public class ProductionsController implements Serializable{
             editMaterials();
             productionEJB.create(production);
             FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Producción realizada con éxito"));
+            componentList = loadComponentList();
+            materialList = loadMaterialList();
         }else{
             FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Cantidad introducida inválida"));
         }

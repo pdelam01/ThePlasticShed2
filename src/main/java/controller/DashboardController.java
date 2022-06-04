@@ -179,7 +179,8 @@ public class DashboardController implements Serializable{
             Instant ins = date.toInstant();
             LocalDate localDate = ins.atZone(defaultZoneId).toLocalDate();
             if(localDate.getMonthValue()==now.getMonthValue() &&
-                    localDate.getYear()==now.getYear()) {
+                    localDate.getYear()==now.getYear() &&
+                    sales.get(i).getEmployee().getActive()==1) {
                 finalSales.add(sales.get(i));
             }
         }
@@ -189,7 +190,9 @@ public class DashboardController implements Serializable{
     private Map<Employees, Double> createMap(List<Employees> emp) {
         Map<Employees, Double> map = new HashMap<>();
         for (int i=0; i<emp.size(); i++) {
-            map.put(emp.get(i), 0.0);
+            if(emp.get(i).getActive()==1) {
+                map.put(emp.get(i), 0.0);
+            }
         }
         return map;
     }
