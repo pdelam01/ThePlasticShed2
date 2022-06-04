@@ -37,7 +37,7 @@ public class ProductionsFacade extends AbstractFacade<Productions> implements Pr
                     "FROM Productions p")
                     .getResultList();
         } catch (Exception e) {
-             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+             System.out.println("Oh no! Algo ha ido mal");
              return null;
         }
     }
