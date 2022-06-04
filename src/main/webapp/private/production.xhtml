@@ -117,7 +117,8 @@
                                                     </div>
                                                     <div class="col">
                                                         <div class="mb-3"><label class="form-label"><strong>Cantidad</strong><br/></label>
-                                                            <p:inputText class="form-control" type="number" id="upc" value="#{productionsController.quantity}"/>
+                                                            <p:inputText class="form-control" type="number" id="upc" value="#{productionsController.quantity}"
+                                                                         onkeydown="return event.keyCode !== 69" />                                           
                                                         </div>
                                                     </div>
                                                 </div>

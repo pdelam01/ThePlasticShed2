@@ -158,7 +158,6 @@ public class ProductionsController implements Serializable{
             editComponents();
             editAditionalComponents();
             editMaterials();
-            
             productionEJB.create(production);
             FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Producción realizada con éxito"));
         }else{
