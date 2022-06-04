@@ -93,15 +93,15 @@ public class ProfileController implements Serializable{
                 }
                 
             }
-            
-            if(todoOk && todoOk2){
-                FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml");
-            }
             try {
                 employeesEJB.updateEmployee(user, name, employees.getDni(), date);
             } catch (Exception e) {
                 FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Datos introducidos duplicados"));
             }
+            if(todoOk && todoOk2){
+                FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml");
+            }
+            
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal");
         }
@@ -157,12 +157,16 @@ public class ProfileController implements Serializable{
             }
             
             if(todoOk && todoOk2 && todoOk3){
-                FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml");
+                if(employeesEJB.updateEmployeeSensibiliti(ssn, phoneNumber, dni, employees.getIdEmployee())) {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml");
+                }else {
+                    FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Datos introducidos duplicados"));
+                }
+                //FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml");
             }
-            
-            employeesEJB.updateEmployeeSensibiliti(ssn, phoneNumber, dni, employees.getIdEmployee());
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal");
+            FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Datos introducidos duplicados"));
+            System.out.println("Oh no! Algo ha ido mal 10");
         }
     }
     

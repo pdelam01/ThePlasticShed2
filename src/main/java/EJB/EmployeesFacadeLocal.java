@@ -37,7 +37,7 @@ public interface EmployeesFacadeLocal {
     
     void updateEmployee(String user, String name, String dni, Date date);
     
-    void updateEmployeeSensibiliti(String ssn, String phone, String dni, int id); 
+    boolean updateEmployeeSensibiliti(String ssn, String phone, String dni, int id); 
     
     List<Employees> findEmployeesList();
 }

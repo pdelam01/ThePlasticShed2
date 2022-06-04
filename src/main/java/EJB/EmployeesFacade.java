@@ -7,7 +7,11 @@ package EJB;
 
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import modelo.Employees;
@@ -72,7 +76,7 @@ public class EmployeesFacade extends AbstractFacade<Employees> implements Employ
         }
     }
     
-    public void updateEmployeeSensibiliti(String ssn, String phone, String dni, int id) {
+    public boolean updateEmployeeSensibiliti(String ssn, String phone, String dni, int id) {
         try {
             em.createQuery(
                     "UPDATE Employees e SET e.ssn=:ssn, e.phoneNum=:phone, e.dni=:dni"
@@ -82,8 +86,10 @@ public class EmployeesFacade extends AbstractFacade<Employees> implements Employ
                     .setParameter("dni", dni)
                     .setParameter("id", id)
                     .executeUpdate();
+            return true;
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal");
+            return false;
         }
     }
     
