@@ -31,7 +31,7 @@ public interface EmployeesFacadeLocal {
 
     int count();
     
-    List loginCredentials(String username, String password);
+    List loginCredentials(String username);
 
     List showEmployeeInfo(int id);
     

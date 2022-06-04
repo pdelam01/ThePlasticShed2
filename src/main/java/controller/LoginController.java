@@ -17,6 +17,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.sound.midi.SysexMessage;
 import modelo.Employees;
+import utils.PasswordUtils;
 
 /**
  *
@@ -37,14 +38,17 @@ public class LoginController implements Serializable {
     }
     
     public void checkCredentials() {
-
         try {
-            List result = employeesEJB.loginCredentials(employees.getUsername(), employees.getPass());
+            List result = employeesEJB.loginCredentials(employees.getUsername());
             if (!result.isEmpty()) {
-                System.out.println(result.get(0).toString());
-                Employees emp = (Employees) result.get(0);
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("empleadoLogged", result.get(0));
-                FacesContext.getCurrentInstance().getExternalContext().redirect("faces/private/home.xhtml");   
+                if(verifyPassword((Employees) result.get(0))) {
+                    System.out.println(result.get(0).toString());
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("empleadoLogged", result.get(0));
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("faces/private/home.xhtml");
+                } else {
+                    System.out.println("USUARIO O CONTRASEÑA INCORRECTA");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("public/error404.xhtml");
+                }
             } else {
                 System.out.println("USUARIO O CONTRASEÑA INCORRECTA");
                 FacesContext.getCurrentInstance().getExternalContext().redirect("public/error404.xhtml");
@@ -52,7 +56,10 @@ public class LoginController implements Serializable {
         } catch (Exception e) {
             System.out.println("controller.LoginController.checkCredentials Ha lledago " + e.getMessage());
         }
-
+    }
+    
+    private boolean verifyPassword(Employees emp) {
+        return PasswordUtils.verifyUserPassword(employees.getPass(), emp.getPass(), emp.getSalt());
     }
 
     public void closeSession() {

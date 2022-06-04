@@ -20,6 +20,7 @@ import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Employees;
+import utils.PasswordUtils;
 
 /**
  *
@@ -85,13 +86,28 @@ public class EmployeesController implements Serializable {
         roleList.add(new SelectItem("Secretario", "Secretario"));
         roleList.add(new SelectItem("Administrador", "Administrador"));
     }
-
+    
     public void addEmployees() {
-        boolean todoOk = true;
-        if (!utils.Utils.validUsername(employee.getUsername())) {
-            FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Username introducido erróneo, "
-                    + "se procede a dejar el almacenado en base de datos"));
-            todoOk = false;
+        employee.setBirthday(date);
+        employee.setRole(rol);
+        encryptPassword();
+        System.out.println("IDe: "+employee.getIdEmployee());
+        employeesEJB.create(employee);
+    }
+    
+    private void encryptPassword() {
+        String pass = employee.getPass();
+        String salt = PasswordUtils.getSalt(30);
+        String mySecurePassword = PasswordUtils.generateSecurePassword(pass, salt);
+        employee.setPass(mySecurePassword);
+        employee.setSalt(salt);
+    }
+    
+    public void redirectAdd() {
+        try{
+            FacesContext.getCurrentInstance().getExternalContext().redirect("usermng.xhtml");
+        } catch (Exception e) {
+            System.out.println("Error al redireccionar");
         }
         if (!utils.Utils.validName(employee.getNameEmp())) {
             FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Nombre introducido erróneo, "

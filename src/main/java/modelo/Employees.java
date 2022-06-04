@@ -55,6 +55,9 @@ public class Employees implements Serializable{
     
     @Column (name = "Password")
     private String pass;
+    
+    @Column (name = "Salt")
+    private String salt;
 
     public int getIdEmployee() {
         return idEmployee;
@@ -133,18 +136,26 @@ public class Employees implements Serializable{
         this.pass = pass;
     }
 
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 73 * hash + this.idEmployee;
-        hash = 73 * hash + Objects.hashCode(this.name);
-        hash = 73 * hash + Objects.hashCode(this.dni);
-        hash = 73 * hash + Objects.hashCode(this.ssn);
-        hash = 73 * hash + Objects.hashCode(this.role);
-        hash = 73 * hash + Objects.hashCode(this.phoneNum);
-        hash = 73 * hash + Objects.hashCode(this.birthday);
-        hash = 73 * hash + Objects.hashCode(this.username);
-        hash = 73 * hash + Objects.hashCode(this.pass);
+        hash = 19 * hash + this.idEmployee;
+        hash = 19 * hash + Objects.hashCode(this.name);
+        hash = 19 * hash + Objects.hashCode(this.ssn);
+        hash = 19 * hash + Objects.hashCode(this.role);
+        hash = 19 * hash + Objects.hashCode(this.phoneNum);
+        hash = 19 * hash + Objects.hashCode(this.birthday);
+        hash = 19 * hash + Objects.hashCode(this.username);
+        hash = 19 * hash + Objects.hashCode(this.pass);
+        hash = 19 * hash + Objects.hashCode(this.salt);
         return hash;
     }
 
@@ -163,9 +174,6 @@ public class Employees implements Serializable{
         if (this.idEmployee != other.idEmployee) {
             return false;
         }
-        if (this.phoneNum != other.phoneNum) {
-            return false;
-        }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
@@ -178,10 +186,16 @@ public class Employees implements Serializable{
         if (!Objects.equals(this.role, other.role)) {
             return false;
         }
+        if (!Objects.equals(this.phoneNum, other.phoneNum)) {
+            return false;
+        }
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }
         if (!Objects.equals(this.pass, other.pass)) {
+            return false;
+        }
+        if (!Objects.equals(this.salt, other.salt)) {
             return false;
         }
         if (!Objects.equals(this.birthday, other.birthday)) {
@@ -191,4 +205,5 @@ public class Employees implements Serializable{
     }
     
     
+  
 }

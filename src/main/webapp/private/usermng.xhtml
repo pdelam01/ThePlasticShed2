@@ -121,10 +121,19 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="mb-3"><label class="form-label" for="address"><strong>DNI</strong></label><p:inputText class="form-control" type="text" id="dni" maxlength="9" placeholder="" value="#{employeesController.employee.dni}"/></div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="city"><strong>SSN</strong></label><p:inputText class="form-control" type="text" maxlength="10" id="ssn" placeholder="" value="#{employeesController.employee.ssn}"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="address"><strong>DNI</strong></label><p:inputText class="form-control" type="text" id="dni" placeholder="" value="#{employeesController.employee.dni}"/></div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="mb-3"><label class="form-label" for="password"><strong>Contraseña</strong></label>
+                                                                    <p:password class="form-control" id="pass" placeholder="" value="#{employeesController.employee.pass}"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                       <div class="row">
+                                                            <div class="col">
+                                                                <div class="mb-3"><label class="form-label" for="city"><strong>SSN</strong></label><p:inputText class="form-control" type="text" id="ssn" placeholder="" value="#{employeesController.employee.ssn}"/></div>
                                                             </div>
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="country"><strong>Número de Telefono</strong></label><p:inputText class="form-control" type="text" maxlength="9" id="tlfn" placeholder="" value="#{employeesController.employee.phoneNum}"/>
