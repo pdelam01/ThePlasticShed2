@@ -88,7 +88,7 @@ public class EmployeesFacade extends AbstractFacade<Employees> implements Employ
                     .executeUpdate();
             return true;
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal");
+            System.out.println("Oh no! Algo ha ido ma0 5050l");
             return false;
         }
     }

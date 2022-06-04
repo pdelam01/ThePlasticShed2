@@ -222,8 +222,13 @@ public class EmployeesController implements Serializable {
             FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Empleado editado correctamente"));
             employeeEdit.setBirthday(dateEdit);
             employeeEdit.setRole(rol);
-            employeesEJB.edit(employeeEdit);
-            cleanValuesDNIFalse();
+            try {
+                employeesEJB.edit(employeeEdit);
+                cleanValuesDNIFalse();
+                FacesContext.getCurrentInstance().getExternalContext().redirect("usermng.xhtml");
+            } catch (Exception e) {
+                FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Datos introducidos duplicados"));
+            }
         }
 
     }

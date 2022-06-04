@@ -77,7 +77,6 @@ public class ProfileController implements Serializable{
                     user = employees.getUsername();
                 }
             }
-            
             String returnName = employeeToUpdate.getNameEmp().trim();
             if(Utils.validName(returnName)) {
                 name = employeeToUpdate.getNameEmp();
@@ -155,7 +154,6 @@ public class ProfileController implements Serializable{
                     dni = employees.getDni();
                 } 
             }
-            
             if(todoOk && todoOk2 && todoOk3){
                 if(employeesEJB.updateEmployeeSensibiliti(ssn, phoneNumber, dni, employees.getIdEmployee())) {
                     FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml");
