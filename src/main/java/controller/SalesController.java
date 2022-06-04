@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
@@ -31,11 +32,10 @@ import modelo.Sales;
 
 @Named
 @ViewScoped
-public class ClientsController implements Serializable {
+public class SalesController implements Serializable {
     
     private List<Clients> clientsList;
     private List<SelectItem> clientsItemsList;
-    private List<Sales> salesList;
     private List<Components> componentsList;
     private Components component;
     private Sales sale;
@@ -57,7 +57,6 @@ public class ClientsController implements Serializable {
     @PostConstruct
     public void init(){
         clientsList = loadClientsList();
-        salesList = loadSalesList();
         clientsItemsList = new ArrayList<SelectItem>();
         clienteId = 0;
         index = 1;
@@ -71,8 +70,6 @@ public class ClientsController implements Serializable {
     
     public List<Clients> loadClientsList(){
         try {
-            List<Clients> lista = clientsEJB.findClientsList();
-            System.out.println("Clientes size: "+lista.size());
             return clientsEJB.findClientsList();
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
@@ -82,8 +79,6 @@ public class ClientsController implements Serializable {
     
     public List<Sales> loadSalesList(){
         try {
-            List<Sales> lista = salesEJB.findSalesList();
-            System.out.println("Ventas size: "+lista.size());
             return salesEJB.findSalesList();
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
@@ -104,7 +99,8 @@ public class ClientsController implements Serializable {
     
     public void doSale(){
         employeeSession = (Employees) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleadoLogged");
-        if(quantity > 0 && quantity < componentsEJB.find(index).getQuantity()){
+        
+        if(utils.Utils.validQuantity(quantity, componentsEJB, index)){
             sale.setComponent(component);
             sale.setEmployee(employeeSession);
             sale.setClient(clientsEJB.find(clienteId));
@@ -115,15 +111,14 @@ public class ClientsController implements Serializable {
             
             salesEJB.create(sale);
             componentsEJB.edit(component);
+            FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Venta realizada con éxito"));
         }else{
-            //Venta no realizada
+            FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Cantidad introducida superior a la disponible o inválida"));
         }
     }
     
     public List<Components> loadComponentList(){
         try {
-            List<Components> lista = componentsEJB.findComponentsList();
-            System.out.println("Componentes size: "+lista.size());
             return componentsEJB.findComponentsList();
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
@@ -154,14 +149,6 @@ public class ClientsController implements Serializable {
         }
         component = componentsList.get(index-1);
         calculatePrice();
-    }
-
-    public List<Sales> getSalesList() {
-        return salesList;
-    }
-
-    public void setSalesList(List<Sales> salesList) {
-        this.salesList = salesList;
     }
     
     public List<Clients> getClientsList(){
