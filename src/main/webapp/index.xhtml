@@ -31,6 +31,9 @@
                                         <h4 class="text-dark mb-4">Inicio de Sesión</h4>
                                     </div>
                                     <h:form class="user">
+                                         <p:messages for="MessageId2" id="messages" showDetail="true" closable="true">
+                                            <p:autoUpdate/>
+                                        </p:messages>
                                         <div class="mb-3"><p:inputText class="form-control form-control-user" id="user" placeholder="Introduce un usuario..." value="#{loginController.employees.username}"/></div>
                                         <div class="mb-3"><p:password class="form-control form-control-user" id="password" placeholder="Contraseña" value="#{loginController.employees.pass}"/></div>
                                         <div class="mb-3">
@@ -38,7 +41,7 @@
                                                 <div class="form-check"><input class="form-check-input custom-control-input" type="checkbox" id="formCheck-1"/><label class="form-check-label custom-control-label" for="formCheck-1">Recuérdame</label></div>
                                             </div>
                                         </div>
-                                        <p:commandButton class="btn btn-primary d-block btn-user w-100" action="#{loginController.checkCredentials()}" value="Iniciar Sesión"></p:commandButton>
+                                        <p:commandButton class="btn btn-primary d-block btn-user w-100" action="#{loginController.checkCredentials()}" value="Iniciar Sesión" update="@form"></p:commandButton>
                                         <hr/>
                                     </h:form>
                                     <div class="text-center"><a class="small" href="mailto:dfern04@estudiantes.unileon.es">¿Olvidaste la contraseña? Manda un correo a nuestra secretaria</a></div>
