@@ -97,8 +97,11 @@ public class ProfileController implements Serializable{
             if(todoOk && todoOk2){
                 FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml");
             }
-            
-            employeesEJB.updateEmployee(user, name, employees.getDni(), date);
+            try {
+                employeesEJB.updateEmployee(user, name, employees.getDni(), date);
+            } catch (Exception e) {
+                FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Datos introducidos duplicados"));
+            }
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal");
         }
