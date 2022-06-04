@@ -229,6 +229,8 @@ public class EmployeesController implements Serializable {
             } catch (Exception e) {
                 FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Datos introducidos duplicados"));
             }
+        } else {
+            cleanValuesDNIFalse();
         }
 
     }
