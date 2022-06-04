@@ -59,7 +59,7 @@ public class LoginController implements Serializable {
         try {
             System.out.println("cierro la session");
             FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/ThePlasticShed2");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/ThePlasticShed_v2");
         } catch (Exception e) {
             System.out.println("controller.LoginController.closeSession" + e.getMessage());
         }
