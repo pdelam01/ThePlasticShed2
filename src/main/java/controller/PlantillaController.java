@@ -31,29 +31,24 @@ public class PlantillaController implements Serializable {
 
         Employees empleado = (Employees) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleadoLogged");
         if (empleado != null) {
+            System.out.println("=====================================================");
             String direccionContexto = FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath();
             String requestPath = FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo();
             requestPath = requestPath.replace("/private/", "");
             System.out.println(pagsAdmin.contains(requestPath));
             switch (empleado.getRole()) {
                 case "Administrador":
-                    if (pagsAdmin.contains(requestPath)) {
-                        //No se hace nada, se deja pasar la request
-                    } else {
+                    if (!pagsAdmin.contains(requestPath)) {
                         FacesContext.getCurrentInstance().getExternalContext().redirect(direccionContexto + "/public/error404.xhtml");
                     }
                     break;
                 case "Secretario":
-                    if (pagsSecretary.contains(requestPath)) {
-                        //No se hace nada, se deja pasar la request
-                    } else {
+                    if (!pagsSecretary.contains(requestPath)) {
                         FacesContext.getCurrentInstance().getExternalContext().redirect(direccionContexto + "/public/error404.xhtml");
                     }
                     break;
                 default:
-                    if (pagsPawn.contains(requestPath)) {
-                        //No se hace nada, se deja pasar la request
-                    } else {
+                    if (!pagsPawn.contains(requestPath)) {
                         FacesContext.getCurrentInstance().getExternalContext().redirect(direccionContexto + "/public/error404.xhtml");
                     }
                     break;
@@ -67,11 +62,13 @@ public class PlantillaController implements Serializable {
     
     public String getRoleTemplate(){
         Employees empleado = (Employees) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleadoLogged");
-        String rol;
-        if (empleado.getRole().equals("Peón")) {
-            rol = "Peon";
-        }else{
-            rol = empleado.getRole();
+        String rol = "Peon";
+        if(empleado!=null){
+            if (empleado.getRole().equals("Peón")) {
+                rol = "Peon";
+            }else{
+                rol = empleado.getRole();
+            }
         }
         return rol;
     }
