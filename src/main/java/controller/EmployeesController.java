@@ -54,7 +54,6 @@ public class EmployeesController implements Serializable {
 
     public List<Employees> loadEmployeesList() {
         try {
-            System.out.println("=============================================");
             return employeesEJB.findEmployeesList();
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
@@ -88,26 +87,11 @@ public class EmployeesController implements Serializable {
     }
     
     public void addEmployees() {
-        employee.setBirthday(date);
-        employee.setRole(rol);
-        encryptPassword();
-        System.out.println("IDe: "+employee.getIdEmployee());
-        employeesEJB.create(employee);
-    }
-    
-    private void encryptPassword() {
-        String pass = employee.getPass();
-        String salt = PasswordUtils.getSalt(30);
-        String mySecurePassword = PasswordUtils.generateSecurePassword(pass, salt);
-        employee.setPass(mySecurePassword);
-        employee.setSalt(salt);
-    }
-    
-    public void redirectAdd() {
-        try{
-            FacesContext.getCurrentInstance().getExternalContext().redirect("usermng.xhtml");
-        } catch (Exception e) {
-            System.out.println("Error al redireccionar");
+        boolean todoOk = true;
+        if (!utils.Utils.validUsername(employee.getUsername())) {
+            FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Username introducido erróneo, "
+                    + "se procede a dejar el almacenado en base de datos"));
+            todoOk = false;
         }
         if (!utils.Utils.validName(employee.getNameEmp())) {
             FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Nombre introducido erróneo, "
@@ -132,7 +116,7 @@ public class EmployeesController implements Serializable {
         if (todoOk) {
             employee.setBirthday(date);
             employee.setRole(rol);
-            employee.setPass("admin");
+            encryptPassword();
             try {
                 employeesEJB.create(employee);
                 cleanValuesDuplicate();
@@ -144,19 +128,27 @@ public class EmployeesController implements Serializable {
             }
         }
     }
+    
+    private void encryptPassword() {
+        String pass = employee.getPass();
+        String salt = PasswordUtils.getSalt(30);
+        String mySecurePassword = PasswordUtils.generateSecurePassword(pass, salt);
+        employee.setPass(mySecurePassword);
+        employee.setSalt(salt);
+    }
+    
+    public void redirectAdd() {
+        try{
+            FacesContext.getCurrentInstance().getExternalContext().redirect("usermng.xhtml");
+        } catch (Exception e) {
+            System.out.println("Error al redireccionar");
+        }
+    }
 
     private void cleanValuesDuplicate() {
         employee = new Employees();
         rol = "Peón";
         date = null;
-    }
-
-    public void redirectAdd() {
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("usermng.xhtml");
-        } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
-        }
     }
 
     public void searchEmployees() {

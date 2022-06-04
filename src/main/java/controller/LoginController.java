@@ -40,20 +40,25 @@ public class LoginController implements Serializable {
     public void checkCredentials() {
         try {
             List result = employeesEJB.loginCredentials(employees.getUsername());
+            System.out.println("Hola");
             if (!result.isEmpty()) {
+                System.out.println("Hola1");
                 if(verifyPassword((Employees) result.get(0))) {
                     System.out.println(result.get(0).toString());
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("empleadoLogged", result.get(0));
                     FacesContext.getCurrentInstance().getExternalContext().redirect("faces/private/home.xhtml");
                 } else {
+                    System.out.println("Hola2");
                     System.out.println("USUARIO O CONTRASEÑA INCORRECTA");
                     FacesContext.getCurrentInstance().getExternalContext().redirect("public/error404.xhtml");
                 }
             } else {
+                System.out.println("Hola3");
                 System.out.println("USUARIO O CONTRASEÑA INCORRECTA");
                 FacesContext.getCurrentInstance().getExternalContext().redirect("public/error404.xhtml");
             }
         } catch (Exception e) {
+            System.out.println("Hola4");
             System.out.println("controller.LoginController.checkCredentials Ha lledago " + e.getMessage());
         }
     }
