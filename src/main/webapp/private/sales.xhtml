@@ -60,34 +60,9 @@
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col d-flex align-items-center justify-content-end"><p:commandButton class="btn btn-primary" icon="fas fa-arrow-left" action="#{salesController.moveLeft()}" update="form-sales"></p:commandButton></div>
-                                                            <div class="col d-flex align-items-center justify-content-center"><img class="rounded-circle mb-3 mt-4" src="./../assets/img/components/componente#{salesController.index}.png" width="190" height="190"/>
-                                                                <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
-                                                                    <div class="modal-dialog" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h4 class="modal-title">Realizando la venta...</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <div class="row">
-                                                                                    <div class="col d-flex align-items-center justify-content-center"><img class=" mb-3 mt-4" src="./../assets/img/icons/moneda.png" width="160" height="160"/></div>
-                                                                                </div>
-                                                                                <div class="row">
-                                                                                    <div class="col d-flex align-items-center justify-content-center">
-                                                                                        <p>¡Se ha realizado la venta correctamente!</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row">
-                                                                                    <div class="col">
-                                                                                        <div class="progress">
-                                                                                            <div class="progress-bar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">100%</div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="modal-footer"><p:button class="btn btn-primary" pt:data-bs-dismiss="modal" value="Vale"></p:button></div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div></div>
+                                                            <div class="col d-flex align-items-center justify-content-center">
+                                                                <img class="rounded-circle mb-3 mt-4" src="./../assets/img/components/componente#{salesController.index}.png" width="190" height="190"/>
+                                                            </div>
                                                             <div class="col d-flex align-items-center justify-content-start"><p:commandButton class="btn btn-primary" icon="fas fa-arrow-right" action="#{salesController.moveRight()}" update="form-sales"></p:commandButton></div>
                                                         </div>
 
