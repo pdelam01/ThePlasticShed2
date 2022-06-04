@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -28,21 +29,17 @@ import modelo.Productions;
  *
  * @author diego
  */
-@Named //Ambitos de clase: Vista, aplicacion, sesion, peticion 
+@Named
 @ViewScoped
 public class ProductionsController implements Serializable{
 
     private List<Components> componentList;
     private List<Materials> materialList;
     private List<ArrayMaterials> arrayMaterils;
-    private List<Productions> productionsList;
-    
     private int index;
     private int quantity;
-    
     private Materials materialOne;
     private Materials materialTwo;
-    
     private Components component;
     
     @EJB
@@ -61,7 +58,6 @@ public class ProductionsController implements Serializable{
     public void init(){
         componentList = loadComponentList();
         materialList = loadMaterialList();
-        productionsList = loadProductionsList();
         index = 1;
         component = componentList.get(index-1);
         arrayMaterils = loadArrayMaterialList();
@@ -88,7 +84,7 @@ public class ProductionsController implements Serializable{
         }
     }
     
-    private List<Productions> loadProductionsList() {
+    public List<Productions> loadProductionsList() {
         try {
             return productionEJB.findProductionsList();
         } catch (Exception e) {
@@ -158,16 +154,17 @@ public class ProductionsController implements Serializable{
     
     public void doProduction() {
         Productions production = obtainProduction();
-        if(controlMaterials() && controlAditionalComponent()) {
+        if(utils.Utils.isANum(String.valueOf(quantity)) && controlMaterials() && controlAditionalComponent() && quantity>0) {
             editComponents();
             editAditionalComponents();
             editMaterials();
+            
             productionEJB.create(production);
-            System.out.println("bien");
+            FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Producción realizada con éxito"));
         }else{
-            System.out.println("mal");
+            //Producción no realizada 
+            FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Cantidad introducida inválida"));
         }
-        
     }
     
     private Productions obtainProduction() {
@@ -235,16 +232,8 @@ public class ProductionsController implements Serializable{
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("production.xhtml");
         } catch (Exception e) {
-            System.out.println("Error al redireccionar");
+            System.out.println("Error al redireccionar"+e.getMessage());
         }
-    }
-
-    public List<Productions> getProductionsList() {
-        return productionsList;
-    }
-
-    public void setProductionsList(List<Productions> productionsList) {
-        this.productionsList = productionsList;
     }
 
     public List<Components> getComponentList() {

@@ -5,6 +5,8 @@
  */
 package utils;
 
+import EJB.ComponentsFacadeLocal;
+
 /**
  *
  * @author De la Hera
@@ -94,5 +96,22 @@ public class Utils {
         return true;
     }
     
+    public static boolean validQuantity(int quantity, ComponentsFacadeLocal componentsEJB, int index){
+        if(quantity > 0 && quantity < componentsEJB.find(index).getQuantity()){
+            return true;
+        }else{
+            return false;
+        }
+    }
     
+    public static boolean isANum(String num) {
+        for (Character character : num.toCharArray()) {
+            if (!Character.isDigit(character)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 }

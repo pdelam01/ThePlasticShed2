@@ -30,7 +30,7 @@
                                         <h:form>
                                             <div class="card-body">
                                                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                                                    <p:dataTable class="table my-0" id="dataTable" var="clientes" value="#{clientsController.clientsList}">
+                                                    <p:dataTable class="table my-0" id="dataTable" var="clientes" value="#{salesController.clientsList}">
                                                         <p:column headerText="Nombre y apellidos">
                                                             <h:outputText value="#{clientes.name} #{clientes.surname}"/>
                                                         </p:column>
@@ -48,6 +48,9 @@
                                 </div>
                                 <div class="tab-pane" role="tabpanel" id="tab-2">
                                     <h:form id="form-sales">
+                                        <p:messages for="MessageId" id="messages" showDetail="true" closable="true">
+                                            <p:autoUpdate/>
+                                        </p:messages>
                                         <div class="row">
                                             <div class="col">
                                                 <div class="card shadow mb-3">
@@ -56,8 +59,8 @@
                                                     </div>
                                                     <div class="card-body">
                                                         <div class="row">
-                                                            <div class="col d-flex align-items-center justify-content-end"><p:commandButton class="btn btn-primary" icon="fas fa-arrow-left" action="#{clientsController.moveLeft()}" update="form-sales"></p:commandButton></div>
-                                                            <div class="col d-flex align-items-center justify-content-center"><img class="rounded-circle mb-3 mt-4" src="./../assets/img/components/componente#{clientsController.index}.png" width="190" height="190"/>
+                                                            <div class="col d-flex align-items-center justify-content-end"><p:commandButton class="btn btn-primary" icon="fas fa-arrow-left" action="#{salesController.moveLeft()}" update="form-sales"></p:commandButton></div>
+                                                            <div class="col d-flex align-items-center justify-content-center"><img class="rounded-circle mb-3 mt-4" src="./../assets/img/components/componente#{salesController.index}.png" width="190" height="190"/>
                                                                 <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
                                                                     <div class="modal-dialog" role="document">
                                                                         <div class="modal-content">
@@ -85,37 +88,37 @@
                                                                         </div>
                                                                     </div>
                                                                 </div></div>
-                                                            <div class="col d-flex align-items-center justify-content-start"><p:commandButton class="btn btn-primary" icon="fas fa-arrow-right" action="#{clientsController.moveRight()}" update="form-sales"></p:commandButton></div>
+                                                            <div class="col d-flex align-items-center justify-content-start"><p:commandButton class="btn btn-primary" icon="fas fa-arrow-right" action="#{salesController.moveRight()}" update="form-sales"></p:commandButton></div>
                                                         </div>
 
                                                         <div class="row">
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de componente</strong></label><p:inputText class="form-control" type="text" id="material" value="#{clientsController.component.name}" disabled="true"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="username"><strong>Nombre de componente</strong></label><p:inputText class="form-control" type="text" id="material" value="#{salesController.component.name}" disabled="true"/></div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="email"><strong>Cantidad</strong><br/></label><p:inputText class="form-control" type="number" id="cantidad" value="#{clientsController.quantity}">
-                                                                        <p:ajax listener="#{clientsController.calculatePrice()}" event="mouseout" update="total_price"/> </p:inputText>
+                                                                <div class="mb-3"><label class="form-label" for="email"><strong>Cantidad</strong><br/></label><p:inputText class="form-control" type="number" id="cantidad" value="#{salesController.quantity}">
+                                                                        <p:ajax listener="#{salesController.calculatePrice()}" event="mouseout" update="total_price"/> </p:inputText>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col">
                                                                 <div class="mb-3"><label class="form-label" for="last_name"><strong>Cliente</strong></label>
-                                                                    <h:selectOneMenu class="form-select" value="#{clientsController.clienteId}">
-                                                                        <f:selectItems value="#{clientsController.clientsItemsList}" />
+                                                                    <h:selectOneMenu class="form-select" value="#{salesController.clienteId}">
+                                                                        <f:selectItems value="#{salesController.clientsItemsList}" />
                                                                     </h:selectOneMenu>
                                                                 </div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="last_name"><strong>Precio del Componente</strong></label><p:inputText class="form-control" type="text" id="precio" value="#{clientsController.component.price} €" disabled="true"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="last_name"><strong>Precio del Componente</strong></label><p:inputText class="form-control" type="text" id="precio" value="#{salesController.component.price} €" disabled="true"/></div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col d-flex align-items-center justify-content-center">
-                                                                <div class="mb-3"><p:commandButton class="btn btn-primary btn-sm" value="Realizar Venta" action="#{clientsController.doSale()}" pt:data-bs-toggle="modal" pt:data-bs-target="#modal-1" ></p:commandButton></div>
+                                                                <div class="mb-3"><p:commandButton class="btn btn-primary btn-sm" value="Realizar Venta" action="#{salesController.doSale()}" update="form-historial" ></p:commandButton></div>
                                                             </div>
                                                             <div class="col">
-                                                                <div class="mb-3"><label class="form-label" for="last_name"><strong>Precio Total de la Venta</strong></label><p:inputText class="form-control" type="text" id="total_price" value="#{clientsController.totalPrice} €" disabled="true"/></div>
+                                                                <div class="mb-3"><label class="form-label" for="last_name"><strong>Precio Total de la Venta</strong></label><p:inputText class="form-control" type="text" id="total_price" value="#{salesController.totalPrice} €" disabled="true"/></div>
                                                             </div>
                                                         </div>
 
@@ -130,10 +133,10 @@
                                         <div class="card-header py-3">
                                             <p class="text-primary m-0 fw-bold">Historial de ventas</p>
                                         </div>
-                                        <h:form>
+                                        <h:form id="form-historial">
                                             <div class="card-body">
                                                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                                                    <p:dataTable class="table my-0" id="dataTable" var="sales" value="#{clientsController.salesList}" paginator="true" paginatorPosition="bottom" rows="6" lazy="true">
+                                                    <p:dataTable class="table my-0" id="dataTable" var="sales" value="#{salesController.loadSalesList()}" paginator="true" paginatorPosition="bottom" rows="6" lazy="true">
                                                         <p:column headerText="Imagen de componente">
                                                             <h:graphicImage class="rounded-circle me-2" width="40" height="40" url="../../assets/img/components/componente#{sales.component.id}.png" />
                                                         </p:column>

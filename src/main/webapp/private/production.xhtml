@@ -65,6 +65,9 @@
                                 <div class="col">
                                     <div class="card shadow mb-3">
                                         <h:form id="form">
+                                            <p:messages for="MessageId" id="messages" showDetail="true" closable="true">
+                                                <p:autoUpdate/>
+                                            </p:messages>
                                             <div class="card-header py-3">
                                                 <p class="text-primary m-0 fw-bold">Componente a producir</p>
                                             </div>
@@ -114,7 +117,7 @@
                                                     </div>
                                                     <div class="col">
                                                         <div class="mb-3"><label class="form-label"><strong>Cantidad</strong><br/></label>
-                                                            <p:inputText class="form-control" type="text" id="upc" value="#{productionsController.quantity}"/>
+                                                            <p:inputText class="form-control" type="number" id="upc" value="#{productionsController.quantity}"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -133,7 +136,7 @@
                                                 <div class="row">
                                                     <div class="col d-flex align-items-center justify-content-center">
                                                         <div class="mb-3">
-                                                            <p:commandButton class="btn btn-primary" value="Producir componente" action="#{productionsController.doProduction()}" pt:data-bs-toggle="modal" pt:data-bs-target="#modal-1"></p:commandButton>
+                                                            <p:commandButton class="btn btn-primary" value="Producir componente" action="#{productionsController.doProduction()}" update="form-historial"></p:commandButton>
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -156,7 +159,7 @@
                                 <h:form id="form-historial">
                                     <div class="card-body">
                                         <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                                            <p:dataTable class="table my-0" id="dataTable" var="production" value="#{productionsController.productionsList}" paginator="true" paginatorPosition="bottom" rows="6" lazy="true">
+                                            <p:dataTable class="table my-0" id="dataTable" var="production" value="#{productionsController.loadProductionsList()}" paginator="true" paginatorPosition="bottom" rows="6" lazy="true">
                                                 <p:column headerText="Imagen del Componente">
                                                     <h:graphicImage class="rounded-circle me-2" width="40" height="40" url="../../assets/img/components/componente#{production.idComponent.id}.png" />
                                                 </p:column>

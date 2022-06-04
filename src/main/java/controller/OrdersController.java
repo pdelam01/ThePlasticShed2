@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
@@ -31,12 +32,11 @@ import modelo.Suppliers;
 
 @Named
 @ViewScoped
-public class SuppliersController implements Serializable {
+public class OrdersController implements Serializable {
     
     private List<Suppliers> suppliersList;
     private List<SelectItem> suppliersItemsList;
     private List<Materials> materialsList;
-    private List<Orders> ordersList;
     private Materials material;
     private Employees employeeSession;
     private Orders order;
@@ -61,7 +61,6 @@ public class SuppliersController implements Serializable {
         supplierId = 0;
         index = 1;
         materialsList = loadMaterialsList();
-        ordersList = loadOrdersList();
         material = materialsList.get(index-1);
         quantity = 1;
         order = new Orders();
@@ -71,8 +70,6 @@ public class SuppliersController implements Serializable {
     
     public List<Suppliers> loadSuppliersList(){
         try {
-            List<Suppliers> lista = suppliersEJB.findSuppliersList();
-            System.out.println("Proveedores size: "+lista.size());
             return suppliersEJB.findSuppliersList();
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
@@ -82,8 +79,6 @@ public class SuppliersController implements Serializable {
     
     public List<Materials> loadMaterialsList(){
         try {
-            List<Materials> lista = materialsEJB.findMaterialsList();
-            System.out.println("Materials size: "+lista.size());
             return materialsEJB.findMaterialsList();
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
@@ -93,8 +88,6 @@ public class SuppliersController implements Serializable {
     
     public List<Orders> loadOrdersList(){
         try {
-            List<Orders> lista = ordersEJB.findOrdersList();
-            System.out.println("Pedidos size: "+lista.size());
             return ordersEJB.findOrdersList();
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
@@ -116,16 +109,22 @@ public class SuppliersController implements Serializable {
     
     public void doOrder(){
         employeeSession = (Employees) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleadoLogged");
-        order.setMaterial(material);
-        order.setIdEmployee(employeeSession);
-        order.setSupplier(suppliersEJB.find(supplierId));
-        order.setDate(getLocalDate());
-        order.setQuantity(quantity);
-        order.setTotalPrice(totalPrice);
-        material.setQuantity(materialsEJB.find(index).getQuantity()+quantity);
         
-        ordersEJB.create(order);
-        materialsEJB.edit(material);
+        if (quantity > 0) {
+            order.setMaterial(material);
+            order.setIdEmployee(employeeSession);
+            order.setSupplier(suppliersEJB.find(supplierId));
+            order.setDate(getLocalDate());
+            order.setQuantity(quantity);
+            order.setTotalPrice(totalPrice);
+            material.setQuantity(materialsEJB.find(index).getQuantity() + quantity);
+
+            ordersEJB.create(order);
+            materialsEJB.edit(material);
+            FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Pedido realizado con éxito"));
+        }else{
+            FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Cantidad introducida inválida"));
+        }
     }
     
     public double roundTwoDecimals(){
@@ -151,14 +150,6 @@ public class SuppliersController implements Serializable {
         }
         material = materialsList.get(index-1);
         calculatePrice();
-    }
-
-    public List<Orders> getOrdersList() {
-        return ordersList;
-    }
-
-    public void setOrdersList(List<Orders> ordersList) {
-        this.ordersList = ordersList;
     }
     
     public List<Suppliers> getSuppliersList(){
