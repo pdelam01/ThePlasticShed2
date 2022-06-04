@@ -33,7 +33,6 @@ public class PlantillaController implements Serializable {
             String direccionContexto = FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath();
             String requestPath = FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo();
             requestPath = requestPath.replace("/private/", "");
-            System.out.println(pagsAdmin.contains(requestPath));
             switch (empleado.getRole()) {
                 case "Administrador":
                     if (!pagsAdmin.contains(requestPath)) {
