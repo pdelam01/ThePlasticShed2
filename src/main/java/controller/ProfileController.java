@@ -43,7 +43,6 @@ public class ProfileController implements Serializable{
     }
     
     public Employees showInfo() {
-        System.out.println("VAmos a BBSS");
         try {
             Employees pr = (Employees) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleadoLogged");
             System.out.println(pr.getIdEmployee());
@@ -55,7 +54,7 @@ public class ProfileController implements Serializable{
                 return null;
             }
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
             return null;
         }
     }
@@ -63,9 +62,7 @@ public class ProfileController implements Serializable{
     public void updateInfoEmployee() {
         try {
             String user = "", name = "";
-            boolean todoOk = false;
-            boolean todoOk2 = false;
-            
+            boolean todoOk = false, todoOk2 = false;
             String returnUsername = employeeToUpdate.getUsername().trim();
             if(Utils.validUsername(returnUsername)) {
                 user = employeeToUpdate.getUsername();
@@ -103,32 +100,26 @@ public class ProfileController implements Serializable{
             
             employeesEJB.updateEmployee(user, name, employees.getDni(), date);
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
         }
     }
     
     public void updateInfoSensibilityEmployee() {
         try {
             String ssn = "", phoneNumber = "", dni = "";
-            boolean todoOk = false;
-            boolean todoOk2 = false;
-            boolean todoOk3 = false;
-            
+            boolean todoOk = false, todoOk2 = false, todoOk3 = false;
             String returnSSN = employeeToUpdate.getSsn().trim();
             if(Utils.validSSN(returnSSN)) {
                 ssn = employeeToUpdate.getSsn().trim();
                 todoOk=true;
-                System.out.println("SSN OK");
             }else{
                 if(returnSSN.length()==0) {
                     ssn = employees.getSsn();
                     todoOk=true;
-                    System.out.println("SSN OK ==== 0");
                 }else{
                     FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "SSN introducido erróneo, "
                             + "se procede a dejar el almacenado en base de datos"));
                     ssn = employees.getSsn();
-                    System.out.println("SSN bad");
                 }
             }
             
@@ -136,17 +127,14 @@ public class ProfileController implements Serializable{
             if(Utils.validPhoneNumber(returnPhoneNumber)) {
                 phoneNumber = employeeToUpdate.getPhoneNum().trim();
                 todoOk2 = true;
-                System.out.println("phone number OK");
             }else{
                 if (returnPhoneNumber.length() == 0) {
                     phoneNumber = employees.getPhoneNum();
                     todoOk2 = true;
-                    System.out.println("phonenumber OK ==== 0");
                 }else{
                     FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Número de teléfono introducido erróneo, "
                             + "se procede a dejar el almacenado en base de datos"));
                      phoneNumber = employees.getPhoneNum();
-                     System.out.println("phone number bad");
                 }
             }
             
@@ -154,17 +142,14 @@ public class ProfileController implements Serializable{
             if(Utils.validDNI(returnDNI)) {
                 dni = employeeToUpdate.getDni().trim();
                 todoOk3 = true;
-                System.out.println("DNI OK");
             }else{
                 if (returnDNI.length()==0) {
                     dni = employees.getDni();
                     todoOk3 = true;
-                    System.out.println("DNI OK ==== 0");
                 }else{
                     FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "DNI introducido erróneo, "
                             + "se procede a dejar el almacenado en base de datos"));
                     dni = employees.getDni();
-                    System.out.println("DNI BAD");
                 } 
             }
             
@@ -174,7 +159,7 @@ public class ProfileController implements Serializable{
             
             employeesEJB.updateEmployeeSensibiliti(ssn, phoneNumber, dni, employees.getIdEmployee());
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
         }
     }
     

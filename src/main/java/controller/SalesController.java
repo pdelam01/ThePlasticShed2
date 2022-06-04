@@ -72,7 +72,7 @@ public class SalesController implements Serializable {
         try {
             return clientsEJB.findClientsList();
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
             return null;
         }
     }
@@ -81,7 +81,7 @@ public class SalesController implements Serializable {
         try {
             return salesEJB.findSalesList();
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
             return null;
         }
     }
@@ -108,7 +108,6 @@ public class SalesController implements Serializable {
             sale.setQuantity(quantity);
             sale.setTotalPrice(totalPrice);
             component.setQuantity(componentsEJB.find(index).getQuantity()-quantity);
-            
             salesEJB.create(sale);
             componentsEJB.edit(component);
             FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Venta realizada con éxito"));
@@ -121,7 +120,7 @@ public class SalesController implements Serializable {
         try {
             return componentsEJB.findComponentsList();
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
             return null;
         }
     }

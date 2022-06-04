@@ -6,17 +6,14 @@
 package controller;
 
 import EJB.EmployeesFacadeLocal;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import javax.sound.midi.SysexMessage;
 import modelo.Employees;
 import utils.PasswordUtils;
 
@@ -73,11 +70,10 @@ public class LoginController implements Serializable {
 
     public void closeSession() {
         try {
-            System.out.println("cierro la session");
             FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
             FacesContext.getCurrentInstance().getExternalContext().redirect("/ThePlasticShed_v2");
         } catch (Exception e) {
-            System.out.println("controller.LoginController.closeSession" + e.getMessage());
+            System.out.println("controller.LoginController.closeSession");
         }
 
     }

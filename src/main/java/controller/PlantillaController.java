@@ -28,10 +28,8 @@ public class PlantillaController implements Serializable {
         List<String> pagsPawn = Arrays.asList("home.xhtml", "profile.xhtml", "almacen.xhtml", "production.xhtml");
         List<String> pagsSecretary = Arrays.asList("home.xhtml", "profile.xhtml", "almacen.xhtml", "production.xhtml", "sales.xhtml", "orders.xhtml");
         List<String> pagsAdmin = Arrays.asList("home.xhtml", "profile.xhtml", "almacen.xhtml", "production.xhtml", "sales.xhtml", "orders.xhtml", "usermng.xhtml");
-
         Employees empleado = (Employees) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleadoLogged");
         if (empleado != null) {
-            System.out.println("=====================================================");
             String direccionContexto = FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath();
             String requestPath = FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo();
             requestPath = requestPath.replace("/private/", "");
@@ -54,7 +52,6 @@ public class PlantillaController implements Serializable {
                     break;
             }
         } else {
-            System.out.println("yo en el else");
             String direccionContexto = FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath();
             FacesContext.getCurrentInstance().getExternalContext().redirect(direccionContexto + "/public/error404.xhtml");
         }

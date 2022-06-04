@@ -70,7 +70,7 @@ public class ProductionsController implements Serializable{
         try {
             return componentsEJB.findComponentsList();
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
             return null;
         }
     }
@@ -79,7 +79,7 @@ public class ProductionsController implements Serializable{
         try {
             return materialsEJB.findMaterialsList();
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
             return null;
         }
     }
@@ -88,7 +88,7 @@ public class ProductionsController implements Serializable{
         try {
             return productionEJB.findProductionsList();
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
             return null;
         }
     }
@@ -161,7 +161,6 @@ public class ProductionsController implements Serializable{
             productionEJB.create(production);
             FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Producción realizada con éxito"));
         }else{
-            //Producción no realizada 
             FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Cantidad introducida inválida"));
         }
     }

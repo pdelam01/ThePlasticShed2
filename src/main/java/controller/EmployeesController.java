@@ -7,13 +7,11 @@ package controller;
 
 import EJB.EmployeesFacadeLocal;
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
@@ -56,7 +54,7 @@ public class EmployeesController implements Serializable {
         try {
             return employeesEJB.findEmployeesList();
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
             return null;
         }
     }
@@ -67,7 +65,7 @@ public class EmployeesController implements Serializable {
             employeesEJB.remove(aux);
             FacesContext.getCurrentInstance().getExternalContext().redirect("usermng.xhtml");
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
         }
     }
 
@@ -124,7 +122,7 @@ public class EmployeesController implements Serializable {
             } catch (Exception e) {
                 cleanValuesDuplicate();
                 FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error, elementos duplicados"));
-                System.out.println("Oh no! Algo ha ido mal: ");
+                System.out.println("Oh no! Algo ha ido mal");
             }
         }
     }

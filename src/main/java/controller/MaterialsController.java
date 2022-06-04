@@ -35,11 +35,9 @@ public class MaterialsController implements Serializable{
     
     public List<Materials> loadMaterialsList(){
         try {
-            List<Materials> lista = materialsEJB.findMaterialsList();
-            System.out.println("Materials size: "+lista.size());
             return materialsEJB.findMaterialsList();
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
             return null;
         }
     }

@@ -37,11 +37,8 @@ import modelo.Materials;
 import modelo.Orders;
 import modelo.Productions;
 import modelo.Sales;
-import org.primefaces.component.linechart.LineChart;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
-import org.primefaces.model.chart.CartesianChartModel;
-import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 import org.primefaces.model.chart.PieChartModel;
@@ -97,30 +94,27 @@ public class DashboardController implements Serializable{
     
     public void redirectProfile() {
         try {
-            System.out.println("redirecciono a perfil");
             FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml");
         } catch (Exception e) {
-            System.out.println("[ERR] controller dashboard redirect perfil error" + e.getMessage());
+            System.out.println("[ERR] controller dashboard redirect perfil error");
         }
 
     }
     
     public void redirectAlmacen() {
         try {
-            System.out.println("redirecciono a almacen");
             FacesContext.getCurrentInstance().getExternalContext().redirect("almacen.xhtml");
         } catch (Exception e) {
-            System.out.println("[ERR] controller dashboard redirect almacen error" + e.getMessage());
+            System.out.println("[ERR] controller dashboard redirect almacen error");
         }
 
     }
     
     public void redirectDashboard() {
         try {
-            System.out.println("redirecciono a dashboard");
             FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
         } catch (Exception e) {
-            System.out.println("[ERR] controller dashboard redirect almacen error" + e.getMessage());
+            System.out.println("[ERR] controller dashboard redirect almacen error");
         }
 
     }

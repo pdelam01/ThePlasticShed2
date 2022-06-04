@@ -35,8 +35,6 @@ public class ComponentsController implements Serializable{
     
     public List<Components> loadComponentList(){
         try {
-            List<Components> lista = componentsEJB.findComponentsList();
-            System.out.println("Componentes size: "+lista.size());
             return componentsEJB.findComponentsList();
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());

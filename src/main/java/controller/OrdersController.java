@@ -72,7 +72,7 @@ public class OrdersController implements Serializable {
         try {
             return suppliersEJB.findSuppliersList();
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
             return null;
         }
     }
@@ -81,7 +81,7 @@ public class OrdersController implements Serializable {
         try {
             return materialsEJB.findMaterialsList();
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
             return null;
         }
     }
@@ -90,7 +90,7 @@ public class OrdersController implements Serializable {
         try {
             return ordersEJB.findOrdersList();
         } catch (Exception e) {
-            System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
+            System.out.println("Oh no! Algo ha ido mal");
             return null;
         }
     }
