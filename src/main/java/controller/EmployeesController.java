@@ -54,8 +54,7 @@ public class EmployeesController implements Serializable{
 
     public List<Employees> loadEmployeesList() {
         try {
-            List<Employees> lista = employeesEJB.findEmployeesList();
-            System.out.println("Employees size: "+lista.size());
+            System.out.println("=============================================");
             return employeesEJB.findEmployeesList();
         } catch (Exception e) {
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
@@ -90,45 +89,40 @@ public class EmployeesController implements Serializable{
     
     public void addEmployees() {
         boolean todoOk = true;
-        
         if (!utils.Utils.validUsername(employee.getUsername())) {
             FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Username introducido erróneo, "
                             + "se procede a dejar el almacenado en base de datos"));
             todoOk = false;
         }
-        
         if (!utils.Utils.validName(employee.getNameEmp())) {
             FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Nombre introducido erróneo, "
                             + "se procede a dejar el almacenado en base de datos"));
             todoOk = false;
         }
-        
         if(!utils.Utils.validDNI(employee.getDni())){
             FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "DNI introducido erróneo, "
                             + "se procede a dejar el almacenado en base de datos")); 
             todoOk = false;
         }
-        
         if(!utils.Utils.validSSN(employee.getSsn())){
             FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "SSN introducido erróneo, "
                             + "se procede a dejar el almacenado en base de datos")); 
             todoOk = false;
         }
-        
         if(!utils.Utils.validPhoneNumber(employee.getPhoneNum())){
             FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Número de teléfono introducido erróneo, "
                             + "se procede a dejar el almacenado en base de datos"));
             todoOk = false;
         }
-        
         if (todoOk) {
             employee.setBirthday(date);
             employee.setRole(rol);
             employee.setPass("admin");
-            
             try {
                 employeesEJB.create(employee);
-            } catch (EJBException e) {
+                cleanValuesDuplicate();
+                employeesList = loadEmployeesList();
+            } catch (Exception e) {
                 cleanValuesDuplicate();
                 FacesContext.getCurrentInstance().addMessage("MessageId2", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error, elementos duplicados")); 
                 System.out.println("Oh no! Algo ha ido mal: ");
@@ -149,6 +143,7 @@ public class EmployeesController implements Serializable{
             System.out.println("Oh no! Algo ha ido mal: " + e.getMessage());
         }
     }
+    
     public void searchEmployees() {
         try {
             boolean todoOk=false;
@@ -159,7 +154,6 @@ public class EmployeesController implements Serializable{
                     todoOk=true;
                 }
             }
-            
             if(!todoOk){
                 dni="";
                 cleanValuesDNIFalse();
@@ -182,41 +176,37 @@ public class EmployeesController implements Serializable{
     
     public void updateEmployee() {
         boolean todoOk = true;
-        
         if (!utils.Utils.validUsername(employeeEdit.getUsername())) {
             FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Username introducido erróneo, "
-                            + "se procede a dejar el almacenado en base de datos"));
+                            + "no se modifica"));
             todoOk = false;
         }
-        
         if (!utils.Utils.validName(employeeEdit.getNameEmp())) {
             FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Nombre introducido erróneo, "
-                            + "se procede a dejar el almacenado en base de datos"));
+                            + "no se modifica"));
             todoOk = false;
         }
-        
         if(!utils.Utils.validDNI(employeeEdit.getDni())){
             FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "DNI introducido erróneo, "
-                            + "se procede a dejar el almacenado en base de datos")); 
+                            + "no se modifica")); 
             todoOk = false;
         }
-        
         if(!utils.Utils.validSSN(employeeEdit.getSsn())){
             FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "SSN introducido erróneo, "
-                            + "se procede a dejar el almacenado en base de datos")); 
+                            + "no se modifica")); 
             todoOk = false;
         }
-        
         if(!utils.Utils.validPhoneNumber(employeeEdit.getPhoneNum())){
             FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Número de teléfono introducido erróneo, "
-                            + "se procede a dejar el almacenado en base de datos"));
+                            + "no se modifica"));
             todoOk = false;
         }
-        
         if (todoOk) {
+            FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Empleado editado correctamente"));
             employeeEdit.setBirthday(dateEdit);
             employeeEdit.setRole(rol);
             employeesEJB.edit(employeeEdit);
+            cleanValuesDNIFalse();
         }
         
     }
@@ -285,6 +275,5 @@ public class EmployeesController implements Serializable{
         this.dateEdit = dateEdit;
     }
     
-    
-    
+
 }
